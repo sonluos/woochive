@@ -1,0 +1,38 @@
+.tag-filter {
+  margin-bottom: 2rem;
+}
+
+.tag-filter h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-color, #213547);
+}
+
+.tag-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-filter-button {
+  padding: 0.5rem 1rem;
+  background: var(--card-bg, #f9f9f9);
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  color: var(--text-color, #213547);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.tag-filter-button:hover {
+  border-color: var(--primary-color, #646cff);
+  background: var(--primary-color, #646cff);
+  color: white;
+}
+
+.tag-filter-button.active {
+  background: var(--primary-color, #646cff);
+  border-color: var(--primary-color, #646cff);
+  color: white;
+}
