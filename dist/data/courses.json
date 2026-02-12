@@ -1,0 +1,58 @@
+[
+  {
+    "id": "math-analysis",
+    "name": "수학적 해석학",
+    "semester": "2022-1",
+    "description": "실수의 완비성, 수열과 급수의 수렴, 연속함수와 미분가능성",
+    "category": "Mathematics"
+  },
+  {
+    "id": "linear-algebra",
+    "name": "선형대수학",
+    "semester": "2022-1",
+    "description": "벡터공간, 선형변환, 고유값과 고유벡터, 직교성",
+    "category": "Mathematics"
+  },
+  {
+    "id": "probability-theory",
+    "name": "확률론",
+    "semester": "2022-2",
+    "description": "확률공간, 확률변수, 기댓값과 분산, 대수의 법칙",
+    "category": "Mathematics"
+  },
+  {
+    "id": "deep-learning",
+    "name": "딥러닝",
+    "semester": "2023-1",
+    "description": "신경망 기초, CNN, RNN, Transformer, 최적화 기법",
+    "category": "Computer Science"
+  },
+  {
+    "id": "signal-processing",
+    "name": "디지털 신호처리",
+    "semester": "2023-1",
+    "description": "이산시간 신호, FFT, 필터 설계, 스펙트럼 분석",
+    "category": "Engineering"
+  },
+  {
+    "id": "quantum-computing",
+    "name": "양자 컴퓨팅",
+    "semester": "2023-2",
+    "description": "양자역학 기초, 큐비트, 양자 게이트, 양자 알고리즘",
+    "category": "Computer Science"
+  },
+  {
+    "id": "music-theory",
+    "name": "음악 이론",
+    "semester": "2023-2",
+    "description": "화성학, 대위법, 음악 형식론, 현대 음악 기법",
+    "category": "Music"
+  },
+  {
+    "id": "algorithmic-composition",
+    "name": "알고리즘 작곡",
+    "semester": "2024-1",
+    "description": "생성 음악, 확률적 작곡, 음악 정보 검색",
+    "category": "Music"
+  }
+]

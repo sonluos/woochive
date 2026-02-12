@@ -1,187 +1,199 @@
-# Woochive 배포 가이드
+# 배포 완료 가이드
 
-이 문서는 Woochive 포트폴리오 웹사이트를 GitHub와 Vercel에 배포하는 방법을 안내합니다.
+## 🎉 배포 성공!
 
-## 완료된 작업
+Woochive 포트폴리오 웹사이트가 성공적으로 배포되었습니다.
 
-✅ 프로젝트 초기 설정 및 기본 구조
-✅ 데이터 모델 및 샘플 데이터
-✅ 데이터 로딩 유틸리티
-✅ 라우팅 및 네비게이션
-✅ 공통 컴포넌트 (AudioPlayer, ImageGallery 포함)
-✅ 필터링 및 검색 로직
-✅ 모든 페이지 구현 (Home, About, Projects, Music, Publications, DetailPage)
-✅ 에러 처리 및 로딩 상태
-✅ 성능 최적화 (이미지 레이지 로딩)
-✅ 스타일링 및 반응형 디자인
-✅ vercel.json 설정
-✅ README.md 문서화
+## 배포 정보
 
-## 남은 작업
+- **Production URL**: https://woochive.vercel.app
+- **Vercel 대시보드**: https://vercel.com/sonluos-projects/woochive
+- **GitHub 저장소**: https://github.com/sonluos/woochive
+- **배포 날짜**: 2026년 2월 12일
 
-### 1. 속성 기반 테스트 작성 (선택적)
+## 배포된 기능
 
-다음 속성 테스트들이 아직 작성되지 않았습니다:
+### 주요 페이지
+- ✅ Home (홈페이지) - 최근 6개 항목 표시
+- ✅ About (소개) - 자기소개 및 수강 과목
+- ✅ Projects (프로젝트) - 연구 프로젝트 목록
+- ✅ Music (음악) - 음악 작업물 목록
+- ✅ Publications (출판물) - 논문 및 출판물
 
-- Property 4-10: Home, About, Projects, Music, Publications 페이지 속성 테스트
-- Property 14-16: DetailPage 속성 테스트
-- Property 28-34: 반응형 및 고급 기능 속성 테스트
+### 핵심 기능
+- ✅ 태그 필터링
+- ✅ 검색 기능
+- ✅ 상세 페이지
+- ✅ 관련 항목 추천
+- ✅ 반응형 디자인 (모바일/태블릿/데스크톱)
+- ✅ 다크 모드 지원
+- ✅ 이미지 레이지 로딩
+- ✅ SEO 최적화
 
-이 테스트들은 선택적이며, 기본 기능은 이미 단위 테스트로 커버되어 있습니다.
+### 관리자 기능
+- ✅ 관리자 로그인 (/admin/login)
+- ✅ 관리자 대시보드 (/admin)
+- ✅ 프로젝트 편집 (/admin/projects)
+- ✅ 음악 편집 (/admin/music)
+- ✅ JSON 다운로드 기능
 
-### 2. Git 저장소 설정 및 GitHub 푸시
+## 사용 방법
 
-```bash
-# Git 초기화
-git init
-git branch -M main
-
-# .gitignore 확인 (이미 설정되어 있음)
-# node_modules, dist, .env 등이 포함되어 있는지 확인
-
-# 첫 커밋 생성
-git add .
-git commit -m "Initial commit: Woochive portfolio website"
-
-# GitHub에서 새 저장소 생성
-# 1. GitHub.com에 로그인
-# 2. 우측 상단 '+' 버튼 클릭 > New repository
-# 3. Repository name: woochive (또는 원하는 이름)
-# 4. Public/Private 선택
-# 5. Create repository 클릭
-
-# 원격 저장소 연결 및 푸시
-git remote add origin https://github.com/YOUR_USERNAME/woochive.git
-git push -u origin main
+### 1. 웹사이트 접속
+```
+https://woochive.vercel.app
 ```
 
-### 3. Vercel 배포
+### 2. 관리자 로그인
+```
+URL: https://woochive.vercel.app/admin/login
+기본 비밀번호: woochive2024
+```
 
-#### 방법 1: Vercel 웹사이트를 통한 배포 (권장)
+⚠️ **보안 주의**: 프로덕션 환경에서는 반드시 비밀번호를 변경하세요!
 
-1. [Vercel](https://vercel.com)에 로그인 (GitHub 계정으로 로그인 권장)
-2. "New Project" 클릭
-3. GitHub 저장소 import
-   - "Import Git Repository" 선택
-   - 방금 생성한 저장소 선택
-4. 프로젝트 설정 확인
-   - Framework Preset: Vite
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-5. "Deploy" 버튼 클릭
-6. 배포 완료 후 URL 확인 (예: `https://woochive.vercel.app`)
+### 3. 콘텐츠 편집
+1. 관리자 로그인
+2. 대시보드에서 편집할 섹션 선택
+3. 항목 추가/수정/삭제
+4. "Download JSON" 버튼 클릭
+5. 다운로드된 JSON 파일을 `public/data/` 폴더에 업로드
+6. GitHub에 커밋 및 푸시
+7. Vercel이 자동으로 재배포
 
-#### 방법 2: Vercel CLI를 통한 배포
+## 자동 배포 설정
+
+GitHub에 푸시하면 Vercel이 자동으로 배포합니다:
 
 ```bash
-# Vercel CLI 설치
-npm install -g vercel
+# 변경사항 커밋
+git add .
+git commit -m "Update content"
 
-# 로그인
-vercel login
+# GitHub에 푸시
+git push origin main
 
-# 배포
-vercel
+# Vercel이 자동으로 배포 시작 (약 1-2분 소요)
+```
+
+## 수동 배포 (필요시)
+
+### Vercel CLI 사용
+```bash
+cd woochive
+
+# 프리뷰 배포
+npm run deploy:preview
 
 # 프로덕션 배포
-vercel --prod
+npm run deploy:prod
 ```
 
-### 4. 배포 후 검증
+### Vercel 웹사이트 사용
+1. https://vercel.com/sonluos-projects/woochive 접속
+2. "Deployments" 탭
+3. "Redeploy" 버튼 클릭
 
-배포가 완료되면 다음 사항들을 확인하세요:
+## 환경 변수 설정
 
-#### 기본 기능
-- [ ] 홈페이지 로딩 확인
-- [ ] 모든 네비게이션 링크 동작 확인
-- [ ] 직접 URL 접근 확인 (/projects, /about 등)
-- [ ] 404 페이지 동작 확인
+Vercel 대시보드에서 환경 변수를 설정할 수 있습니다:
 
-#### 미디어 파일
-- [ ] 이미지 로딩 확인
-- [ ] 오디오 파일 재생 확인 (Music 페이지)
-- [ ] PDF 다운로드 확인 (Publications 페이지)
+1. https://vercel.com/sonluos-projects/woochive/settings/environment-variables
+2. 변수 추가:
+   - `VITE_ADMIN_PASSWORD`: 관리자 비밀번호
 
-#### 반응형 디자인
-- [ ] 모바일 뷰 확인 (< 768px)
-- [ ] 태블릿 뷰 확인 (768px-1024px)
-- [ ] 데스크톱 뷰 확인 (> 1024px)
-- [ ] 모바일 네비게이션 메뉴 동작 확인
+## 커스텀 도메인 연결 (선택)
 
-#### 기능 테스트
-- [ ] 검색 기능 동작 확인
-- [ ] 태그 필터링 동작 확인
-- [ ] 상세 페이지 이동 확인
-- [ ] 관련 항목 추천 표시 확인
-- [ ] 이미지 갤러리 모달 동작 확인
-- [ ] 오디오 플레이어 동작 확인
+1. Vercel 대시보드 → Settings → Domains
+2. 도메인 추가 (예: woochive.me)
+3. DNS 설정:
+   ```
+   Type: A
+   Name: @
+   Value: 76.76.21.21
+   
+   Type: CNAME
+   Name: www
+   Value: cname.vercel-dns.com
+   ```
+4. DNS 전파 대기 (최대 48시간)
+5. SSL 인증서 자동 발급
 
-#### 브라우저 콘솔
-- [ ] 콘솔에 에러가 없는지 확인
-- [ ] 네트워크 탭에서 404 에러 확인
-- [ ] 성능 탭에서 로딩 시간 확인
+## 성능 모니터링
 
-### 5. 문제 해결
+### Vercel Analytics
+1. Vercel 대시보드 → Analytics
+2. 방문자 통계 확인
+3. Core Web Vitals 모니터링
 
-#### 404 에러 (페이지 새로고침 시)
-- `vercel.json` 파일이 올바르게 설정되어 있는지 확인
-- Vercel 대시보드에서 재배포 시도
+### 성능 최적화 팁
+- 이미지는 WebP 형식 사용
+- 각 이미지 크기 < 500KB 권장
+- JSON 파일 크기 최소화
+- 불필요한 데이터 제거
 
-#### 이미지 로딩 실패
-- 이미지 경로가 `/images/...` 형식으로 시작하는지 확인
-- `public` 폴더에 이미지가 있는지 확인
-- 대소문자 구분 확인
+## 문제 해결
 
-#### 빌드 실패
-- Vercel 대시보드에서 빌드 로그 확인
-- 로컬에서 `npm run build` 실행하여 에러 확인
-- TypeScript 에러가 있는지 확인
+### 404 에러 (페이지 새로고침 시)
+- `vercel.json`의 rewrites 설정 확인
+- 이미 설정되어 있음 ✅
 
-### 6. 커스텀 도메인 연결 (선택적)
-
-woochive.me 도메인을 연결하려면:
-
-1. Vercel 프로젝트 Settings > Domains 이동
-2. "Add" 버튼 클릭
-3. `woochive.me` 입력
-4. DNS 설정 안내에 따라 도메인 등록 업체에서 설정
-   - A 레코드: `76.76.21.21`
-   - 또는 CNAME 레코드: `cname.vercel-dns.com`
-5. DNS 전파 대기 (최대 48시간, 보통 몇 분 내)
-6. SSL 인증서 자동 발급 확인
-
-## 로컬 개발
-
+### 빌드 실패
 ```bash
-# 개발 서버 실행
-npm run dev
+# 로컬에서 빌드 테스트
+npm run build
 
-# 브라우저에서 http://localhost:5173 접속
+# 에러 확인 및 수정
+npm run build:check
 ```
 
-## 데이터 업데이트
+### 환경 변수 적용 안 됨
+1. Vercel 대시보드에서 환경 변수 확인
+2. "Redeploy" 클릭하여 재배포
 
-포트폴리오 데이터를 업데이트하려면:
+### 이미지 로딩 실패
+- 이미지 경로가 `/images/...` 형식인지 확인
+- `public/` 폴더에 이미지가 있는지 확인
+- 대소문자 정확히 일치하는지 확인
 
-1. `public/data/` 폴더의 JSON 파일 수정
-2. 변경사항 커밋 및 푸시
-3. Vercel이 자동으로 재배포
+## 백업 및 복구
 
-## 추가 개선 사항 (선택적)
+### 데이터 백업
+```bash
+# JSON 파일 백업
+cp -r public/data ~/backup/data-$(date +%Y%m%d)
+```
 
-- [ ] 이미지 최적화 (WebP 형식, 반응형 이미지)
-- [ ] SEO 메타 태그 추가
-- [ ] Google Analytics 연동
-- [ ] 다국어 지원
-- [ ] 블로그 섹션 추가
-- [ ] Contact 폼 추가
-- [ ] 애니메이션 효과 추가
+### 이전 버전으로 롤백
+1. Vercel 대시보드 → Deployments
+2. 이전 배포 선택
+3. "Promote to Production" 클릭
+
+## 유용한 링크
+
+- **Production URL**: https://woochive.vercel.app
+- **Vercel 대시보드**: https://vercel.com/sonluos-projects/woochive
+- **GitHub 저장소**: https://github.com/sonluos/woochive
+- **Vercel 문서**: https://vercel.com/docs
+- **Vite 문서**: https://vitejs.dev
+
+## 다음 단계
+
+1. ✅ 배포 완료
+2. 🔍 웹사이트 테스트 (https://woochive.vercel.app)
+3. 🔐 관리자 비밀번호 변경
+4. 📝 실제 콘텐츠로 교체
+5. 🎨 디자인 커스터마이징 (선택)
+6. 🌐 커스텀 도메인 연결 (선택)
+7. 📊 Analytics 설정 (선택)
 
 ## 지원
 
-문제가 발생하면 다음을 확인하세요:
+문제가 발생하면:
+1. [Vercel 커뮤니티](https://github.com/vercel/vercel/discussions)
+2. [Vercel 지원](https://vercel.com/support)
+3. GitHub Issues
 
-- [Vercel 문서](https://vercel.com/docs)
-- [Vite 문서](https://vitejs.dev/)
-- [React Router 문서](https://reactrouter.com/)
+---
+
+축하합니다! 🎉 Woochive 포트폴리오 웹사이트가 성공적으로 배포되었습니다!
