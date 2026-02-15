@@ -3,6 +3,7 @@ import { useProjects, useMusic, usePublications } from '../hooks/usePortfolioDat
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ImageGallery } from '../components/ImageGallery';
 import { AudioPlayer } from '../components/AudioPlayer';
+import GradientCard from '../components/GradientCard';
 import { PortfolioItem } from '../types/portfolio';
 import './DetailPage.css';
 
@@ -49,58 +50,106 @@ function DetailPage({ type }: DetailPageProps) {
     const relatedProjects = projects ? getRelatedItems(project, projects) : [];
 
     return (
-      <div className="detail-page project-detail">
-        <button onClick={() => navigate('/projects')} className="back-button">← Back to Projects</button>
-        <h1>{project.title}</h1>
-        <p className="date">{new Date(project.date).toLocaleDateString('ko-KR')}</p>
-        <div className="tags">
-          {project.tags.map((tag) => (
-            <Link key={tag} to={`/projects?tag=${encodeURIComponent(tag)}`} className="tag">
-              {tag}
-            </Link>
-          ))}
-        </div>
-        <p className="description">{project.description}</p>
-        
-        {project.images && project.images.length > 0 && (
-          <ImageGallery images={project.images} alt={project.title} />
-        )}
-        
-        <div className="full-description">
-          <h2>상세 설명</h2>
-          <p>{project.fullDescription}</p>
-        </div>
-        <div className="technologies">
-          <h3>기술 스택</h3>
-          <ul>
-            {project.technologies.map((tech) => (
-              <li key={tech}>{tech}</li>
-            ))}
-          </ul>
-        </div>
-        {project.links && (
-          <div className="links">
-            <h3>Links</h3>
-            {project.links.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-            {project.links.demo && <a href={project.links.demo} target="_blank" rel="noopener noreferrer">Demo</a>}
-            {project.links.documentation && <a href={project.links.documentation} target="_blank" rel="noopener noreferrer">Documentation</a>}
-          </div>
-        )}
-        
-        {relatedProjects.length > 0 && (
-          <div className="related-items">
-            <h3>관련 프로젝트</h3>
-            <div className="related-grid">
-              {relatedProjects.map(related => (
-                <Link key={related.id} to={`/projects/${related.id}`} className="related-card">
-                  {related.thumbnail && <img src={related.thumbnail} alt={related.title} />}
-                  <h4>{related.title}</h4>
-                  <p>{related.description}</p>
-                </Link>
-              ))}
+      <div className="detail-page-wrapper">
+        <div className="container">
+          <div className="detail-page project-detail">
+            <button onClick={() => navigate('/projects')} className="back-button">
+              ← Back to Projects
+            </button>
+            
+            <div className="detail-hero">
+              <h1 className="detail-title">{project.title}</h1>
+              <div className="detail-meta">
+                <p className="detail-date">{new Date(project.date).toLocaleDateString('ko-KR')}</p>
+                <div className="tags">
+                  {project.tags.map((tag) => (
+                    <Link key={tag} to={`/projects?tag=${encodeURIComponent(tag)}`} className="tag">
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <p className="detail-description">{project.description}</p>
             </div>
+            
+            {project.images && project.images.length > 0 && (
+              <div className="detail-gallery">
+                <ImageGallery images={project.images} alt={project.title} />
+              </div>
+            )}
+            
+            <div className="detail-content-grid">
+              <div className="detail-main">
+                <section className="detail-section">
+                  <h2 className="section-heading">상세 설명</h2>
+                  <p className="section-text">{project.fullDescription}</p>
+                </section>
+              </div>
+              
+              <aside className="detail-sidebar">
+                <GradientCard gradient="purple" hover={false}>
+                  <div className="sidebar-card">
+                    <h3 className="sidebar-heading">기술 스택</h3>
+                    <ul className="tech-list">
+                      {project.technologies.map((tech) => (
+                        <li key={tech} className="tech-item">{tech}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </GradientCard>
+                
+                {project.links && (
+                  <GradientCard gradient="blue" hover={false}>
+                    <div className="sidebar-card">
+                      <h3 className="sidebar-heading">Links</h3>
+                      <div className="link-buttons">
+                        {project.links.github && (
+                          <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="link-button">
+                            GitHub
+                          </a>
+                        )}
+                        {project.links.demo && (
+                          <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="link-button">
+                            Demo
+                          </a>
+                        )}
+                        {project.links.documentation && (
+                          <a href={project.links.documentation} target="_blank" rel="noopener noreferrer" className="link-button">
+                            Documentation
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </GradientCard>
+                )}
+              </aside>
+            </div>
+            
+            {relatedProjects.length > 0 && (
+              <section className="related-section">
+                <h2 className="section-heading">관련 프로젝트</h2>
+                <div className="related-grid">
+                  {relatedProjects.map((related, index) => {
+                    const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
+                    return (
+                      <GradientCard key={related.id} gradient={gradients[index % 3]} hover={true}>
+                        <Link to={`/projects/${related.id}`} className="related-card-link">
+                          {related.thumbnail && (
+                            <img src={related.thumbnail} alt={related.title} className="related-thumbnail" />
+                          )}
+                          <div className="related-content">
+                            <h4 className="related-title">{related.title}</h4>
+                            <p className="related-description">{related.description}</p>
+                          </div>
+                        </Link>
+                      </GradientCard>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
           </div>
-        )}
+        </div>
       </div>
     );
   }
