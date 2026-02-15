@@ -58,7 +58,7 @@ function About() {
 
     // From projects
     projects?.forEach(project => {
-      project.tags.forEach(tag => {
+      project.tags?.forEach(tag => {
         const current = skillMap.get(tag) || { count: 0, category: 'technical' };
         skillMap.set(tag, { count: current.count + 1, category: 'technical' });
       });
@@ -70,7 +70,7 @@ function About() {
 
     // From music
     music?.forEach(work => {
-      work.tags.forEach(tag => {
+      work.tags?.forEach(tag => {
         const current = skillMap.get(tag) || { count: 0, category: 'creative' };
         skillMap.set(tag, { count: current.count + 1, category: 'creative' });
       });
@@ -185,19 +185,21 @@ function About() {
         </section>
 
         {/* Skills Section */}
-        {skills.length > 0 && (
+        {skills && skills.length > 0 && (
           <section className="skills-section">
             <h2 className="section-title-about">Skills & Expertise</h2>
             <div className="skills-cloud">
               {skills.map((skill, index) => {
-                const maxCount = skills[0].count;
-                const minCount = skills[skills.length - 1].count;
+                const maxCount = skills[0]?.count || 1;
+                const minCount = skills[skills.length - 1]?.count || 1;
                 const sizeRange = 2.5 - 1; // 2.5rem to 1rem
-                const normalizedSize = ((skill.count - minCount) / (maxCount - minCount)) * sizeRange + 1;
+                const normalizedSize = maxCount > minCount 
+                  ? ((skill.count - minCount) / (maxCount - minCount)) * sizeRange + 1
+                  : 1.5;
                 
                 return (
                   <span
-                    key={skill.name}
+                    key={`${skill.name}-${index}`}
                     className={`skill-tag ${skill.category}`}
                     style={{
                       fontSize: `${normalizedSize}rem`,
