@@ -6,6 +6,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import HeroSection from '../components/HeroSection';
 import StatCard from '../components/StatCard';
 import GradientCard from '../components/GradientCard';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 function Home() {
   const { data: projects, loading: projectsLoading, error: projectsError, reload: reloadProjects } = useProjects();
@@ -51,6 +52,10 @@ function Home() {
   const latestItems = getLatestItems();
   const featuredItems = latestItems.slice(0, 3);
 
+  // Intersection observers for scroll animations
+  const [statsRef, statsVisible] = useIntersectionObserver({ threshold: 0.2 });
+  const [featuredRef, featuredVisible] = useIntersectionObserver({ threshold: 0.1 });
+
   return (
     <div className="home">
       <HeroSection
@@ -67,9 +72,9 @@ function Home() {
         </div>
       </HeroSection>
 
-      <section className="stats-section">
+      <section className="stats-section" ref={statsRef}>
         <div className="container">
-          <div className="stats-grid">
+          <div className={`stats-grid ${statsVisible ? 'animate-on-scroll is-visible' : 'animate-on-scroll'}`}>
             <StatCard
               title="Research Projects"
               value={projects?.length || 0}
@@ -95,43 +100,48 @@ function Home() {
         </div>
       </section>
 
-      <section className="featured-section">
+      <section className="featured-section" ref={featuredRef}>
         <div className="container">
-          <h2 className="section-title">Featured Work</h2>
+          <h2 className={`section-title ${featuredVisible ? 'animate-on-scroll is-visible' : 'animate-on-scroll'}`}>Featured Work</h2>
           <div className="featured-grid">
             {featuredItems.map((item, index) => {
               const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
               return (
-                <GradientCard
+                <div 
                   key={item.id}
-                  gradient={gradients[index % 3]}
-                  hover={true}
-                  onClick={() => window.location.href = getItemLink(item)}
+                  className={`stagger-item ${featuredVisible ? 'is-visible' : ''}`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="featured-card">
-                    {item.thumbnail && (
-                      <img 
-                        src={item.thumbnail} 
-                        alt={item.title}
-                        loading="lazy"
-                        className="featured-thumbnail"
-                      />
-                    )}
-                    <div className="featured-content">
-                      <h3>{item.title}</h3>
-                      <p>
-                        {'description' in item ? item.description : item.abstract}
-                      </p>
-                      {item.tags && (
-                        <div className="tags">
-                          {item.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} className="tag">{tag}</span>
-                          ))}
-                        </div>
+                  <GradientCard
+                    gradient={gradients[index % 3]}
+                    hover={true}
+                    onClick={() => window.location.href = getItemLink(item)}
+                  >
+                    <div className="featured-card">
+                      {item.thumbnail && (
+                        <img 
+                          src={item.thumbnail} 
+                          alt={item.title}
+                          loading="lazy"
+                          className="featured-thumbnail"
+                        />
                       )}
+                      <div className="featured-content">
+                        <h3>{item.title}</h3>
+                        <p>
+                          {'description' in item ? item.description : item.abstract}
+                        </p>
+                        {item.tags && (
+                          <div className="tags">
+                            {item.tags.slice(0, 3).map((tag) => (
+                              <span key={tag} className="tag">{tag}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </GradientCard>
+                  </GradientCard>
+                </div>
               );
             })}
           </div>
