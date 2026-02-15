@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar';
 import TagFilter from '../components/TagFilter';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import GradientCard from '../components/GradientCard';
 
 function Projects() {
   const { data: projects, loading, error, reload } = useProjects();
@@ -58,47 +59,64 @@ function Projects() {
   }
 
   return (
-    <div className="projects">
-      <h1>Projects</h1>
-      <p>Research projects in AI, Mathematics, and Signal Processing.</p>
-      
-      <SearchBar 
-        onSearch={setSearchQuery} 
-        placeholder="프로젝트 검색..."
-      />
-
-      <TagFilter 
-        tags={allTags}
-        selectedTags={selectedTags}
-        onTagToggle={handleTagToggle}
-      />
-      
-      {filteredProjects.length === 0 ? (
-        <p className="no-results">검색 결과가 없습니다.</p>
-      ) : (
-        <div className="project-grid">
-          {filteredProjects.map((project) => (
-            <Link to={`/projects/${project.id}`} key={project.id} className="project-card">
-              {project.thumbnail && (
-                <img 
-                  src={project.thumbnail} 
-                  alt={project.title}
-                  loading="lazy"
-                  className="project-thumbnail"
-                />
-              )}
-              <h2>{project.title}</h2>
-              <p className="description">{project.description}</p>
-              <div className="tags">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
-              </div>
-              <p className="date">{new Date(project.date).toLocaleDateString('ko-KR')}</p>
-            </Link>
-          ))}
+    <div className="projects-page">
+      <div className="container">
+        <div className="page-header">
+          <h1 className="page-title">Projects</h1>
+          <p className="page-subtitle">Research projects in AI, Mathematics, and Signal Processing.</p>
         </div>
-      )}
+        
+        <div className="filter-section">
+          <SearchBar 
+            onSearch={setSearchQuery} 
+            placeholder="프로젝트 검색..."
+          />
+
+          <TagFilter 
+            tags={allTags}
+            selectedTags={selectedTags}
+            onTagToggle={handleTagToggle}
+          />
+        </div>
+        
+        {filteredProjects.length === 0 ? (
+          <p className="no-results">검색 결과가 없습니다.</p>
+        ) : (
+          <div className="portfolio-grid">
+            {filteredProjects.map((project, index) => {
+              const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
+              return (
+                <GradientCard
+                  key={project.id}
+                  gradient={gradients[index % 3]}
+                  hover={true}
+                >
+                  <Link to={`/projects/${project.id}`} className="portfolio-card-link">
+                    {project.thumbnail && (
+                      <img 
+                        src={project.thumbnail} 
+                        alt={project.title}
+                        loading="lazy"
+                        className="portfolio-thumbnail"
+                      />
+                    )}
+                    <div className="portfolio-card-content">
+                      <h2 className="portfolio-card-title">{project.title}</h2>
+                      <p className="portfolio-card-description">{project.description}</p>
+                      <div className="tags">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="tag">{tag}</span>
+                        ))}
+                      </div>
+                      <p className="portfolio-card-date">{new Date(project.date).toLocaleDateString('ko-KR')}</p>
+                    </div>
+                  </Link>
+                </GradientCard>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

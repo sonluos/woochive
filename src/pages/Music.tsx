@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar';
 import TagFilter from '../components/TagFilter';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import GradientCard from '../components/GradientCard';
 
 function Music() {
   const { data: musicWorks, loading, error, reload } = useMusic();
@@ -58,52 +59,69 @@ function Music() {
   }
 
   return (
-    <div className="music">
-      <h1>Music</h1>
-      <p>Music works and compositions.</p>
-      
-      <SearchBar 
-        onSearch={setSearchQuery} 
-        placeholder="음악 작품 검색..."
-      />
-
-      <TagFilter 
-        tags={allTags}
-        selectedTags={selectedTags}
-        onTagToggle={handleTagToggle}
-      />
-      
-      {filteredMusic.length === 0 ? (
-        <p className="no-results">검색 결과가 없습니다.</p>
-      ) : (
-        <div className="music-grid">
-          {filteredMusic.map((work) => (
-            <Link to={`/music/${work.id}`} key={work.id} className="music-card">
-              {work.thumbnail && (
-                <img 
-                  src={work.thumbnail} 
-                  alt={work.title}
-                  loading="lazy"
-                  className="music-thumbnail"
-                />
-              )}
-              <h2>{work.title}</h2>
-              <p className="description">{work.description}</p>
-              <div className="instruments">
-                {work.instruments.map((instrument) => (
-                  <span key={instrument} className="instrument">{instrument}</span>
-                ))}
-              </div>
-              <div className="tags">
-                {work.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
-              </div>
-              <p className="date">{new Date(work.date).toLocaleDateString('ko-KR')}</p>
-            </Link>
-          ))}
+    <div className="music-page">
+      <div className="container">
+        <div className="page-header">
+          <h1 className="page-title">Music</h1>
+          <p className="page-subtitle">Music works and compositions.</p>
         </div>
-      )}
+        
+        <div className="filter-section">
+          <SearchBar 
+            onSearch={setSearchQuery} 
+            placeholder="음악 작품 검색..."
+          />
+
+          <TagFilter 
+            tags={allTags}
+            selectedTags={selectedTags}
+            onTagToggle={handleTagToggle}
+          />
+        </div>
+        
+        {filteredMusic.length === 0 ? (
+          <p className="no-results">검색 결과가 없습니다.</p>
+        ) : (
+          <div className="portfolio-grid">
+            {filteredMusic.map((work, index) => {
+              const gradients: Array<'purple' | 'blue' | 'orange'> = ['blue', 'orange', 'purple'];
+              return (
+                <GradientCard
+                  key={work.id}
+                  gradient={gradients[index % 3]}
+                  hover={true}
+                >
+                  <Link to={`/music/${work.id}`} className="portfolio-card-link">
+                    {work.thumbnail && (
+                      <img 
+                        src={work.thumbnail} 
+                        alt={work.title}
+                        loading="lazy"
+                        className="portfolio-thumbnail"
+                      />
+                    )}
+                    <div className="portfolio-card-content">
+                      <h2 className="portfolio-card-title">{work.title}</h2>
+                      <p className="portfolio-card-description">{work.description}</p>
+                      <div className="instruments">
+                        {work.instruments.map((instrument) => (
+                          <span key={instrument} className="instrument">{instrument}</span>
+                        ))}
+                      </div>
+                      <div className="tags">
+                        {work.tags.map((tag) => (
+                          <span key={tag} className="tag">{tag}</span>
+                        ))}
+                      </div>
+                      <p className="portfolio-card-date">{new Date(work.date).toLocaleDateString('ko-KR')}</p>
+                    </div>
+                  </Link>
+                </GradientCard>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
