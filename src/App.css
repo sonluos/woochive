@@ -753,6 +753,11 @@
   margin-bottom: var(--spacing-3xl);
 }
 
+.featured-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .featured-card {
   display: flex;
   flex-direction: column;

@@ -85,7 +85,7 @@ function Home() {
 
       <section className="stats-section" ref={statsRef}>
         <div className="container">
-          <div className={`stats-grid ${statsVisible ? 'animate-on-scroll is-visible' : 'animate-on-scroll'}`}>
+          <div className="stats-grid">
             <StatCard
               title="Research Projects"
               value={projects?.length || 0}
@@ -113,7 +113,7 @@ function Home() {
 
       <section className="featured-section" ref={featuredRef}>
         <div className="container">
-          <h2 className={`section-title ${featuredVisible ? 'animate-on-scroll is-visible' : 'animate-on-scroll'}`}>Featured Work</h2>
+          <h2 className="section-title">Featured Work</h2>
           {featuredItems && featuredItems.length > 0 ? (
             <>
               <div className="featured-grid">
@@ -122,8 +122,7 @@ function Home() {
                   return (
                     <div 
                       key={item.id}
-                      className={`stagger-item ${featuredVisible ? 'is-visible' : ''}`}
-                      style={{ transitionDelay: `${index * 100}ms` }}
+                      className="featured-item"
                     >
                       <GradientCard
                         gradient={gradients[index % 3]}
