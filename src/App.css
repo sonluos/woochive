@@ -73,7 +73,7 @@
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
 }
 
 .portfolio-card-link {
@@ -81,6 +81,11 @@
   text-decoration: none;
   color: inherit;
   height: 100%;
+  transition: transform var(--transition-base);
+}
+
+.portfolio-card-link:hover {
+  transform: translateY(-2px);
 }
 
 .portfolio-thumbnail {
@@ -709,7 +714,7 @@
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
 }
 
 @media (max-width: 1024px) {
@@ -744,12 +749,13 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: var(--leading-tight);
 }
 
 .featured-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
   margin-bottom: var(--spacing-3xl);
 }
 
@@ -809,14 +815,14 @@
   text-decoration: none;
   border-radius: var(--radius-xl);
   font-weight: var(--font-medium);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .view-all-button:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 1024px) {
@@ -856,20 +862,21 @@
 
 .hero-link {
   padding: var(--spacing-md) var(--spacing-2xl);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   color: var(--text-primary);
   text-decoration: none;
   border-radius: var(--radius-xl);
   font-weight: var(--font-medium);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   transition: all var(--transition-base);
-  border: 2px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-link:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   border-color: var(--color-purple);
   background: rgba(255, 255, 255, 1);
 }

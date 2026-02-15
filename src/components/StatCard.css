@@ -6,6 +6,7 @@
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--border-light);
 }
 
 .stat-card::before {
@@ -15,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.1;
+  opacity: 0.05;
   z-index: 0;
   transition: opacity var(--transition-base);
 }
@@ -37,12 +38,13 @@
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-card-hover);
+  border-color: var(--border-color);
 }
 
 .stat-card:hover::before {
-  opacity: 0.15;
+  opacity: 0.08;
 }
 
 .stat-card__header {

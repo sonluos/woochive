@@ -2,7 +2,7 @@
   background: var(--bg-card);
   border-radius: var(--radius-2xl);
   padding: 0;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-card);
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -34,13 +34,13 @@
 }
 
 .gradient-card--hover:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-xl);
-  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--border-color);
 }
 
 .gradient-card--hover:hover::before {
-  opacity: 0.08;
+  opacity: 0.06;
 }
 
 .gradient-card--clickable {
@@ -48,7 +48,7 @@
 }
 
 .gradient-card--clickable:active {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-1px);
 }
 
 .gradient-card > * {
@@ -59,6 +59,6 @@
 /* Responsive */
 @media (max-width: 768px) {
   .gradient-card--hover:hover {
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-2px);
   }
 }

@@ -270,8 +270,8 @@
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Scale Effect */
@@ -280,7 +280,7 @@
 }
 
 .hover-scale:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* Glow Effect */
@@ -289,7 +289,7 @@
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(155, 135, 245, 0.4);
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.3);
 }
 
 /* Brightness Effect */
