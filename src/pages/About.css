@@ -1,0 +1,340 @@
+.about {
+  min-height: 100vh;
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Profile Section */
+.profile-section {
+  margin-bottom: var(--spacing-4xl);
+  padding: var(--spacing-3xl) 0;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.profile-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  padding: 6px;
+  background: var(--gradient-mixed);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-base);
+}
+
+.profile-image-container:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.profile-image-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-icon {
+  font-size: 6rem;
+  opacity: 0.3;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+  margin: 0;
+  background: var(--gradient-mixed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: var(--leading-tight);
+}
+
+.profile-introduction {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.profile-contact {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: 0;
+  font-size: var(--text-base);
+}
+
+.contact-label {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.contact-link {
+  color: var(--color-purple);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  font-weight: var(--font-medium);
+}
+
+.contact-link:hover {
+  color: var(--color-purple-dark);
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  transition: all var(--transition-base);
+}
+
+.social-link:hover {
+  background: var(--gradient-purple);
+  color: var(--text-inverse);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.social-icon {
+  font-size: var(--text-lg);
+}
+
+/* Stats Section */
+.about-stats-section {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.stats-grid-about {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.balance-bars {
+  margin-top: var(--spacing-lg);
+}
+
+/* Courses Section */
+.courses-section {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.section-title-about {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  margin: 0 0 var(--spacing-2xl) 0;
+  background: var(--gradient-mixed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.course-category {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-xl) 0;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.course-card {
+  padding: var(--spacing-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.course-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.course-name {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: var(--leading-snug);
+}
+
+.course-semester {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  font-weight: var(--font-medium);
+}
+
+.course-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.course-credits,
+.course-grade {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-medium);
+}
+
+.course-description {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .profile-content {
+    grid-template-columns: 250px 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .profile-image-container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .profile-icon {
+    font-size: 5rem;
+  }
+
+  .profile-name {
+    font-size: var(--text-4xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .profile-section {
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .profile-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .profile-image-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-icon {
+    font-size: 4.5rem;
+  }
+
+  .profile-name {
+    font-size: var(--text-3xl);
+  }
+
+  .profile-introduction {
+    font-size: var(--text-base);
+  }
+
+  .profile-contact {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .stats-grid-about {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .section-title-about {
+    font-size: var(--text-3xl);
+  }
+
+  .category-title {
+    font-size: var(--text-xl);
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-image-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .profile-icon {
+    font-size: 4rem;
+  }
+
+  .profile-name {
+    font-size: var(--text-2xl);
+  }
+
+  .social-link {
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+  }
+}

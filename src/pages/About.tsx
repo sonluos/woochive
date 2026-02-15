@@ -5,6 +5,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import StatCard from '../components/StatCard';
 import ProgressBar from '../components/ProgressBar';
 import GradientCard from '../components/GradientCard';
+import './About.css';
 
 function About() {
   const { data: bio, loading: bioLoading, error: bioError, reload: reloadBio } = useBio();
@@ -57,6 +58,14 @@ function About() {
         {/* Profile Section */}
         <section className="profile-section">
           <div className="profile-content">
+            <div className="profile-image-wrapper">
+              <div className="profile-image-container">
+                <div className="profile-image-placeholder">
+                  <span className="profile-icon">👤</span>
+                </div>
+              </div>
+            </div>
+            
             <div className="profile-text">
               <h1 className="profile-name">{bio.name}</h1>
               <p className="profile-introduction">{bio.introduction}</p>
@@ -72,16 +81,19 @@ function About() {
                 <div className="social-links">
                   {bio.socialLinks.github && (
                     <a href={bio.socialLinks.github} target="_blank" rel="noopener noreferrer" className="social-link">
+                      <span className="social-icon">💻</span>
                       GitHub
                     </a>
                   )}
                   {bio.socialLinks.linkedin && (
                     <a href={bio.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="social-link">
+                      <span className="social-icon">💼</span>
                       LinkedIn
                     </a>
                   )}
                   {bio.socialLinks.twitter && (
                     <a href={bio.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-link">
+                      <span className="social-icon">🐦</span>
                       Twitter
                     </a>
                   )}
