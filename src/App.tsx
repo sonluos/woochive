@@ -14,6 +14,8 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminEditProjects from './pages/AdminEditProjects';
 import AdminEditMusic from './pages/AdminEditMusic';
+import AdminEditPublications from './pages/AdminEditPublications';
+import AdminEditAbout from './pages/AdminEditAbout';
 import './App.css';
 
 // Protected Route Component
@@ -55,6 +57,16 @@ function App() {
                 <Route path="/admin/edit/music" element={
                   <ProtectedRoute>
                     <AdminEditMusic />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit/publications" element={
+                  <ProtectedRoute>
+                    <AdminEditPublications />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit/about" element={
+                  <ProtectedRoute>
+                    <AdminEditAbout />
                   </ProtectedRoute>
                 } />
                 

@@ -288,3 +288,99 @@
     flex-direction: column;
   }
 }
+
+/* Section Card Styles for About Page */
+.section-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header h2 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.section-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btn-download {
+  padding: 0.5rem 1rem;
+  background: var(--secondary-color, #6c757d);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-download:hover {
+  background: var(--secondary-hover, #5a6268);
+  transform: translateY(-1px);
+}
+
+.bio-preview {
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.bio-preview p {
+  margin: var(--spacing-sm) 0;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.bio-preview strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: border-color var(--transition-base);
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: stretch;
+  }
+
+  .section-actions {
+    width: 100%;
+  }
+
+  .section-actions button {
+    flex: 1;
+  }
+}

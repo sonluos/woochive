@@ -62,13 +62,52 @@ export async function loadMusic(): Promise<MusicWork[]> {
 }
 
 export async function loadPublications(): Promise<Publication[]> {
-  return fetchJson<Publication[]>('/data/publications.json');
+  // localStorage에서 먼저 확인
+  const cached = localStorage.getItem('publications_data');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (error) {
+      console.error('Failed to parse cached publications:', error);
+    }
+  }
+  
+  // localStorage에 없으면 JSON 파일에서 로드
+  const data = await fetchJson<Publication[]>('/data/publications.json');
+  localStorage.setItem('publications_data', JSON.stringify(data));
+  return data;
 }
 
 export async function loadBio(): Promise<Bio> {
-  return fetchJson<Bio>('/data/bio.json');
+  // localStorage에서 먼저 확인
+  const cached = localStorage.getItem('bio_data');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (error) {
+      console.error('Failed to parse cached bio:', error);
+    }
+  }
+  
+  // localStorage에 없으면 JSON 파일에서 로드
+  const data = await fetchJson<Bio>('/data/bio.json');
+  localStorage.setItem('bio_data', JSON.stringify(data));
+  return data;
 }
 
 export async function loadCourses(): Promise<Course[]> {
-  return fetchJson<Course[]>('/data/courses.json');
+  // localStorage에서 먼저 확인
+  const cached = localStorage.getItem('courses_data');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (error) {
+      console.error('Failed to parse cached courses:', error);
+    }
+  }
+  
+  // localStorage에 없으면 JSON 파일에서 로드
+  const data = await fetchJson<Course[]>('/data/courses.json');
+  localStorage.setItem('courses_data', JSON.stringify(data));
+  return data;
 }

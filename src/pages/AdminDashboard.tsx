@@ -19,6 +19,9 @@ function AdminDashboard() {
     if (confirm('모든 변경사항을 초기화하고 원본 데이터로 되돌리시겠습니까?')) {
       localStorage.removeItem('projects_data');
       localStorage.removeItem('music_data');
+      localStorage.removeItem('publications_data');
+      localStorage.removeItem('bio_data');
+      localStorage.removeItem('courses_data');
       alert('데이터가 초기화되었습니다. 페이지를 새로고침하세요.');
       window.location.reload();
     }
