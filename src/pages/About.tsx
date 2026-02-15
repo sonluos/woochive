@@ -52,6 +52,43 @@ function About() {
   const creativePercent = totalProjects > 0 ? Math.round((creativeCount / totalProjects) * 100) : 50;
   const balanceScore = 100 - Math.abs(academicPercent - creativePercent);
 
+  // Extract skills from projects and music
+  const extractSkills = () => {
+    const skillMap = new Map<string, { count: number; category: string }>();
+
+    // From projects
+    projects?.forEach(project => {
+      project.tags.forEach(tag => {
+        const current = skillMap.get(tag) || { count: 0, category: 'technical' };
+        skillMap.set(tag, { count: current.count + 1, category: 'technical' });
+      });
+      project.technologies?.forEach(tech => {
+        const current = skillMap.get(tech) || { count: 0, category: 'technical' };
+        skillMap.set(tech, { count: current.count + 1, category: 'technical' });
+      });
+    });
+
+    // From music
+    music?.forEach(work => {
+      work.tags.forEach(tag => {
+        const current = skillMap.get(tag) || { count: 0, category: 'creative' };
+        skillMap.set(tag, { count: current.count + 1, category: 'creative' });
+      });
+      work.instruments?.forEach(instrument => {
+        const current = skillMap.get(instrument) || { count: 0, category: 'creative' };
+        skillMap.set(instrument, { count: current.count + 1, category: 'creative' });
+      });
+    });
+
+    // Convert to array and sort by count
+    return Array.from(skillMap.entries())
+      .map(([name, data]) => ({ name, ...data }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 20); // Top 20 skills
+  };
+
+  const skills = extractSkills();
+
   return (
     <div className="about">
       <div className="container">
@@ -146,6 +183,34 @@ function About() {
             />
           </div>
         </section>
+
+        {/* Skills Section */}
+        {skills.length > 0 && (
+          <section className="skills-section">
+            <h2 className="section-title-about">Skills & Expertise</h2>
+            <div className="skills-cloud">
+              {skills.map((skill, index) => {
+                const maxCount = skills[0].count;
+                const minCount = skills[skills.length - 1].count;
+                const sizeRange = 2.5 - 1; // 2.5rem to 1rem
+                const normalizedSize = ((skill.count - minCount) / (maxCount - minCount)) * sizeRange + 1;
+                
+                return (
+                  <span
+                    key={skill.name}
+                    className={`skill-tag ${skill.category}`}
+                    style={{
+                      fontSize: `${normalizedSize}rem`,
+                      animationDelay: `${index * 0.05}s`
+                    }}
+                  >
+                    {skill.name}
+                  </span>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
         {/* Courses Section */}
         {courses && courses.length > 0 && (
