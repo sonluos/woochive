@@ -52,18 +52,6 @@ function About() {
   const creativePercent = totalProjects > 0 ? Math.round((creativeCount / totalProjects) * 100) : 50;
   const balanceScore = 100 - Math.abs(academicPercent - creativePercent);
 
-  console.log('About Page Debug:', {
-    totalProjects,
-    academicCount,
-    creativeCount,
-    academicPercent,
-    creativePercent,
-    balanceScore,
-    hasProjects: !!projects,
-    hasMusic: !!music,
-    hasPublications: !!publications
-  });
-
   // Extract skills from projects and music
   const extractSkills = () => {
     const skillMap = new Map<string, { count: number; category: string }>();

@@ -42,8 +42,6 @@ function Home() {
       ...(publications || [])
     ];
     
-    console.log('All items before sort:', allItems.length, allItems);
-    
     return allItems
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 6);
@@ -57,15 +55,6 @@ function Home() {
 
   const latestItems = getLatestItems();
   const featuredItems = latestItems.slice(0, 3);
-
-  console.log('Home Debug:', {
-    projects: projects?.length,
-    music: music?.length,
-    publications: publications?.length,
-    latestItems: latestItems.length,
-    featuredItems: featuredItems.length,
-    featuredItemsData: featuredItems
-  });
 
   return (
     <div className="home">
