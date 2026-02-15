@@ -14,23 +14,31 @@
 
 .admin-header h1 {
   margin: 0;
-  color: var(--text-color);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  font-size: var(--text-4xl);
+  background: var(--gradient-mixed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .logout-button {
   padding: 0.5rem 1.5rem;
-  background: var(--danger-color);
-  color: white;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: var(--text-inverse);
   border: none;
   border-radius: var(--radius-md);
-  font-weight: 500;
+  font-weight: var(--font-medium);
   cursor: pointer;
   transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .logout-button:hover {
-  background: #c82333;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .admin-content {
@@ -40,13 +48,14 @@
 }
 
 .admin-sidebar {
-  background: var(--card-bg);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   height: fit-content;
   position: sticky;
   top: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin-nav {
@@ -68,16 +77,19 @@
   text-align: left;
   color: var(--text-secondary);
   font-size: 1rem;
+  font-weight: var(--font-medium);
 }
 
 .admin-nav-item:hover {
   background: var(--bg-secondary);
-  color: var(--text-color);
+  color: var(--text-primary);
+  transform: translateX(4px);
 }
 
 .admin-nav-item.active {
-  background: var(--primary-color);
-  color: white;
+  background: var(--gradient-purple);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-icon {
@@ -85,19 +97,22 @@
 }
 
 .nav-text {
-  font-weight: 500;
+  font-weight: var(--font-medium);
 }
 
 .admin-main {
-  background: var(--card-bg);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xxl);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin-section h2 {
   margin: 0 0 var(--spacing-md) 0;
-  color: var(--text-color);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
 }
 
 .section-description {
@@ -108,20 +123,20 @@
 
 .edit-button {
   padding: 0.75rem 2rem;
-  background: var(--primary-color);
-  color: white;
+  background: var(--gradient-blue);
+  color: var(--text-inverse);
   border: none;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: var(--font-semibold);
   cursor: pointer;
   transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .edit-button:hover {
-  background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 @media (max-width: 768px) {
