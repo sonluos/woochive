@@ -103,51 +103,57 @@ function Home() {
       <section className="featured-section" ref={featuredRef}>
         <div className="container">
           <h2 className={`section-title ${featuredVisible ? 'animate-on-scroll is-visible' : 'animate-on-scroll'}`}>Featured Work</h2>
-          <div className="featured-grid">
-            {featuredItems.map((item, index) => {
-              const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
-              return (
-                <div 
-                  key={item.id}
-                  className={`stagger-item ${featuredVisible ? 'is-visible' : ''}`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <GradientCard
-                    gradient={gradients[index % 3]}
-                    hover={true}
-                    onClick={() => window.location.href = getItemLink(item)}
-                  >
-                    <div className="featured-card">
-                      {item.thumbnail && (
-                        <img 
-                          src={item.thumbnail} 
-                          alt={item.title}
-                          loading="lazy"
-                          className="featured-thumbnail"
-                        />
-                      )}
-                      <div className="featured-content">
-                        <h3>{item.title}</h3>
-                        <p>
-                          {'description' in item ? item.description : item.abstract}
-                        </p>
-                        {item.tags && (
-                          <div className="tags">
-                            {item.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="tag">{tag}</span>
-                            ))}
+          {featuredItems && featuredItems.length > 0 ? (
+            <>
+              <div className="featured-grid">
+                {featuredItems.map((item, index) => {
+                  const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
+                  return (
+                    <div 
+                      key={item.id}
+                      className={`stagger-item ${featuredVisible ? 'is-visible' : ''}`}
+                      style={{ transitionDelay: `${index * 100}ms` }}
+                    >
+                      <GradientCard
+                        gradient={gradients[index % 3]}
+                        hover={true}
+                        onClick={() => window.location.href = getItemLink(item)}
+                      >
+                        <div className="featured-card">
+                          {item.thumbnail && (
+                            <img 
+                              src={item.thumbnail} 
+                              alt={item.title}
+                              loading="lazy"
+                              className="featured-thumbnail"
+                            />
+                          )}
+                          <div className="featured-content">
+                            <h3>{item.title}</h3>
+                            <p>
+                              {'description' in item ? item.description : item.abstract}
+                            </p>
+                            {item.tags && (
+                              <div className="tags">
+                                {item.tags.slice(0, 3).map((tag) => (
+                                  <span key={tag} className="tag">{tag}</span>
+                                ))}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      </GradientCard>
                     </div>
-                  </GradientCard>
-                </div>
-              );
-            })}
-          </div>
-          <div className="view-all-container">
-            <Link to="/projects" className="view-all-button">View All Projects →</Link>
-          </div>
+                  );
+                })}
+              </div>
+              <div className="view-all-container">
+                <Link to="/projects" className="view-all-button">View All Projects →</Link>
+              </div>
+            </>
+          ) : (
+            <p className="no-items">No featured items available</p>
+          )}
         </div>
       </section>
     </div>
