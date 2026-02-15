@@ -386,9 +386,9 @@
 }
 
 .skill-tag.creative {
-  background: linear-gradient(135deg, rgba(213, 127, 244, 0.12) 0%, rgba(197, 102, 232, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(181, 127, 244, 0.12) 0%, rgba(153, 102, 232, 0.12) 100%);
   color: var(--color-creative);
-  border: 1.5px solid rgba(213, 127, 244, 0.3);
+  border: 1.5px solid rgba(181, 127, 244, 0.3);
 }
 
 .skill-tag:hover {
