@@ -162,50 +162,106 @@ function DetailPage({ type }: DetailPageProps) {
     const relatedWorks = musicWorks ? getRelatedItems(work, musicWorks) : [];
 
     return (
-      <div className="detail-page music-detail">
-        <button onClick={() => navigate('/music')} className="back-button">← Back to Music</button>
-        <h1>{work.title}</h1>
-        <p className="date">{new Date(work.date).toLocaleDateString('ko-KR')}</p>
-        <div className="tags">
-          {work.tags.map((tag) => (
-            <Link key={tag} to={`/music?tag=${encodeURIComponent(tag)}`} className="tag">
-              {tag}
-            </Link>
-          ))}
-        </div>
-        <p className="description">{work.description}</p>
-        
-        {work.audioFile && (
-          <AudioPlayer src={work.audioFile} title={work.title} />
-        )}
-        
-        <div className="instruments">
-          <h3>악기</h3>
-          <ul>
-            {work.instruments.map((instrument) => (
-              <li key={instrument}>{instrument}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="full-description">
-          <h2>작품 설명</h2>
-          <p>{work.fullDescription}</p>
-        </div>
-        
-        {relatedWorks.length > 0 && (
-          <div className="related-items">
-            <h3>관련 음악</h3>
-            <div className="related-grid">
-              {relatedWorks.map(related => (
-                <Link key={related.id} to={`/music/${related.id}`} className="related-card">
-                  {related.thumbnail && <img src={related.thumbnail} alt={related.title} />}
-                  <h4>{related.title}</h4>
-                  <p>{related.description}</p>
-                </Link>
-              ))}
+      <div className="detail-page-wrapper">
+        <div className="container">
+          <div className="detail-page music-detail">
+            <button onClick={() => navigate('/music')} className="back-button">
+              ← Back to Music
+            </button>
+            
+            <div className="detail-hero">
+              <h1 className="detail-title">{work.title}</h1>
+              <div className="detail-meta">
+                <p className="detail-date">{new Date(work.date).toLocaleDateString('ko-KR')}</p>
+                <div className="tags">
+                  {work.tags.map((tag) => (
+                    <Link key={tag} to={`/music?tag=${encodeURIComponent(tag)}`} className="tag">
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <p className="detail-description">{work.description}</p>
             </div>
+            
+            {work.audioFile && (
+              <div className="detail-audio">
+                <AudioPlayer src={work.audioFile} title={work.title} />
+              </div>
+            )}
+            
+            <div className="detail-content-grid">
+              <div className="detail-main">
+                <section className="detail-section">
+                  <h2 className="section-heading">작품 설명</h2>
+                  <p className="section-text">{work.fullDescription}</p>
+                </section>
+              </div>
+              
+              <aside className="detail-sidebar">
+                <GradientCard gradient="blue" hover={false}>
+                  <div className="sidebar-card">
+                    <h3 className="sidebar-heading">악기</h3>
+                    <ul className="tech-list">
+                      {work.instruments.map((instrument) => (
+                        <li key={instrument} className="tech-item">{instrument}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </GradientCard>
+                
+                {work.links && (
+                  <GradientCard gradient="orange" hover={false}>
+                    <div className="sidebar-card">
+                      <h3 className="sidebar-heading">Links</h3>
+                      <div className="link-buttons">
+                        {work.links.youtube && (
+                          <a href={work.links.youtube} target="_blank" rel="noopener noreferrer" className="link-button">
+                            YouTube
+                          </a>
+                        )}
+                        {work.links.soundcloud && (
+                          <a href={work.links.soundcloud} target="_blank" rel="noopener noreferrer" className="link-button">
+                            SoundCloud
+                          </a>
+                        )}
+                        {work.links.other && (
+                          <a href={work.links.other} target="_blank" rel="noopener noreferrer" className="link-button">
+                            Other
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </GradientCard>
+                )}
+              </aside>
+            </div>
+            
+            {relatedWorks.length > 0 && (
+              <section className="related-section">
+                <h2 className="section-heading">관련 음악</h2>
+                <div className="related-grid">
+                  {relatedWorks.map((related, index) => {
+                    const gradients: Array<'purple' | 'blue' | 'orange'> = ['blue', 'orange', 'purple'];
+                    return (
+                      <GradientCard key={related.id} gradient={gradients[index % 3]} hover={true}>
+                        <Link to={`/music/${related.id}`} className="related-card-link">
+                          {related.thumbnail && (
+                            <img src={related.thumbnail} alt={related.title} className="related-thumbnail" />
+                          )}
+                          <div className="related-content">
+                            <h4 className="related-title">{related.title}</h4>
+                            <p className="related-description">{related.description}</p>
+                          </div>
+                        </Link>
+                      </GradientCard>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
           </div>
-        )}
+        </div>
       </div>
     );
   }
@@ -218,61 +274,110 @@ function DetailPage({ type }: DetailPageProps) {
     const relatedPubs = publications ? getRelatedItems(pub, publications) : [];
 
     return (
-      <div className="detail-page publication-detail">
-        <button onClick={() => navigate('/publications')} className="back-button">← Back to Publications</button>
-        <h1>{pub.title}</h1>
-        <p className="authors">{pub.authors.join(', ')}</p>
-        <p className="venue">{pub.venue}</p>
-        <p className="date">{new Date(pub.date).toLocaleDateString('ko-KR')}</p>
-        {pub.tags && (
-          <div className="tags">
-            {pub.tags.map((tag) => (
-              <Link key={tag} to={`/publications?tag=${encodeURIComponent(tag)}`} className="tag">
-                {tag}
-              </Link>
-            ))}
-          </div>
-        )}
-        <div className="abstract">
-          <h2>Abstract</h2>
-          <p>{pub.abstract}</p>
-        </div>
-        {pub.fullContent && (
-          <div className="full-content">
-            <h2>Full Content</h2>
-            <p>{pub.fullContent}</p>
-          </div>
-        )}
-        {pub.pdfFile && (
-          <div className="pdf-download">
-            <a href={pub.pdfFile} download className="download-button">
-              📄 Download PDF
-            </a>
-          </div>
-        )}
-        {pub.links && (
-          <div className="links">
-            <h3>Links</h3>
-            {pub.links.doi && <a href={pub.links.doi} target="_blank" rel="noopener noreferrer">DOI</a>}
-            {pub.links.arxiv && <a href={pub.links.arxiv} target="_blank" rel="noopener noreferrer">arXiv</a>}
-            {pub.links.other && <a href={pub.links.other} target="_blank" rel="noopener noreferrer">Other</a>}
-          </div>
-        )}
-        
-        {relatedPubs.length > 0 && (
-          <div className="related-items">
-            <h3>관련 출판물</h3>
-            <div className="related-grid">
-              {relatedPubs.map(related => (
-                <Link key={related.id} to={`/publications/${related.id}`} className="related-card">
-                  <h4>{related.title}</h4>
-                  <p className="authors">{related.authors.join(', ')}</p>
-                  <p className="venue">{related.venue}</p>
-                </Link>
-              ))}
+      <div className="detail-page-wrapper">
+        <div className="container">
+          <div className="detail-page publication-detail">
+            <button onClick={() => navigate('/publications')} className="back-button">
+              ← Back to Publications
+            </button>
+            
+            <div className="detail-hero">
+              <h1 className="detail-title">{pub.title}</h1>
+              <div className="detail-meta">
+                <p className="publication-authors">{pub.authors.join(', ')}</p>
+                <p className="publication-venue">{pub.venue}</p>
+                <p className="detail-date">{new Date(pub.date).toLocaleDateString('ko-KR')}</p>
+              </div>
+              {pub.tags && (
+                <div className="tags" style={{ justifyContent: 'center', marginTop: 'var(--spacing-lg)' }}>
+                  {pub.tags.map((tag) => (
+                    <Link key={tag} to={`/publications?tag=${encodeURIComponent(tag)}`} className="tag">
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
+            
+            <div className="detail-content-grid">
+              <div className="detail-main">
+                <section className="detail-section">
+                  <h2 className="section-heading">Abstract</h2>
+                  <p className="section-text">{pub.abstract}</p>
+                </section>
+                
+                {pub.fullContent && (
+                  <section className="detail-section">
+                    <h2 className="section-heading">Full Content</h2>
+                    <p className="section-text">{pub.fullContent}</p>
+                  </section>
+                )}
+              </div>
+              
+              <aside className="detail-sidebar">
+                {pub.pdfFile && (
+                  <GradientCard gradient="orange" hover={false}>
+                    <div className="sidebar-card">
+                      <h3 className="sidebar-heading">Download</h3>
+                      <div className="link-buttons">
+                        <a href={pub.pdfFile} download className="link-button">
+                          📄 Download PDF
+                        </a>
+                      </div>
+                    </div>
+                  </GradientCard>
+                )}
+                
+                {pub.links && (
+                  <GradientCard gradient="purple" hover={false}>
+                    <div className="sidebar-card">
+                      <h3 className="sidebar-heading">Links</h3>
+                      <div className="link-buttons">
+                        {pub.links.doi && (
+                          <a href={pub.links.doi} target="_blank" rel="noopener noreferrer" className="link-button">
+                            DOI
+                          </a>
+                        )}
+                        {pub.links.arxiv && (
+                          <a href={pub.links.arxiv} target="_blank" rel="noopener noreferrer" className="link-button">
+                            arXiv
+                          </a>
+                        )}
+                        {pub.links.other && (
+                          <a href={pub.links.other} target="_blank" rel="noopener noreferrer" className="link-button">
+                            Other
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </GradientCard>
+                )}
+              </aside>
+            </div>
+            
+            {relatedPubs.length > 0 && (
+              <section className="related-section">
+                <h2 className="section-heading">관련 출판물</h2>
+                <div className="related-grid">
+                  {relatedPubs.map((related, index) => {
+                    const gradients: Array<'purple' | 'blue' | 'orange'> = ['orange', 'purple', 'blue'];
+                    return (
+                      <GradientCard key={related.id} gradient={gradients[index % 3]} hover={true}>
+                        <Link to={`/publications/${related.id}`} className="related-card-link">
+                          <div className="related-content publication-related-content">
+                            <h4 className="related-title">{related.title}</h4>
+                            <p className="publication-related-authors">{related.authors.join(', ')}</p>
+                            <p className="publication-related-venue">{related.venue}</p>
+                          </div>
+                        </Link>
+                      </GradientCard>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
           </div>
-        )}
+        </div>
       </div>
     );
   }

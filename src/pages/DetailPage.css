@@ -217,18 +217,50 @@
 }
 
 /* Publication specific */
-.publication-detail .authors {
+.publication-detail .detail-meta {
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.publication-authors {
   font-size: var(--text-lg);
   color: var(--text-secondary);
   font-style: italic;
   margin: 0;
+  font-weight: var(--font-medium);
 }
 
-.publication-detail .venue {
+.publication-venue {
   font-size: var(--text-base);
-  color: var(--text-primary);
-  font-weight: var(--font-medium);
+  color: var(--color-purple);
+  font-weight: var(--font-semibold);
   margin: 0;
+}
+
+.publication-related-content {
+  padding: var(--spacing-xl);
+}
+
+.publication-related-authors {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: var(--spacing-sm) 0;
+}
+
+.publication-related-venue {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* Audio Player Section */
+.detail-audio {
+  margin-bottom: var(--spacing-4xl);
+  padding: var(--spacing-2xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
 }
 
 /* Responsive */
