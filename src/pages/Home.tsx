@@ -13,6 +13,10 @@ function Home() {
   const { data: music, loading: musicLoading, error: musicError, reload: reloadMusic } = useMusic();
   const { data: publications, loading: publicationsLoading, error: publicationsError, reload: reloadPublications } = usePublications();
 
+  // Intersection observers for scroll animations (must be before any conditional returns)
+  const [statsRef, statsVisible] = useIntersectionObserver({ threshold: 0.2 });
+  const [featuredRef, featuredVisible] = useIntersectionObserver({ threshold: 0.1 });
+
   const loading = projectsLoading || musicLoading || publicationsLoading;
   const error = projectsError || musicError || publicationsError;
   
@@ -51,10 +55,6 @@ function Home() {
 
   const latestItems = getLatestItems();
   const featuredItems = latestItems.slice(0, 3);
-
-  // Intersection observers for scroll animations
-  const [statsRef, statsVisible] = useIntersectionObserver({ threshold: 0.2 });
-  const [featuredRef, featuredVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   return (
     <div className="home">
