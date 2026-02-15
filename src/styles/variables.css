@@ -3,22 +3,36 @@
      Colors
      ======================================== */
   
-  /* Primary Colors - 더 부드러운 톤 */
-  --color-purple: #a78bfa;
-  --color-purple-dark: #8b5cf6;
-  --color-blue: #60a5fa;
-  --color-blue-dark: #3b82f6;
-  --color-orange: #fb923c;
-  --color-orange-dark: #f97316;
-  --color-cyan: #34d399;
-  --color-yellow: #fbbf24;
+  /* Primary Colors - Academic/Research (Cool Gray-Teal) */
+  --color-academic: #717E87;
+  --color-academic-light: #8a96a0;
+  --color-academic-dark: #5a666e;
   
-  /* Gradients - 더 자연스러운 그라디언트 */
-  --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-  --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-  --gradient-orange: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-  --gradient-mixed: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #fb923c 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(167, 139, 250, 0.08) 0%, rgba(96, 165, 250, 0.08) 50%, rgba(251, 146, 60, 0.08) 100%);
+  /* Primary Colors - Music/Creative (Purple-Pink) */
+  --color-creative: #D57FF4;
+  --color-creative-light: #e199f7;
+  --color-creative-dark: #c566e8;
+  
+  /* Legacy color names for compatibility */
+  --color-purple: #D57FF4;
+  --color-purple-dark: #c566e8;
+  --color-blue: #717E87;
+  --color-blue-dark: #5a666e;
+  --color-orange: #e199f7;
+  --color-orange-dark: #c566e8;
+  --color-cyan: #8a96a0;
+  --color-yellow: #e199f7;
+  
+  /* Gradients */
+  --gradient-academic: linear-gradient(135deg, #717E87 0%, #5a666e 100%);
+  --gradient-creative: linear-gradient(135deg, #D57FF4 0%, #c566e8 100%);
+  --gradient-mixed: linear-gradient(135deg, #717E87 0%, #9a8dbd 50%, #D57FF4 100%);
+  
+  /* Legacy gradient names */
+  --gradient-purple: linear-gradient(135deg, #D57FF4 0%, #c566e8 100%);
+  --gradient-blue: linear-gradient(135deg, #717E87 0%, #5a666e 100%);
+  --gradient-orange: linear-gradient(135deg, #e199f7 0%, #D57FF4 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(113, 126, 135, 0.08) 0%, rgba(154, 141, 189, 0.08) 50%, rgba(213, 127, 244, 0.08) 100%);
   
   /* Neutral Colors - 더 부드러운 배경 */
   --bg-primary: #ffffff;

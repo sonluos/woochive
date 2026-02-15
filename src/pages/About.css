@@ -380,15 +380,15 @@
 }
 
 .skill-tag.technical {
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.12) 0%, rgba(96, 165, 250, 0.12) 100%);
-  color: var(--color-purple);
-  border: 1.5px solid rgba(167, 139, 250, 0.3);
+  background: linear-gradient(135deg, rgba(113, 126, 135, 0.12) 0%, rgba(90, 102, 110, 0.12) 100%);
+  color: var(--color-academic);
+  border: 1.5px solid rgba(113, 126, 135, 0.3);
 }
 
 .skill-tag.creative {
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.12) 0%, rgba(96, 165, 250, 0.12) 100%);
-  color: var(--color-orange);
-  border: 1.5px solid rgba(251, 146, 60, 0.3);
+  background: linear-gradient(135deg, rgba(213, 127, 244, 0.12) 0%, rgba(197, 102, 232, 0.12) 100%);
+  color: var(--color-creative);
+  border: 1.5px solid rgba(213, 127, 244, 0.3);
 }
 
 .skill-tag:hover {
@@ -397,13 +397,13 @@
 }
 
 .skill-tag.technical:hover {
-  background: var(--gradient-purple);
+  background: var(--gradient-academic);
   color: var(--text-inverse);
   border-color: transparent;
 }
 
 .skill-tag.creative:hover {
-  background: var(--gradient-orange);
+  background: var(--gradient-creative);
   color: var(--text-inverse);
   border-color: transparent;
 }
