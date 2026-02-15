@@ -37,6 +37,9 @@ export interface Publication {
   abstract: string;
   fullContent?: string;
   pdfFile?: string;
+  pdfUrl?: string;
+  doi?: string;
+  arxivUrl?: string;
   tags?: string[];
   links?: {
     doi?: string;
@@ -60,8 +63,12 @@ export interface Bio {
 // Course information
 export interface Course {
   id: string;
+  code: string;
   name: string;
   semester: string;
+  year: number;
+  credits: number;
+  grade?: string;
   description?: string;
   category?: string;
 }
