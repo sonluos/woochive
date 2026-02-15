@@ -1,0 +1,64 @@
+.gradient-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-2xl);
+  padding: 0;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.gradient-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity var(--transition-base);
+}
+
+.gradient-card--purple::before {
+  background: var(--gradient-purple);
+}
+
+.gradient-card--blue::before {
+  background: var(--gradient-blue);
+}
+
+.gradient-card--orange::before {
+  background: var(--gradient-orange);
+}
+
+.gradient-card--hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  border-color: transparent;
+}
+
+.gradient-card--hover:hover::before {
+  opacity: 0.08;
+}
+
+.gradient-card--clickable {
+  cursor: pointer;
+}
+
+.gradient-card--clickable:active {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.gradient-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gradient-card--hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
