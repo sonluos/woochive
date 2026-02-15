@@ -15,9 +15,18 @@ function AdminEditProjects() {
 
   const loadProjects = async () => {
     try {
+      // localStorage에서 먼저 확인
+      const cached = localStorage.getItem('projects_data');
+      if (cached) {
+        setProjects(JSON.parse(cached));
+        return;
+      }
+
+      // localStorage에 없으면 JSON 파일에서 로드
       const response = await fetch('/data/projects.json');
       const data = await response.json();
       setProjects(data);
+      localStorage.setItem('projects_data', JSON.stringify(data));
     } catch (error) {
       console.error('Failed to load projects:', error);
     }
@@ -47,7 +56,9 @@ function AdminEditProjects() {
     if (confirm('정말 삭제하시겠습니까?')) {
       const updated = projects.filter(p => p.id !== id);
       setProjects(updated);
-      downloadJSON(updated, 'projects.json');
+      // localStorage에 저장하여 즉시 반영
+      localStorage.setItem('projects_data', JSON.stringify(updated));
+      alert('삭제되었습니다! 변경사항이 즉시 반영됩니다.');
     }
   };
 
@@ -64,9 +75,11 @@ function AdminEditProjects() {
     }
 
     setProjects(updated);
-    downloadJSON(updated, 'projects.json');
+    // localStorage에 저장하여 즉시 반영
+    localStorage.setItem('projects_data', JSON.stringify(updated));
     setEditingProject(null);
     setIsCreating(false);
+    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
   };
 
   const downloadJSON = (data: any, filename: string) => {
@@ -212,16 +225,23 @@ function AdminEditProjects() {
 
             <div className="form-actions">
               <button onClick={handleSave} className="btn-save">
-                저장 (JSON 다운로드)
+                저장
               </button>
               <button onClick={() => setEditingProject(null)} className="btn-cancel">
                 취소
               </button>
+              <button 
+                onClick={() => downloadJSON(projects, 'projects.json')} 
+                className="btn-download"
+                type="button"
+              >
+                JSON 다운로드 (백업용)
+              </button>
             </div>
 
             <p className="form-note">
-              💡 저장하면 JSON 파일이 다운로드됩니다. 
-              다운로드된 파일을 <code>public/data/projects.json</code>에 업로드하세요.
+              💡 저장하면 변경사항이 즉시 사이트에 반영됩니다. 
+              JSON 다운로드는 백업용으로 사용하세요.
             </p>
           </div>
         )}

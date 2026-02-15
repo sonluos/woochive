@@ -28,11 +28,37 @@ async function fetchJson<T>(url: string): Promise<T> {
 }
 
 export async function loadProjects(): Promise<ResearchProject[]> {
-  return fetchJson<ResearchProject[]>('/data/projects.json');
+  // localStorage에서 먼저 확인
+  const cached = localStorage.getItem('projects_data');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (error) {
+      console.error('Failed to parse cached projects:', error);
+    }
+  }
+  
+  // localStorage에 없으면 JSON 파일에서 로드
+  const data = await fetchJson<ResearchProject[]>('/data/projects.json');
+  localStorage.setItem('projects_data', JSON.stringify(data));
+  return data;
 }
 
 export async function loadMusic(): Promise<MusicWork[]> {
-  return fetchJson<MusicWork[]>('/data/music.json');
+  // localStorage에서 먼저 확인
+  const cached = localStorage.getItem('music_data');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (error) {
+      console.error('Failed to parse cached music:', error);
+    }
+  }
+  
+  // localStorage에 없으면 JSON 파일에서 로드
+  const data = await fetchJson<MusicWork[]>('/data/music.json');
+  localStorage.setItem('music_data', JSON.stringify(data));
+  return data;
 }
 
 export async function loadPublications(): Promise<Publication[]> {

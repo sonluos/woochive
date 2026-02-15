@@ -15,9 +15,18 @@ function AdminEditMusic() {
 
   const loadMusic = async () => {
     try {
+      // localStorage에서 먼저 확인
+      const cached = localStorage.getItem('music_data');
+      if (cached) {
+        setMusicWorks(JSON.parse(cached));
+        return;
+      }
+
+      // localStorage에 없으면 JSON 파일에서 로드
       const response = await fetch('/data/music.json');
       const data = await response.json();
       setMusicWorks(data);
+      localStorage.setItem('music_data', JSON.stringify(data));
     } catch (error) {
       console.error('Failed to load music:', error);
     }
@@ -46,7 +55,9 @@ function AdminEditMusic() {
     if (confirm('정말 삭제하시겠습니까?')) {
       const updated = musicWorks.filter(w => w.id !== id);
       setMusicWorks(updated);
-      downloadJSON(updated, 'music.json');
+      // localStorage에 저장하여 즉시 반영
+      localStorage.setItem('music_data', JSON.stringify(updated));
+      alert('삭제되었습니다! 변경사항이 즉시 반영됩니다.');
     }
   };
 
@@ -63,9 +74,11 @@ function AdminEditMusic() {
     }
 
     setMusicWorks(updated);
-    downloadJSON(updated, 'music.json');
+    // localStorage에 저장하여 즉시 반영
+    localStorage.setItem('music_data', JSON.stringify(updated));
     setEditingWork(null);
     setIsCreating(false);
+    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
   };
 
   const downloadJSON = (data: any, filename: string) => {
@@ -211,16 +224,23 @@ function AdminEditMusic() {
 
             <div className="form-actions">
               <button onClick={handleSave} className="btn-save">
-                저장 (JSON 다운로드)
+                저장
               </button>
               <button onClick={() => setEditingWork(null)} className="btn-cancel">
                 취소
               </button>
+              <button 
+                onClick={() => downloadJSON(musicWorks, 'music.json')} 
+                className="btn-download"
+                type="button"
+              >
+                JSON 다운로드 (백업용)
+              </button>
             </div>
 
             <p className="form-note">
-              💡 저장하면 JSON 파일이 다운로드됩니다. 
-              다운로드된 파일을 <code>public/data/music.json</code>에 업로드하세요.
+              💡 저장하면 변경사항이 즉시 사이트에 반영됩니다. 
+              JSON 다운로드는 백업용으로 사용하세요.
             </p>
           </div>
         )}

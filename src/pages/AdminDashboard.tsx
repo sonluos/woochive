@@ -15,6 +15,15 @@ function AdminDashboard() {
     navigate('/');
   };
 
+  const handleResetData = () => {
+    if (confirm('모든 변경사항을 초기화하고 원본 데이터로 되돌리시겠습니까?')) {
+      localStorage.removeItem('projects_data');
+      localStorage.removeItem('music_data');
+      alert('데이터가 초기화되었습니다. 페이지를 새로고침하세요.');
+      window.location.reload();
+    }
+  };
+
   const sections = [
     { id: 'about' as Section, name: 'About', icon: '👤' },
     { id: 'projects' as Section, name: 'Projects', icon: '💻' },
@@ -26,9 +35,14 @@ function AdminDashboard() {
     <div className="admin-dashboard">
       <div className="admin-header">
         <h1>관리자 대시보드</h1>
-        <button onClick={handleLogout} className="logout-button">
-          로그아웃
-        </button>
+        <div className="header-actions">
+          <button onClick={handleResetData} className="reset-button">
+            데이터 초기화
+          </button>
+          <button onClick={handleLogout} className="logout-button">
+            로그아웃
+          </button>
+        </div>
       </div>
 
       <div className="admin-content">
