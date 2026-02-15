@@ -4,6 +4,7 @@ import { usePublications } from '../hooks/usePortfolioData';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import GradientCard from '../components/GradientCard';
+import './Publications.css';
 
 function Publications() {
   const { data: publications, loading, error, reload } = usePublications();

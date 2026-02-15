@@ -1,0 +1,48 @@
+.music-page {
+  min-height: 100vh;
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Reuse common styles from Projects.css */
+.music-page .page-header,
+.music-page .page-title,
+.music-page .page-subtitle,
+.music-page .filter-section,
+.music-page .portfolio-grid,
+.music-page .portfolio-card-link,
+.music-page .portfolio-thumbnail,
+.music-page .portfolio-card-content,
+.music-page .portfolio-card-title,
+.music-page .portfolio-card-description,
+.music-page .tags,
+.music-page .tag,
+.music-page .portfolio-card-date,
+.music-page .no-results {
+  /* Styles inherited from Projects.css pattern */
+}
+
+/* Music-specific styles */
+.instruments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.instrument {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: linear-gradient(135deg, rgba(110, 181, 212, 0.1) 0%, rgba(110, 181, 212, 0.2) 100%);
+  border: 1px solid var(--color-blue);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--color-blue-dark);
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .music-page {
+    padding: var(--spacing-xl) 0;
+  }
+}

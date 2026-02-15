@@ -1,0 +1,68 @@
+.publications-page {
+  min-height: 100vh;
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Reuse common styles from Projects.css */
+.publications-page .page-header,
+.publications-page .page-title,
+.publications-page .page-subtitle,
+.publications-page .portfolio-grid,
+.publications-page .portfolio-card-link,
+.publications-page .portfolio-card-content,
+.publications-page .portfolio-card-title,
+.publications-page .portfolio-card-description,
+.publications-page .tags,
+.publications-page .tag,
+.publications-page .portfolio-card-date {
+  /* Styles inherited from Projects.css pattern */
+}
+
+/* Publication-specific styles */
+.publication-content {
+  padding: var(--spacing-2xl);
+}
+
+.publication-authors {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.publication-venue {
+  font-size: var(--text-sm);
+  color: var(--color-purple);
+  font-weight: var(--font-semibold);
+  font-style: italic;
+  margin: 0;
+  padding: var(--spacing-sm) 0;
+}
+
+.publication-abstract {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: var(--spacing-md) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .publications-page {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .publication-content {
+    padding: var(--spacing-lg);
+  }
+
+  .publication-authors {
+    font-size: var(--text-sm);
+  }
+
+  .publication-venue {
+    font-size: var(--text-xs);
+  }
+}

@@ -6,6 +6,7 @@ import TagFilter from '../components/TagFilter';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import GradientCard from '../components/GradientCard';
+import './Music.css';
 
 function Music() {
   const { data: musicWorks, loading, error, reload } = useMusic();
