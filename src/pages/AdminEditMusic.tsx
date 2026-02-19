@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MusicWork } from '../types/portfolio';
+import { saveMusicToGitHub, isGitHubConfigured } from '../utils/githubApi';
 import './AdminEdit.css';
 
 function AdminEditMusic() {
   const [musicWorks, setMusicWorks] = useState<MusicWork[]>([]);
   const [editingWork, setEditingWork] = useState<MusicWork | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,20 +17,21 @@ function AdminEditMusic() {
 
   const loadMusic = async () => {
     try {
-      // localStorage에서 먼저 확인
-      const cached = localStorage.getItem('music_data');
-      if (cached) {
-        setMusicWorks(JSON.parse(cached));
-        return;
+      // GitHub에서 직접 최신 데이터 로드
+      const owner = 'sonluos';
+      const repo = 'woochive';
+      const branch = 'main';
+      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/music.json?t=${Date.now()}`;
+      
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to load: ${response.status}`);
       }
-
-      // localStorage에 없으면 JSON 파일에서 로드
-      const response = await fetch('/data/music.json');
       const data = await response.json();
       setMusicWorks(data);
-      localStorage.setItem('music_data', JSON.stringify(data));
     } catch (error) {
       console.error('Failed to load music:', error);
+      alert('음악 데이터를 불러오는데 실패했습니다.');
     }
   };
 
@@ -51,34 +54,67 @@ function AdminEditMusic() {
     setIsCreating(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
+  const handleDelete = async (id: string) => {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    setIsSaving(true);
+    try {
       const updated = musicWorks.filter(w => w.id !== id);
-      setMusicWorks(updated);
-      // localStorage에 저장하여 즉시 반영
-      localStorage.setItem('music_data', JSON.stringify(updated));
-      alert('삭제되었습니다! 변경사항이 즉시 반영됩니다.');
+      
+      // GitHub에 저장
+      const success = await saveMusicToGitHub(updated);
+      
+      if (success) {
+        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
+        
+        // 삭제 후 최신 데이터 다시 로드
+        await loadMusic();
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
+      alert('삭제 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!editingWork) return;
 
-    let updated: MusicWork[];
-    if (isCreating) {
-      updated = [...musicWorks, editingWork];
-    } else {
-      updated = musicWorks.map(w => 
-        w.id === editingWork.id ? editingWork : w
-      );
+    // 필수 필드 검증
+    if (!editingWork.title || !editingWork.description) {
+      alert('제목과 설명은 필수 항목입니다.');
+      return;
     }
 
-    setMusicWorks(updated);
-    // localStorage에 저장하여 즉시 반영
-    localStorage.setItem('music_data', JSON.stringify(updated));
-    setEditingWork(null);
-    setIsCreating(false);
-    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
+    setIsSaving(true);
+    try {
+      let updated: MusicWork[];
+      if (isCreating) {
+        updated = [...musicWorks, editingWork];
+      } else {
+        updated = musicWorks.map(w => 
+          w.id === editingWork.id ? editingWork : w
+        );
+      }
+
+      // GitHub에 저장
+      const success = await saveMusicToGitHub(updated);
+      
+      if (success) {
+        setEditingWork(null);
+        setIsCreating(false);
+        alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
+        
+        // 저장 후 최신 데이터 다시 로드
+        await loadMusic();
+      }
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert('저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const downloadJSON = (data: any, filename: string) => {

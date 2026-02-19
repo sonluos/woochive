@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Publication } from '../types/portfolio';
+import { savePublicationsToGitHub, isGitHubConfigured } from '../utils/githubApi';
 import './AdminEdit.css';
 
 function AdminEditPublications() {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [editingPub, setEditingPub] = useState<Publication | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,18 +17,21 @@ function AdminEditPublications() {
 
   const loadPublications = async () => {
     try {
-      const cached = localStorage.getItem('publications_data');
-      if (cached) {
-        setPublications(JSON.parse(cached));
-        return;
+      // GitHub에서 직접 최신 데이터 로드
+      const owner = 'sonluos';
+      const repo = 'woochive';
+      const branch = 'main';
+      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/publications.json?t=${Date.now()}`;
+      
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to load: ${response.status}`);
       }
-
-      const response = await fetch('/data/publications.json');
       const data = await response.json();
       setPublications(data);
-      localStorage.setItem('publications_data', JSON.stringify(data));
     } catch (error) {
       console.error('Failed to load publications:', error);
+      alert('출판물 데이터를 불러오는데 실패했습니다.');
     }
   };
 
@@ -49,32 +54,67 @@ function AdminEditPublications() {
     setIsCreating(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
+  const handleDelete = async (id: string) => {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    setIsSaving(true);
+    try {
       const updated = publications.filter(p => p.id !== id);
-      setPublications(updated);
-      localStorage.setItem('publications_data', JSON.stringify(updated));
-      alert('삭제되었습니다! 변경사항이 즉시 반영됩니다.');
+      
+      // GitHub에 저장
+      const success = await savePublicationsToGitHub(updated);
+      
+      if (success) {
+        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
+        
+        // 삭제 후 최신 데이터 다시 로드
+        await loadPublications();
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
+      alert('삭제 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!editingPub) return;
 
-    let updated: Publication[];
-    if (isCreating) {
-      updated = [...publications, editingPub];
-    } else {
-      updated = publications.map(p => 
-        p.id === editingPub.id ? editingPub : p
-      );
+    // 필수 필드 검증
+    if (!editingPub.title || !editingPub.abstract) {
+      alert('제목과 초록은 필수 항목입니다.');
+      return;
     }
 
-    setPublications(updated);
-    localStorage.setItem('publications_data', JSON.stringify(updated));
-    setEditingPub(null);
-    setIsCreating(false);
-    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
+    setIsSaving(true);
+    try {
+      let updated: Publication[];
+      if (isCreating) {
+        updated = [...publications, editingPub];
+      } else {
+        updated = publications.map(p => 
+          p.id === editingPub.id ? editingPub : p
+        );
+      }
+
+      // GitHub에 저장
+      const success = await savePublicationsToGitHub(updated);
+      
+      if (success) {
+        setEditingPub(null);
+        setIsCreating(false);
+        alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
+        
+        // 저장 후 최신 데이터 다시 로드
+        await loadPublications();
+      }
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert('저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const downloadJSON = (data: any, filename: string) => {
