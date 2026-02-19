@@ -112,3 +112,70 @@
     padding: var(--spacing-xl);
   }
 }
+
+.label-badge {
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--gradient-purple-start);
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.input-help {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.help-link {
+  color: var(--gradient-purple-start);
+  text-decoration: none;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
+.token-status {
+  padding: 1rem;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  border-radius: 8px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--gradient-purple-start);
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.btn-link:hover {
+  color: var(--gradient-purple-end);
+}
+
+.admin-login-note p {
+  margin: 0.5rem 0;
+}
+
+.admin-login-note code {
+  padding: 0.125rem 0.375rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875em;
+}

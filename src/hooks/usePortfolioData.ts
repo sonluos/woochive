@@ -50,25 +50,16 @@ function useDataLoader<T>(
 
     loadData();
 
-    // localStorage 변경 감지 (다른 탭/창에서 변경 시)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key && e.key.startsWith('portfolio_')) {
-        loadData();
-      }
-    };
-
-    // 커스텀 이벤트 감지 (같은 탭에서 변경 시)
-    const handleCustomStorageChange = () => {
+    // 데이터 업데이트 이벤트 감지 (GitHub 저장 후)
+    const handleDataUpdate = () => {
       loadData();
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener('localStorageUpdated', handleCustomStorageChange);
+    window.addEventListener('dataUpdated', handleDataUpdate);
 
     return () => {
       cancelled = true;
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('localStorageUpdated', handleCustomStorageChange);
+      window.removeEventListener('dataUpdated', handleDataUpdate);
     };
   }, [reloadTrigger, ...deps]);
 
