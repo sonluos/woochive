@@ -63,26 +63,25 @@ function AdminEditMusic() {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     setIsSaving(true);
+    
+    // 원본 데이터 백업
+    const originalMusic = [...musicWorks];
+    
     try {
       const updated = musicWorks.filter(w => w.id !== id);
-      
-      // 즉시 UI 업데이트
-      setMusicWorks(updated);
       
       // GitHub에 저장
       const success = await saveMusicToGitHub(updated);
       
       if (success) {
+        // 저장 성공 후 UI 업데이트
+        setMusicWorks(updated);
         alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
       } else {
-        // 실패시 원래 상태로 복구
-        setMusicWorks(musicWorks);
         alert('GitHub 저장에 실패했습니다.');
       }
     } catch (error) {
       console.error('Delete failed:', error);
-      // 실패시 원래 상태로 복구
-      setMusicWorks(musicWorks);
       alert('삭제 중 오류가 발생했습니다.');
     } finally {
       setIsSaving(false);
