@@ -17,24 +17,27 @@ function AdminEditMusic() {
 
   const loadMusic = async () => {
     try {
-      // GitHub에서 직접 최신 데이터 로드 (강력한 캐시 무효화)
+      // GitHub API를 통해 직접 최신 데이터 로드 (캐시 없음)
       const owner = 'sonluos';
       const repo = 'woochive';
       const branch = 'main';
-      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/music.json?t=${Date.now()}`;
+      const path = 'public/data/music.json';
       
-      const response = await fetch(url, {
-        cache: 'no-store',
+      // GitHub API 사용 (raw URL 대신)
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+      
+      const response = await fetch(apiUrl, {
         headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0'
-        }
+          'Accept': 'application/vnd.github.v3.raw',
+        },
+        cache: 'no-store'
       });
+      
       if (!response.ok) {
         throw new Error(`Failed to load: ${response.status}`);
       }
       const data = await response.json();
+      console.log('Loaded music from GitHub:', data);
       setMusicWorks(data);
     } catch (error) {
       console.error('Failed to load music:', error);
