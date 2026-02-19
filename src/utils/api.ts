@@ -1,4 +1,6 @@
-// 정적 파일에서 데이터 로드
+// 정적 파일에서 데이터 로드만 수행
+// Admin 기능은 제거됨 - GitHub에서 직접 JSON 파일 수정
+
 async function loadFromStatic<T>(path: string): Promise<T> {
   const response = await fetch(`/data/${path}?t=${Date.now()}`, {
     cache: 'no-store'
@@ -43,16 +45,3 @@ export const coursesApi = {
     return await loadFromStatic<any[]>('courses.json');
   },
 };
-
-// 인증 관련
-export function setAuthToken(password: string) {
-  localStorage.setItem('adminToken', password);
-}
-
-export function clearAuthToken() {
-  localStorage.removeItem('adminToken');
-}
-
-export function isAuthenticated(): boolean {
-  return !!getAuthToken();
-}

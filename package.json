@@ -6,27 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:check": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "git:setup": "bash scripts/git-setup.sh",
-    "git:setup:win": "scripts\\git-setup.bat",
-    "git:status": "git status",
-    "git:push": "git push",
-    "deploy:preview": "npm run build && vercel",
-    "deploy:prod": "npm run build && vercel --prod",
-    "vercel:login": "vercel login",
-    "vercel:env": "vercel env ls"
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@vercel/kv": "^3.0.0",
-    "@vercel/node": "^5.6.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
-    "vercel": "^50.15.1"
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
