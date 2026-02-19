@@ -17,8 +17,16 @@ function AdminEditProjects() {
 
   const loadProjects = async () => {
     try {
-      // 항상 최신 데이터를 서버에서 가져옴
-      const response = await fetch('/data/projects.json');
+      // GitHub에서 직접 최신 데이터 로드
+      const owner = 'sonluos';
+      const repo = 'woochive';
+      const branch = 'main';
+      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/projects.json?t=${Date.now()}`;
+      
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to load: ${response.status}`);
+      }
       const data = await response.json();
       setProjects(data);
     } catch (error) {
@@ -58,8 +66,10 @@ function AdminEditProjects() {
       const success = await saveProjectsToGitHub(updated);
       
       if (success) {
-        setProjects(updated);
-        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었으며, 잠시 후 사이트에 반영됩니다.');
+        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
+        
+        // 삭제 후 최신 데이터 다시 로드
+        await loadProjects();
       }
     } catch (error) {
       console.error('Delete failed:', error);
@@ -96,7 +106,10 @@ function AdminEditProjects() {
         setProjects(updated);
         setEditingProject(null);
         setIsCreating(false);
-        alert('저장되었습니다! 변경사항이 GitHub에 저장되었으며, Vercel이 자동으로 재배포합니다. (약 1-2분 소요)');
+        alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다. 페이지를 새로고침하면 최신 데이터를 확인할 수 있습니다.');
+        
+        // 저장 후 최신 데이터 다시 로드
+        await loadProjects();
       }
     } catch (error) {
       console.error('Save failed:', error);
@@ -279,7 +292,7 @@ function AdminEditProjects() {
                 </p>
               )}
               <p className="form-note">
-                💡 저장하면 GitHub에 커밋되고 Vercel이 자동으로 재배포합니다. (1-2분 소요)
+                💡 저장하면 GitHub에 즉시 커밋되고, 사이트에 바로 반영됩니다.
               </p>
             </div>
           </div>
