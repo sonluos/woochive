@@ -115,22 +115,23 @@ function AdminEditProjects() {
         );
       }
 
-      // 즉시 UI 업데이트
-      setProjects(updated);
-      setEditingProject(null);
-      setIsCreating(false);
+      console.log('Saving projects to GitHub:', updated);
 
       // GitHub에 저장
       const success = await saveProjectsToGitHub(updated);
       
       if (success) {
+        // 저장 성공 후 UI 업데이트
+        setProjects(updated);
+        setEditingProject(null);
+        setIsCreating(false);
         alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
       } else {
-        alert('GitHub 저장에 실패했습니다. 페이지를 새로고침해주세요.');
+        alert('GitHub 저장에 실패했습니다. 다시 시도해주세요.');
       }
     } catch (error) {
       console.error('Save failed:', error);
-      alert('저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.');
+      alert('저장 중 오류가 발생했습니다. 브라우저 콘솔을 확인해주세요.');
     } finally {
       setIsSaving(false);
     }
