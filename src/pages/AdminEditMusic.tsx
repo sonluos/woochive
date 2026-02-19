@@ -259,25 +259,40 @@ function AdminEditMusic() {
             </div>
 
             <div className="form-actions">
-              <button onClick={handleSave} className="btn-save">
-                저장
+              <button 
+                onClick={handleSave} 
+                className="btn-save"
+                disabled={isSaving}
+              >
+                {isSaving ? '저장 중...' : '저장'}
               </button>
-              <button onClick={() => setEditingWork(null)} className="btn-cancel">
+              <button 
+                onClick={() => setEditingWork(null)} 
+                className="btn-cancel"
+                disabled={isSaving}
+              >
                 취소
               </button>
               <button 
                 onClick={() => downloadJSON(musicWorks, 'music.json')} 
                 className="btn-download"
                 type="button"
+                disabled={isSaving}
               >
                 JSON 다운로드 (백업용)
               </button>
             </div>
 
-            <p className="form-note">
-              💡 저장하면 변경사항이 즉시 사이트에 반영됩니다. 
-              JSON 다운로드는 백업용으로 사용하세요.
-            </p>
+            <div className="form-note-container">
+              {!isGitHubConfigured() && (
+                <p className="form-warning">
+                  ⚠️ GitHub 연동이 설정되지 않았습니다. 변경사항이 저장되지 않습니다.
+                </p>
+              )}
+              <p className="form-note">
+                💡 저장하면 GitHub에 즉시 커밋되고, 사이트에 바로 반영됩니다.
+              </p>
+            </div>
           </div>
         )}
       </div>
