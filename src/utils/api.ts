@@ -1,7 +1,7 @@
 // GitHub 기반 데이터 관리 API
-import { saveToGitHub, loadFromGitHub, hasGitHubToken } from './githubStorage';
+import { saveToGitHub, hasGitHubToken } from './githubStorage';
 
-// 정적 파일에서 데이터 로드 (폴백)
+// 정적 파일에서 데이터 로드
 async function loadFromStatic<T>(path: string): Promise<T> {
   const response = await fetch(`/data/${path}?t=${Date.now()}`, {
     cache: 'no-store'
@@ -12,21 +12,23 @@ async function loadFromStatic<T>(path: string): Promise<T> {
   return response.json();
 }
 
-// 데이터 저장 (다운로드 방식)
+// 데이터 저장 (GitHub)
 async function saveData<T>(filename: string, data: T, message: string): Promise<void> {
-  // JSON 파일로 다운로드
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
+  if (!hasGitHubToken()) {
+    throw new Error('GitHub 토큰이 설정되지 않았습니다. 로그아웃 후 다시 로그인하여 토큰을 입력하세요.');
+  }
   
-  // 안내 메시지
-  alert(`${filename} 파일이 다운로드되었습니다.\n\n다음 단계:\n1. GitHub에서 public/data/${filename} 파일을 열기\n2. 다운로드한 파일 내용을 복사해서 붙여넣기\n3. Commit changes 클릭\n\n또는 로컬에서 파일을 교체하고 git push 하세요.`);
-  
-  throw new Error('수동 업로드가 필요합니다. 파일이 다운로드되었습니다.');
+  try {
+    await saveToGitHub(filename, data, message);
+    // 저장 후 이벤트 발생
+    window.dispatchEvent(new Event('dataUpdated'));
+    
+    // 성공 메시지
+    alert('저장되었습니다! Vercel이 자동으로 재배포합니다 (약 1-2분 소요).');
+  } catch (error) {
+    console.error('Save failed:', error);
+    throw new Error(`저장 실패: ${(error as Error).message}`);
+  }
 }
 
 // 데이터 로드 (GitHub 또는 정적 파일)

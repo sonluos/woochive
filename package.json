@@ -21,6 +21,7 @@
     "vercel:env": "vercel env ls"
   },
   "dependencies": {
+    "@vercel/kv": "^3.0.0",
     "@vercel/node": "^5.6.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
