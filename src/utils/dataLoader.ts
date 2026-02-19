@@ -7,33 +7,42 @@ export class DataLoadError extends Error {
   }
 }
 
-// GitHub raw URL에서 데이터 로드 (강력한 캐시 무효화)
+// GitHub에서 데이터 로드 (API 사용 - 캐시 없음)
 async function fetchFromGitHub<T>(path: string): Promise<T> {
   try {
     const owner = 'sonluos';
     const repo = 'woochive';
     const branch = 'main';
     
-    // raw.githubusercontent.com 사용 (rate limit 없음)
-    // 캐시 무효화: timestamp + random (헤더 없이 URL만 사용)
-    const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
-    const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?cb=${cacheBuster}`;
+    // GitHub API 사용 (인증 없이도 public repo는 접근 가능)
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
     
-    console.log('Loading from GitHub:', path);
+    console.log('Loading from GitHub API:', path);
     
-    const response = await fetch(url, {
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/vnd.github.v3.raw',
+      },
       cache: 'no-store'
     });
     
     if (!response.ok) {
-      throw new DataLoadError(
-        `Failed to load data from ${path}`,
-        response.status
-      );
+      // API rate limit 초과 시 raw URL로 폴백
+      if (response.status === 403) {
+        console.warn('GitHub API rate limit, falling back to raw URL');
+        const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+        const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?cb=${cacheBuster}`;
+        const rawResponse = await fetch(rawUrl, { cache: 'no-store' });
+        if (!rawResponse.ok) {
+          throw new DataLoadError(`Failed to load data from ${path}`, rawResponse.status);
+        }
+        return await rawResponse.json();
+      }
+      throw new DataLoadError(`Failed to load data from ${path}`, response.status);
     }
     
     const data = await response.json();
-    console.log('Loaded data from GitHub:', path, data);
+    console.log('Loaded data from GitHub API:', path, data);
     return data;
   } catch (error) {
     console.error('Failed to load from GitHub:', path, error);

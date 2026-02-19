@@ -17,14 +17,17 @@ function AdminEditProjects() {
 
   const loadProjects = async () => {
     try {
-      // GitHub raw URL에서 데이터 로드 (캐시 무효화)
+      // GitHub API로 데이터 로드 (캐시 없음)
       const owner = 'sonluos';
       const repo = 'woochive';
       const branch = 'main';
-      const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
-      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/projects.json?cb=${cacheBuster}`;
+      const path = 'public/data/projects.json';
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
       
-      const response = await fetch(url, {
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/vnd.github.v3.raw',
+        },
         cache: 'no-store'
       });
       
