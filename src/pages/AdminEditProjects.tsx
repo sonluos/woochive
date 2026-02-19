@@ -17,13 +17,20 @@ function AdminEditProjects() {
 
   const loadProjects = async () => {
     try {
-      // GitHub에서 직접 최신 데이터 로드
+      // GitHub에서 직접 최신 데이터 로드 (강력한 캐시 무효화)
       const owner = 'sonluos';
       const repo = 'woochive';
       const branch = 'main';
       const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/projects.json?t=${Date.now()}`;
       
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      });
       if (!response.ok) {
         throw new Error(`Failed to load: ${response.status}`);
       }
