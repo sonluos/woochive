@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bio, Course } from '../types/portfolio';
-import { bioApi } from '../utils/api';
+import { bioApi, coursesApi } from '../utils/api';
 import './AdminEdit.css';
 
 function AdminEditAbout() {
@@ -23,9 +23,8 @@ function AdminEditAbout() {
       const bioData = await bioApi.get();
       setBio(bioData);
 
-      // Courses는 정적 파일에서 로드 (API 없음)
-      const coursesResponse = await fetch('/data/courses.json');
-      const coursesData = await coursesResponse.json();
+      // Courses 로드
+      const coursesData = await coursesApi.getAll();
       setCourses(coursesData);
     } catch (error) {
       console.error('Failed to load data:', error);
@@ -68,32 +67,43 @@ function AdminEditAbout() {
     setIsCreatingCourse(false);
   };
 
-  const handleDeleteCourse = (id: string) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      const updated = courses.filter(c => c.id !== id);
-      setCourses(updated);
-      localStorage.setItem('courses_data', JSON.stringify(updated));
-      alert('삭제되었습니다! 변경사항이 즉시 반영됩니다.');
+  const handleDeleteCourse = async (id: string) => {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    setIsSaving(true);
+    try {
+      await coursesApi.delete(id);
+      await loadData();
+      alert('삭제되었습니다!');
+    } catch (error) {
+      console.error('Delete failed:', error);
+      alert('삭제 중 오류가 발생했습니다: ' + (error as Error).message);
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  const handleSaveCourse = () => {
+  const handleSaveCourse = async () => {
     if (!editingCourse) return;
 
-    let updated: Course[];
-    if (isCreatingCourse) {
-      updated = [...courses, editingCourse];
-    } else {
-      updated = courses.map(c => 
-        c.id === editingCourse.id ? editingCourse : c
-      );
-    }
+    setIsSaving(true);
+    try {
+      if (isCreatingCourse) {
+        await coursesApi.create(editingCourse);
+      } else {
+        await coursesApi.update(editingCourse);
+      }
 
-    setCourses(updated);
-    localStorage.setItem('courses_data', JSON.stringify(updated));
-    setEditingCourse(null);
-    setIsCreatingCourse(false);
-    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
+      await loadData();
+      setEditingCourse(null);
+      setIsCreatingCourse(false);
+      alert('저장되었습니다!');
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert('저장 중 오류가 발생했습니다: ' + (error as Error).message);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const downloadJSON = (data: any, filename: string) => {
@@ -210,7 +220,7 @@ function AdminEditAbout() {
                   <button onClick={() => handleEditCourse(course)} className="btn-edit">
                     편집
                   </button>
-                  <button onClick={() => handleDeleteCourse(course.id)} className="btn-delete">
+                  <button onClick={() => handleDeleteCourse(course.id)} className="btn-delete" disabled={isSaving}>
                     삭제
                   </button>
                 </div>
@@ -287,10 +297,10 @@ function AdminEditAbout() {
               </div>
 
               <div className="form-actions">
-                <button onClick={handleSaveCourse} className="btn-save">
-                  저장
+                <button onClick={handleSaveCourse} className="btn-save" disabled={isSaving}>
+                  {isSaving ? '저장 중...' : '저장'}
                 </button>
-                <button onClick={() => setEditingCourse(null)} className="btn-cancel">
+                <button onClick={() => setEditingCourse(null)} className="btn-cancel" disabled={isSaving}>
                   취소
                 </button>
               </div>
