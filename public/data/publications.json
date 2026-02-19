@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "quantum-ml",
+    "title": "Quantum Machine Learning for Pattern Recognition",
+    "authors": [
+      "Woochive",
+      "Alice Johnson"
+    ],
+    "venue": "Quantum Information Processing",
+    "date": "2023-04-20",
+    "abstract": "양자 컴퓨팅을 활용한 패턴 인식 알고리즘을 제안합니다. 양자 서포트 벡터 머신(QSVM)과 양자 신경망(QNN)을 결합하여 특정 문제에서 고전 알고리즘 대비 지수적 속도 향상을 달성했습니다.",
+    "tags": [
+      "Quantum Computing",
+      "Machine Learning",
+      "Pattern Recognition"
+    ],
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2023.xxxxx"
+    }
+  }
+]
