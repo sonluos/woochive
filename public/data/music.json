@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "id": "string-quartet-no1",
+    "title": "String Quartet No. 1",
+    "description": "현대적 해석의 현악 4중주",
+    "date": "2023-05-20",
+    "tags": [
+      "Classical",
+      "Contemporary",
+      "Chamber Music"
+    ],
+    "instruments": [
+      "Violin I",
+      "Violin II",
+      "Viola",
+      "Cello"
+    ],
+    "fullDescription": "전통적인 현악 4중주 형식에 현대적인 화성과 리듬을 접목한 작품입니다. 3악장으로 구성되어 있으며, 각 악장은 서로 다른 음악적 아이디어를 탐구합니다."
+  },
+  {
+    "id": "generative-music-system",
+    "title": "Generative Music System",
+    "description": "실시간 생성 음악 시스템",
+    "date": "2023-02-10",
+    "tags": [
+      "Generative",
+      "Interactive",
+      "Algorithmic"
+    ],
+    "instruments": [
+      "Computer",
+      "MIDI Controller"
+    ],
+    "fullDescription": "알고리즘과 확률론을 기반으로 실시간으로 음악을 생성하는 인터랙티브 시스템입니다. 매 연주마다 다른 결과를 만들어냅니다."
+  },
+  {
+    "id": "piano-etudes",
+    "title": "Piano Etudes",
+    "description": "현대 피아노를 위한 연습곡",
+    "date": "2022-12-01",
+    "tags": [
+      "Classical",
+      "Piano",
+      "Contemporary"
+    ],
+    "instruments": [
+      "Piano"
+    ],
+    "fullDescription": "기술적 도전과 음악적 표현을 결합한 6개의 피아노 연습곡 모음입니다. 각 곡은 특정 기법에 초점을 맞춥니다."
+  }
+]
