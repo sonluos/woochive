@@ -408,3 +408,30 @@
     flex: 1;
   }
 }
+
+/* Warning and Note Styles */
+.form-note-container {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.form-warning {
+  padding: var(--spacing-md);
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid #ef4444;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: #dc2626;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.btn-save:disabled,
+.btn-cancel:disabled,
+.btn-download:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
