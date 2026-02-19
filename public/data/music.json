@@ -1,22 +1,5 @@
 [
   {
-    "id": "urban-soundscape",
-    "title": "Urban Soundscape",
-    "description": "도시의 소리를 재해석한 앰비언트 작품",
-    "date": "2023-08-15",
-    "tags": [
-      "Ambient",
-      "Field Recording",
-      "Electronic"
-    ],
-    "instruments": [
-      "Field Recorder",
-      "Synthesizer",
-      "Sampler"
-    ],
-    "fullDescription": "서울의 다양한 장소에서 녹음한 소리를 전자음악과 결합한 사운드스케이프 작품입니다. 도시의 리듬과 멜로디를 발견하는 여정입니다. 지하철, 카페, 공원 등에서 채집한 소리를 레이어링하고 변형하여 새로운 음악적 맥락을 만들어냅니다."
-  },
-  {
     "id": "string-quartet-no1",
     "title": "String Quartet No. 1",
     "description": "현대적 해석의 현악 4중주",
