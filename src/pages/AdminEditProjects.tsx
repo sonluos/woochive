@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResearchProject } from '../types/portfolio';
-import { saveProjectsToGitHub, isGitHubConfigured } from '../utils/githubApi';
+import { projectsApi } from '../utils/api';
 import './AdminEdit.css';
 
 function AdminEditProjects() {
@@ -17,25 +17,8 @@ function AdminEditProjects() {
 
   const loadProjects = async () => {
     try {
-      // GitHub API로 데이터 로드 (캐시 없음)
-      const owner = 'sonluos';
-      const repo = 'woochive';
-      const branch = 'main';
-      const path = 'public/data/projects.json';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-      
-      const response = await fetch(apiUrl, {
-        headers: {
-          'Accept': 'application/vnd.github.v3.raw',
-        },
-        cache: 'no-store'
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log('Loaded projects from GitHub:', data);
+      const data = await projectsApi.getAll();
+      console.log('Loaded projects:', data);
       setProjects(data);
     } catch (error) {
       console.error('Failed to load projects:', error);
@@ -67,26 +50,13 @@ function AdminEditProjects() {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     setIsSaving(true);
-    
-    // 원본 데이터 백업
-    const originalProjects = [...projects];
-    
     try {
-      const updated = projects.filter(p => p.id !== id);
-      
-      // GitHub에 저장
-      const success = await saveProjectsToGitHub(updated);
-      
-      if (success) {
-        // 저장 성공 후 UI 업데이트
-        setProjects(updated);
-        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-      } else {
-        alert('GitHub 저장에 실패했습니다.');
-      }
+      await projectsApi.delete(id);
+      await loadProjects(); // 삭제 후 다시 로드
+      alert('삭제되었습니다!');
     } catch (error) {
       console.error('Delete failed:', error);
-      alert('삭제 중 오류가 발생했습니다.');
+      alert('삭제 중 오류가 발생했습니다: ' + (error as Error).message);
     } finally {
       setIsSaving(false);
     }
@@ -103,32 +73,19 @@ function AdminEditProjects() {
 
     setIsSaving(true);
     try {
-      let updated: ResearchProject[];
       if (isCreating) {
-        updated = [...projects, editingProject];
+        await projectsApi.create(editingProject);
       } else {
-        updated = projects.map(p => 
-          p.id === editingProject.id ? editingProject : p
-        );
+        await projectsApi.update(editingProject);
       }
-
-      console.log('Saving projects to GitHub:', updated);
-
-      // GitHub에 저장
-      const success = await saveProjectsToGitHub(updated);
       
-      if (success) {
-        // 저장 성공 후 UI 업데이트
-        setProjects(updated);
-        setEditingProject(null);
-        setIsCreating(false);
-        alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-      } else {
-        alert('GitHub 저장에 실패했습니다. 다시 시도해주세요.');
-      }
+      await loadProjects(); // 저장 후 다시 로드
+      setEditingProject(null);
+      setIsCreating(false);
+      alert('저장되었습니다!');
     } catch (error) {
       console.error('Save failed:', error);
-      alert('저장 중 오류가 발생했습니다. 브라우저 콘솔을 확인해주세요.');
+      alert('저장 중 오류가 발생했습니다: ' + (error as Error).message);
     } finally {
       setIsSaving(false);
     }
@@ -301,13 +258,8 @@ function AdminEditProjects() {
             </div>
 
             <div className="form-note-container">
-              {!isGitHubConfigured() && (
-                <p className="form-warning">
-                  ⚠️ GitHub 연동이 설정되지 않았습니다. 변경사항이 저장되지 않습니다.
-                </p>
-              )}
               <p className="form-note">
-                💡 저장하면 GitHub에 즉시 커밋되고, 사이트에 바로 반영됩니다.
+                💡 저장하면 즉시 반영됩니다.
               </p>
             </div>
           </div>

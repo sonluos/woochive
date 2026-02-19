@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bio, Course } from '../types/portfolio';
+import { bioApi } from '../utils/api';
 import './AdminEdit.css';
 
 function AdminEditAbout() {
@@ -9,6 +10,7 @@ function AdminEditAbout() {
   const [editingBio, setEditingBio] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
   const [isCreatingCourse, setIsCreatingCourse] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,36 +20,33 @@ function AdminEditAbout() {
   const loadData = async () => {
     try {
       // Bio 로드
-      const bioCache = localStorage.getItem('bio_data');
-      if (bioCache) {
-        setBio(JSON.parse(bioCache));
-      } else {
-        const bioResponse = await fetch('/data/bio.json');
-        const bioData = await bioResponse.json();
-        setBio(bioData);
-        localStorage.setItem('bio_data', JSON.stringify(bioData));
-      }
+      const bioData = await bioApi.get();
+      setBio(bioData);
 
-      // Courses 로드
-      const coursesCache = localStorage.getItem('courses_data');
-      if (coursesCache) {
-        setCourses(JSON.parse(coursesCache));
-      } else {
-        const coursesResponse = await fetch('/data/courses.json');
-        const coursesData = await coursesResponse.json();
-        setCourses(coursesData);
-        localStorage.setItem('courses_data', JSON.stringify(coursesData));
-      }
+      // Courses는 정적 파일에서 로드 (API 없음)
+      const coursesResponse = await fetch('/data/courses.json');
+      const coursesData = await coursesResponse.json();
+      setCourses(coursesData);
     } catch (error) {
       console.error('Failed to load data:', error);
+      alert('데이터를 불러오는데 실패했습니다.');
     }
   };
 
-  const handleSaveBio = () => {
+  const handleSaveBio = async () => {
     if (!bio) return;
-    localStorage.setItem('bio_data', JSON.stringify(bio));
-    setEditingBio(false);
-    alert('저장되었습니다! 변경사항이 즉시 반영됩니다.');
+    
+    setIsSaving(true);
+    try {
+      await bioApi.update(bio);
+      setEditingBio(false);
+      alert('저장되었습니다!');
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert('저장 중 오류가 발생했습니다: ' + (error as Error).message);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleCreateCourse = () => {
@@ -163,10 +162,10 @@ function AdminEditAbout() {
               </div>
 
               <div className="form-actions">
-                <button onClick={handleSaveBio} className="btn-save">
-                  저장
+                <button onClick={handleSaveBio} className="btn-save" disabled={isSaving}>
+                  {isSaving ? '저장 중...' : '저장'}
                 </button>
-                <button onClick={() => setEditingBio(false)} className="btn-cancel">
+                <button onClick={() => setEditingBio(false)} className="btn-cancel" disabled={isSaving}>
                   취소
                 </button>
               </div>

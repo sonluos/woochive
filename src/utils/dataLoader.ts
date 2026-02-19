@@ -7,45 +7,47 @@ export class DataLoadError extends Error {
   }
 }
 
-// GitHub에서 데이터 로드 (API 사용 - 캐시 없음)
-async function fetchFromGitHub<T>(path: string): Promise<T> {
+// API에서 데이터 로드
+async function fetchFromApi<T>(endpoint: string): Promise<T> {
   try {
-    const owner = 'sonluos';
-    const repo = 'woochive';
-    const branch = 'main';
-    
-    // GitHub API 사용 (인증 없이도 public repo는 접근 가능)
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-    
-    console.log('Loading from GitHub API:', path);
-    
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/vnd.github.v3.raw',
-      },
+    const response = await fetch(`/api/data/${endpoint}`, {
       cache: 'no-store'
     });
     
     if (!response.ok) {
-      // API rate limit 초과 시 raw URL로 폴백
-      if (response.status === 403) {
-        console.warn('GitHub API rate limit, falling back to raw URL');
-        const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
-        const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?cb=${cacheBuster}`;
-        const rawResponse = await fetch(rawUrl, { cache: 'no-store' });
-        if (!rawResponse.ok) {
-          throw new DataLoadError(`Failed to load data from ${path}`, rawResponse.status);
-        }
-        return await rawResponse.json();
-      }
-      throw new DataLoadError(`Failed to load data from ${path}`, response.status);
+      throw new DataLoadError(
+        `Failed to load data from ${endpoint}`,
+        response.status
+      );
     }
     
-    const data = await response.json();
-    console.log('Loaded data from GitHub API:', path, data);
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error('Failed to load from GitHub:', path, error);
+    console.error('Failed to load from API:', endpoint, error);
+    if (error instanceof DataLoadError) {
+      throw error;
+    }
+    throw new DataLoadError(`Network error while loading ${endpoint}`);
+  }
+}
+
+// 정적 파일에서 데이터 로드 (폴백)
+async function fetchFromStatic<T>(path: string): Promise<T> {
+  try {
+    const response = await fetch(`/data/${path}?t=${Date.now()}`, {
+      cache: 'no-store'
+    });
+    
+    if (!response.ok) {
+      throw new DataLoadError(
+        `Failed to load data from ${path}`,
+        response.status
+      );
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to load from static:', path, error);
     if (error instanceof DataLoadError) {
       throw error;
     }
@@ -54,26 +56,36 @@ async function fetchFromGitHub<T>(path: string): Promise<T> {
 }
 
 export async function loadProjects(): Promise<ResearchProject[]> {
-  const data = await fetchFromGitHub<ResearchProject[]>('public/data/projects.json');
-  return data;
+  try {
+    return await fetchFromApi<ResearchProject[]>('projects');
+  } catch (error) {
+    console.warn('API failed, falling back to static file');
+    return await fetchFromStatic<ResearchProject[]>('projects.json');
+  }
 }
 
 export async function loadMusic(): Promise<MusicWork[]> {
-  const data = await fetchFromGitHub<MusicWork[]>('public/data/music.json');
-  return data;
+  try {
+    return await fetchFromApi<MusicWork[]>('music');
+  } catch (error) {
+    console.warn('API failed, falling back to static file');
+    return await fetchFromStatic<MusicWork[]>('music.json');
+  }
 }
 
 export async function loadPublications(): Promise<Publication[]> {
-  const data = await fetchFromGitHub<Publication[]>('public/data/publications.json');
-  return data;
+  try {
+    return await fetchFromApi<Publication[]>('publications');
+  } catch (error) {
+    console.warn('API failed, falling back to static file');
+    return await fetchFromStatic<Publication[]>('publications.json');
+  }
 }
 
 export async function loadBio(): Promise<Bio> {
-  const data = await fetchFromGitHub<Bio>('public/data/bio.json');
-  return data;
+  return await fetchFromStatic<Bio>('bio.json');
 }
 
 export async function loadCourses(): Promise<Course[]> {
-  const data = await fetchFromGitHub<Course[]>('public/data/courses.json');
-  return data;
+  return await fetchFromStatic<Course[]>('courses.json');
 }

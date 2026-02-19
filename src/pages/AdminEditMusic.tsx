@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MusicWork } from '../types/portfolio';
-import { saveMusicToGitHub, isGitHubConfigured } from '../utils/githubApi';
+import { musicApi } from '../utils/api';
 import './AdminEdit.css';
 
 function AdminEditMusic() {
@@ -17,25 +17,8 @@ function AdminEditMusic() {
 
   const loadMusic = async () => {
     try {
-      // GitHub API로 데이터 로드 (캐시 없음)
-      const owner = 'sonluos';
-      const repo = 'woochive';
-      const branch = 'main';
-      const path = 'public/data/music.json';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-      
-      const response = await fetch(apiUrl, {
-        headers: {
-          'Accept': 'application/vnd.github.v3.raw',
-        },
-        cache: 'no-store'
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log('Loaded music from GitHub:', data);
+      const data = await musicApi.getAll();
+      console.log('Loaded music:', data);
       setMusicWorks(data);
     } catch (error) {
       console.error('Failed to load music:', error);
@@ -66,26 +49,13 @@ function AdminEditMusic() {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     setIsSaving(true);
-    
-    // 원본 데이터 백업
-    const originalMusic = [...musicWorks];
-    
     try {
-      const updated = musicWorks.filter(w => w.id !== id);
-      
-      // GitHub에 저장
-      const success = await saveMusicToGitHub(updated);
-      
-      if (success) {
-        // 저장 성공 후 UI 업데이트
-        setMusicWorks(updated);
-        alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-      } else {
-        alert('GitHub 저장에 실패했습니다.');
-      }
+      await musicApi.delete(id);
+      await loadMusic();
+      alert('삭제되었습니다!');
     } catch (error) {
       console.error('Delete failed:', error);
-      alert('삭제 중 오류가 발생했습니다.');
+      alert('삭제 중 오류가 발생했습니다: ' + (error as Error).message);
     } finally {
       setIsSaving(false);
     }
@@ -102,32 +72,19 @@ function AdminEditMusic() {
 
     setIsSaving(true);
     try {
-      let updated: MusicWork[];
       if (isCreating) {
-        updated = [...musicWorks, editingWork];
+        await musicApi.create(editingWork);
       } else {
-        updated = musicWorks.map(w => 
-          w.id === editingWork.id ? editingWork : w
-        );
+        await musicApi.update(editingWork);
       }
-
-      console.log('Saving music to GitHub:', updated);
-
-      // GitHub에 저장
-      const success = await saveMusicToGitHub(updated);
       
-      if (success) {
-        // 저장 성공 후 UI 업데이트
-        setMusicWorks(updated);
-        setEditingWork(null);
-        setIsCreating(false);
-        alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-      } else {
-        alert('GitHub 저장에 실패했습니다. 다시 시도해주세요.');
-      }
+      await loadMusic();
+      setEditingWork(null);
+      setIsCreating(false);
+      alert('저장되었습니다!');
     } catch (error) {
       console.error('Save failed:', error);
-      alert('저장 중 오류가 발생했습니다. 브라우저 콘솔을 확인해주세요.');
+      alert('저장 중 오류가 발생했습니다: ' + (error as Error).message);
     } finally {
       setIsSaving(false);
     }
@@ -300,13 +257,8 @@ function AdminEditMusic() {
             </div>
 
             <div className="form-note-container">
-              {!isGitHubConfigured() && (
-                <p className="form-warning">
-                  ⚠️ GitHub 연동이 설정되지 않았습니다. 변경사항이 저장되지 않습니다.
-                </p>
-              )}
               <p className="form-note">
-                💡 저장하면 GitHub에 즉시 커밋되고, 사이트에 바로 반영됩니다.
+                💡 저장하면 즉시 반영됩니다.
               </p>
             </div>
           </div>
