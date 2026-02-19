@@ -1,26 +1,5 @@
 [
   {
-    "id": "signal-processing-wavelet",
-    "title": "Wavelet-based Signal Processing for Audio Analysis",
-    "authors": [
-      "Woochive",
-      "Jane Smith",
-      "John Doe"
-    ],
-    "venue": "IEEE Transactions on Signal Processing",
-    "date": "2023-07-15",
-    "abstract": "웨이블릿 변환을 활용한 오디오 신호 분석 기법을 제안합니다. 기존 푸리에 변환 기반 방법 대비 시간-주파수 해상도가 향상되었으며, 노이즈 환경에서 더 높은 정확도를 보입니다. 음악 정보 검색, 음성 인식, 오디오 분류 등 다양한 응용 분야에서 효과적임을 실험적으로 검증했습니다.",
-    "tags": [
-      "Signal Processing",
-      "Wavelet",
-      "Audio",
-      "DSP"
-    ],
-    "links": {
-      "doi": "https://doi.org/10.1109/TSP.2023.xxxxx"
-    }
-  },
-  {
     "id": "quantum-ml",
     "title": "Quantum Machine Learning for Pattern Recognition",
     "authors": [
