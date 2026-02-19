@@ -7,19 +7,26 @@ export class DataLoadError extends Error {
   }
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
+// GitHub API를 통해 직접 데이터 로드 (캐시 없음)
+async function fetchFromGitHubAPI<T>(path: string): Promise<T> {
   try {
-    // 캐시 방지를 위한 timestamp 추가
-    const timestamp = Date.now();
-    const urlWithTimestamp = url.includes('?') 
-      ? `${url}&t=${timestamp}` 
-      : `${url}?t=${timestamp}`;
+    const owner = 'sonluos';
+    const repo = 'woochive';
+    const branch = 'main';
     
-    const response = await fetch(urlWithTimestamp);
+    // GitHub API 사용 (raw URL 대신)
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+    
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/vnd.github.v3.raw',
+      },
+      cache: 'no-store'
+    });
     
     if (!response.ok) {
       throw new DataLoadError(
-        `Failed to load data from ${url}`,
+        `Failed to load data from ${path}`,
         response.status
       );
     }
@@ -29,45 +36,31 @@ async function fetchJson<T>(url: string): Promise<T> {
     if (error instanceof DataLoadError) {
       throw error;
     }
-    throw new DataLoadError(`Network error while loading ${url}`);
+    throw new DataLoadError(`Network error while loading ${path}`);
   }
 }
 
-// GitHub raw URL 생성 함수
-function getGitHubRawUrl(path: string): string {
-  const owner = 'sonluos';
-  const repo = 'woochive';
-  const branch = 'main';
-  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-}
-
 export async function loadProjects(): Promise<ResearchProject[]> {
-  // GitHub에서 직접 최신 데이터 로드
-  const url = getGitHubRawUrl('public/data/projects.json');
-  const data = await fetchJson<ResearchProject[]>(url);
+  const data = await fetchFromGitHubAPI<ResearchProject[]>('public/data/projects.json');
   return data;
 }
 
 export async function loadMusic(): Promise<MusicWork[]> {
-  const url = getGitHubRawUrl('public/data/music.json');
-  const data = await fetchJson<MusicWork[]>(url);
+  const data = await fetchFromGitHubAPI<MusicWork[]>('public/data/music.json');
   return data;
 }
 
 export async function loadPublications(): Promise<Publication[]> {
-  const url = getGitHubRawUrl('public/data/publications.json');
-  const data = await fetchJson<Publication[]>(url);
+  const data = await fetchFromGitHubAPI<Publication[]>('public/data/publications.json');
   return data;
 }
 
 export async function loadBio(): Promise<Bio> {
-  const url = getGitHubRawUrl('public/data/bio.json');
-  const data = await fetchJson<Bio>(url);
+  const data = await fetchFromGitHubAPI<Bio>('public/data/bio.json');
   return data;
 }
 
 export async function loadCourses(): Promise<Course[]> {
-  const url = getGitHubRawUrl('public/data/courses.json');
-  const data = await fetchJson<Course[]>(url);
+  const data = await fetchFromGitHubAPI<Course[]>('public/data/courses.json');
   return data;
 }
