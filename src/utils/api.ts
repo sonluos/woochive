@@ -13,6 +13,9 @@ function saveToStorage<T>(key: string, data: T): void {
   try {
     localStorage.setItem(key, JSON.stringify(data));
     console.log(`Saved to localStorage: ${key}`);
+    
+    // 커스텀 이벤트 발생 (같은 탭에서 변경 감지용)
+    window.dispatchEvent(new Event('localStorageUpdated'));
   } catch (error) {
     console.error('Failed to save to localStorage:', key, error);
     throw new Error('저장 실패: 브라우저 저장소가 가득 찼을 수 있습니다.');
