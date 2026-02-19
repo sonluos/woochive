@@ -71,7 +71,9 @@ async function updateFileOnGitHub(
     return false;
   }
 
-  console.log('Starting GitHub update for:', path);
+  console.log('=== GitHub Update Start ===');
+  console.log('Path:', path);
+  console.log('Content to save:', content);
   console.log('GitHub config:', {
     owner: GITHUB_OWNER,
     repo: GITHUB_REPO,
@@ -107,13 +109,23 @@ async function updateFileOnGitHub(
 
     // 2. 새 내용을 Base64로 인코딩
     const contentString = JSON.stringify(content, null, 2);
+    console.log('Content string length:', contentString.length);
+    console.log('Content string preview:', contentString.substring(0, 200));
+    
     const encodedContent = btoa(unescape(encodeURIComponent(contentString)));
-
     console.log('Encoded content length:', encodedContent.length);
 
     // 3. GitHub API로 파일 업데이트
     const updateUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
     console.log('Updating file at:', updateUrl);
+
+    const requestBody = {
+      message,
+      content: encodedContent,
+      sha: fileInfo.sha,
+      branch: GITHUB_BRANCH,
+    };
+    console.log('Request body (without content):', { ...requestBody, content: `[${encodedContent.length} chars]` });
 
     const response = await fetch(updateUrl, {
       method: 'PUT',
@@ -122,12 +134,7 @@ async function updateFileOnGitHub(
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        message,
-        content: encodedContent,
-        sha: fileInfo.sha,
-        branch: GITHUB_BRANCH,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     console.log('Update response status:', response.status);
@@ -139,14 +146,17 @@ async function updateFileOnGitHub(
     }
 
     const responseData = await response.json();
-    console.log('Successfully updated file on GitHub:', responseData);
+    console.log('Successfully updated file on GitHub!');
+    console.log('New commit SHA:', responseData.commit?.sha);
+    console.log('=== GitHub Update Success ===');
     
     // 성공 후 약간의 지연을 주어 GitHub가 변경사항을 처리하도록 함
     await new Promise(resolve => setTimeout(resolve, 500));
     
     return true;
   } catch (error) {
-    console.error('Failed to update file on GitHub:', error);
+    console.error('=== GitHub Update Failed ===');
+    console.error('Error details:', error);
     
     let errorMessage = '알 수 없는 오류';
     
