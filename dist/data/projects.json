@@ -1,16 +1,1 @@
-[
-  {
-    "id": "project-1771483802067",
-    "title": "MIR",
-    "description": "Music Information Retrieval",
-    "fullDescription": "음악 정보 검색",
-    "date": "2025-03-03",
-    "tags": [
-      "FCNN"
-    ],
-    "images": [],
-    "technologies": [
-      "MATLAB"
-    ]
-  }
-]
+[]

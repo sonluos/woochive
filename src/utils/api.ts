@@ -12,16 +12,21 @@ async function loadFromStatic<T>(path: string): Promise<T> {
   return response.json();
 }
 
-// 데이터 저장 (GitHub 또는 로컬)
+// 데이터 저장 (다운로드 방식)
 async function saveData<T>(filename: string, data: T, message: string): Promise<void> {
-  if (hasGitHubToken()) {
-    // GitHub에 저장
-    await saveToGitHub(filename, data, message);
-    // 저장 후 이벤트 발생
-    window.dispatchEvent(new Event('dataUpdated'));
-  } else {
-    throw new Error('GitHub token이 설정되지 않았습니다. Admin 설정에서 토큰을 입력하세요.');
-  }
+  // JSON 파일로 다운로드
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  // 안내 메시지
+  alert(`${filename} 파일이 다운로드되었습니다.\n\n다음 단계:\n1. GitHub에서 public/data/${filename} 파일을 열기\n2. 다운로드한 파일 내용을 복사해서 붙여넣기\n3. Commit changes 클릭\n\n또는 로컬에서 파일을 교체하고 git push 하세요.`);
+  
+  throw new Error('수동 업로드가 필요합니다. 파일이 다운로드되었습니다.');
 }
 
 // 데이터 로드 (GitHub 또는 정적 파일)
