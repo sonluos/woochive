@@ -1,23 +1,5 @@
 [
   {
-    "id": "string-quartet-no1",
-    "title": "String Quartet No. 1",
-    "description": "현대적 해석의 현악 4중주",
-    "date": "2023-05-20",
-    "tags": [
-      "Classical",
-      "Contemporary",
-      "Chamber Music"
-    ],
-    "instruments": [
-      "Violin I",
-      "Violin II",
-      "Viola",
-      "Cello"
-    ],
-    "fullDescription": "전통적인 현악 4중주 형식에 현대적인 화성과 리듬을 접목한 작품입니다. 3악장으로 구성되어 있으며, 각 악장은 서로 다른 음악적 아이디어를 탐구합니다. 1악장은 긴장감 있는 대위법, 2악장은 서정적인 멜로디, 3악장은 리듬적 에너지를 중심으로 전개됩니다."
-  },
-  {
     "id": "generative-music-system",
     "title": "Generative Music System",
     "description": "실시간 생성 음악 시스템",
