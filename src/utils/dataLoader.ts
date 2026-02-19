@@ -7,15 +7,6 @@ export class DataLoadError extends Error {
   }
 }
 
-// localStorage 키
-const STORAGE_KEYS = {
-  projects: 'portfolio_projects',
-  music: 'portfolio_music',
-  publications: 'portfolio_publications',
-  bio: 'portfolio_bio',
-  courses: 'portfolio_courses'
-};
-
 // 정적 파일에서 데이터 로드
 async function fetchFromStatic<T>(path: string): Promise<T> {
   try {

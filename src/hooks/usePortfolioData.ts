@@ -50,16 +50,8 @@ function useDataLoader<T>(
 
     loadData();
 
-    // 데이터 업데이트 이벤트 감지 (GitHub 저장 후)
-    const handleDataUpdate = () => {
-      loadData();
-    };
-
-    window.addEventListener('dataUpdated', handleDataUpdate);
-
     return () => {
       cancelled = true;
-      window.removeEventListener('dataUpdated', handleDataUpdate);
     };
   }, [reloadTrigger, ...deps]);
 

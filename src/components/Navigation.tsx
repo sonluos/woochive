@@ -1,13 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import './Navigation.css';
 
 function Navigation() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,17 +60,6 @@ function Navigation() {
               </Link>
             </li>
           ))}
-          {isAuthenticated && (
-            <li>
-              <Link
-                to="/admin"
-                className={`nav-link admin-link ${isActive('/admin') ? 'active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Admin
-              </Link>
-            </li>
-          )}
         </ul>
       </div>
       
