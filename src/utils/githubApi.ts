@@ -20,7 +20,7 @@ async function getFileFromGitHub(path: string): Promise<GitHubFileResponse | nul
   }
 
   try {
-    // 캐시를 피하기 위해 timestamp 추가
+    // 캐시를 피하기 위해 timestamp 추가 (URL 파라미터로만)
     const timestamp = Date.now();
     const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}&t=${timestamp}`;
     
@@ -30,7 +30,6 @@ async function getFileFromGitHub(path: string): Promise<GitHubFileResponse | nul
       headers: {
         'Authorization': `Bearer ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'no-cache',
       },
     });
 
