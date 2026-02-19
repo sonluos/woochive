@@ -1,21 +1,5 @@
 [
   {
-    "id": "mathematical-variations",
-    "title": "Mathematical Variations",
-    "description": "수학적 패턴을 음악으로 표현",
-    "date": "2023-11-05",
-    "tags": [
-      "Algorithmic",
-      "Contemporary",
-      "Mathematics"
-    ],
-    "instruments": [
-      "Piano",
-      "Computer"
-    ],
-    "fullDescription": "프랙탈 패턴과 수열을 음악적 구조로 변환한 실험적 작품입니다. 피보나치 수열, 황금비, 만델브로트 집합 등의 수학적 개념을 리듬과 멜로디로 표현했습니다."
-  },
-  {
     "id": "urban-soundscape",
     "title": "Urban Soundscape",
     "description": "도시의 소리를 재해석한 앰비언트 작품",
