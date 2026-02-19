@@ -15,18 +15,14 @@ async function fetchFromGitHub<T>(path: string): Promise<T> {
     const branch = 'main';
     
     // raw.githubusercontent.com 사용 (rate limit 없음)
-    // 캐시 무효화: timestamp + random
+    // 캐시 무효화: timestamp + random (헤더 없이 URL만 사용)
     const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
     const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?cb=${cacheBuster}`;
     
     console.log('Loading from GitHub:', path);
     
     const response = await fetch(url, {
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-      }
+      cache: 'no-store'
     });
     
     if (!response.ok) {
