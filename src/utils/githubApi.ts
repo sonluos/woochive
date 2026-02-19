@@ -22,29 +22,38 @@ async function getFileFromGitHub(path: string): Promise<GitHubFileResponse | nul
   try {
     // 캐시를 피하기 위해 timestamp 추가
     const timestamp = Date.now();
-    const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}&t=${timestamp}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Cache-Control': 'no-cache',
-        },
-      }
-    );
+    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}&t=${timestamp}`;
+    
+    console.log('Fetching file from GitHub:', url);
+    
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Cache-Control': 'no-cache',
+      },
+    });
+
+    console.log('GitHub API response status:', response.status);
 
     if (!response.ok) {
       const errorData = await response.json();
+      console.error('GitHub API error response:', errorData);
       throw new Error(`GitHub API error: ${response.status} - ${errorData.message || 'Unknown error'}`);
     }
 
     const data = await response.json();
+    console.log('Successfully fetched file, SHA:', data.sha);
+    
     return {
       sha: data.sha,
       content: data.content,
     };
   } catch (error) {
     console.error('Failed to get file from GitHub:', error);
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      throw new Error('네트워크 오류: GitHub API에 연결할 수 없습니다. 인터넷 연결을 확인하세요.');
+    }
     throw error;
   }
 }
@@ -63,6 +72,15 @@ async function updateFileOnGitHub(
     return false;
   }
 
+  console.log('Starting GitHub update for:', path);
+  console.log('GitHub config:', {
+    owner: GITHUB_OWNER,
+    repo: GITHUB_REPO,
+    branch: GITHUB_BRANCH,
+    hasToken: !!GITHUB_TOKEN,
+    tokenPrefix: GITHUB_TOKEN?.substring(0, 7) + '...'
+  });
+
   try {
     // 1. 현재 파일의 최신 SHA 가져오기 (재시도 로직 포함)
     let fileInfo = null;
@@ -70,10 +88,12 @@ async function updateFileOnGitHub(
     
     while (retries > 0 && !fileInfo) {
       try {
+        console.log(`Attempting to get file SHA (${4 - retries}/3)...`);
         fileInfo = await getFileFromGitHub(path);
         break;
       } catch (error) {
         retries--;
+        console.error(`Failed to get SHA, retries left: ${retries}`, error);
         if (retries === 0) throw error;
         // 1초 대기 후 재시도
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -84,35 +104,43 @@ async function updateFileOnGitHub(
       throw new Error('Failed to get current file info after retries');
     }
 
+    console.log('Got file SHA:', fileInfo.sha);
+
     // 2. 새 내용을 Base64로 인코딩
     const contentString = JSON.stringify(content, null, 2);
     const encodedContent = btoa(unescape(encodeURIComponent(contentString)));
 
+    console.log('Encoded content length:', encodedContent.length);
+
     // 3. GitHub API로 파일 업데이트
-    const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message,
-          content: encodedContent,
-          sha: fileInfo.sha,
-          branch: GITHUB_BRANCH,
-        }),
-      }
-    );
+    const updateUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
+    console.log('Updating file at:', updateUrl);
+
+    const response = await fetch(updateUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message,
+        content: encodedContent,
+        sha: fileInfo.sha,
+        branch: GITHUB_BRANCH,
+      }),
+    });
+
+    console.log('Update response status:', response.status);
 
     if (!response.ok) {
       const errorData = await response.json();
+      console.error('Update error response:', errorData);
       throw new Error(`GitHub API error: ${response.status} - ${errorData.message}`);
     }
 
-    console.log('Successfully updated file on GitHub:', path);
+    const responseData = await response.json();
+    console.log('Successfully updated file on GitHub:', responseData);
     
     // 성공 후 약간의 지연을 주어 GitHub가 변경사항을 처리하도록 함
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -120,12 +148,25 @@ async function updateFileOnGitHub(
     return true;
   } catch (error) {
     console.error('Failed to update file on GitHub:', error);
-    const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류';
+    
+    let errorMessage = '알 수 없는 오류';
+    
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      errorMessage = '네트워크 오류: GitHub API에 연결할 수 없습니다. 인터넷 연결을 확인하세요.';
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
     
     if (errorMessage.includes('409')) {
       alert('파일이 이미 변경되었습니다. 페이지를 새로고침한 후 다시 시도해주세요.');
+    } else if (errorMessage.includes('401')) {
+      alert('GitHub 인증 실패: Token이 유효하지 않습니다. Vercel 환경 변수를 확인하세요.');
+    } else if (errorMessage.includes('403')) {
+      alert('GitHub 권한 오류: Token에 repo 권한이 없습니다.');
+    } else if (errorMessage.includes('404')) {
+      alert('GitHub 저장소를 찾을 수 없습니다. OWNER/REPO 설정을 확인하세요.');
     } else {
-      alert(`GitHub 업데이트 실패: ${errorMessage}`);
+      alert(`GitHub 업데이트 실패: ${errorMessage}\n\n브라우저 콘솔(F12)에서 자세한 정보를 확인하세요.`);
     }
     
     return false;
