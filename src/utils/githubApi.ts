@@ -20,18 +20,22 @@ async function getFileFromGitHub(path: string): Promise<GitHubFileResponse | nul
   }
 
   try {
+    // 캐시를 피하기 위해 timestamp 추가
+    const timestamp = Date.now();
     const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`,
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}&t=${timestamp}`,
       {
         headers: {
           'Authorization': `Bearer ${GITHUB_TOKEN}`,
           'Accept': 'application/vnd.github.v3+json',
+          'Cache-Control': 'no-cache',
         },
       }
     );
 
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(`GitHub API error: ${response.status} - ${errorData.message || 'Unknown error'}`);
     }
 
     const data = await response.json();
@@ -41,7 +45,7 @@ async function getFileFromGitHub(path: string): Promise<GitHubFileResponse | nul
     };
   } catch (error) {
     console.error('Failed to get file from GitHub:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -60,10 +64,24 @@ async function updateFileOnGitHub(
   }
 
   try {
-    // 1. 현재 파일의 SHA 가져오기
-    const fileInfo = await getFileFromGitHub(path);
+    // 1. 현재 파일의 최신 SHA 가져오기 (재시도 로직 포함)
+    let fileInfo = null;
+    let retries = 3;
+    
+    while (retries > 0 && !fileInfo) {
+      try {
+        fileInfo = await getFileFromGitHub(path);
+        break;
+      } catch (error) {
+        retries--;
+        if (retries === 0) throw error;
+        // 1초 대기 후 재시도
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
+
     if (!fileInfo) {
-      throw new Error('Failed to get current file info');
+      throw new Error('Failed to get current file info after retries');
     }
 
     // 2. 새 내용을 Base64로 인코딩
@@ -95,10 +113,21 @@ async function updateFileOnGitHub(
     }
 
     console.log('Successfully updated file on GitHub:', path);
+    
+    // 성공 후 약간의 지연을 주어 GitHub가 변경사항을 처리하도록 함
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
     return true;
   } catch (error) {
     console.error('Failed to update file on GitHub:', error);
-    alert(`GitHub 업데이트 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`);
+    const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류';
+    
+    if (errorMessage.includes('409')) {
+      alert('파일이 이미 변경되었습니다. 페이지를 새로고침한 후 다시 시도해주세요.');
+    } else {
+      alert(`GitHub 업데이트 실패: ${errorMessage}`);
+    }
+    
     return false;
   }
 }
