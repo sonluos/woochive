@@ -1,20 +1,18 @@
 [
   {
-    "id": "digital-dreams",
-    "title": "Digital Dreams",
-    "description": "전자음악과 클래식의 융합",
-    "date": "2024-03-10",
-    "tags": ["Electronic", "Classical", "Experimental"],
-    "instruments": ["Synthesizer", "Piano", "Strings"],
-    "fullDescription": "디지털 사운드와 어쿠스틱 악기의 조화를 탐구한 작품입니다. 알고리즘적 작곡 기법과 전통적인 음악 이론을 결합했습니다. 신시사이저로 생성한 텍스처 위에 피아노와 현악기의 멜로디가 어우러지며, 꿈같은 분위기를 연출합니다."
-  },
-  {
     "id": "mathematical-variations",
     "title": "Mathematical Variations",
     "description": "수학적 패턴을 음악으로 표현",
     "date": "2023-11-05",
-    "tags": ["Algorithmic", "Contemporary", "Mathematics"],
-    "instruments": ["Piano", "Computer"],
+    "tags": [
+      "Algorithmic",
+      "Contemporary",
+      "Mathematics"
+    ],
+    "instruments": [
+      "Piano",
+      "Computer"
+    ],
     "fullDescription": "프랙탈 패턴과 수열을 음악적 구조로 변환한 실험적 작품입니다. 피보나치 수열, 황금비, 만델브로트 집합 등의 수학적 개념을 리듬과 멜로디로 표현했습니다."
   },
   {
@@ -22,8 +20,16 @@
     "title": "Urban Soundscape",
     "description": "도시의 소리를 재해석한 앰비언트 작품",
     "date": "2023-08-15",
-    "tags": ["Ambient", "Field Recording", "Electronic"],
-    "instruments": ["Field Recorder", "Synthesizer", "Sampler"],
+    "tags": [
+      "Ambient",
+      "Field Recording",
+      "Electronic"
+    ],
+    "instruments": [
+      "Field Recorder",
+      "Synthesizer",
+      "Sampler"
+    ],
     "fullDescription": "서울의 다양한 장소에서 녹음한 소리를 전자음악과 결합한 사운드스케이프 작품입니다. 도시의 리듬과 멜로디를 발견하는 여정입니다. 지하철, 카페, 공원 등에서 채집한 소리를 레이어링하고 변형하여 새로운 음악적 맥락을 만들어냅니다."
   },
   {
@@ -31,8 +37,17 @@
     "title": "String Quartet No. 1",
     "description": "현대적 해석의 현악 4중주",
     "date": "2023-05-20",
-    "tags": ["Classical", "Contemporary", "Chamber Music"],
-    "instruments": ["Violin I", "Violin II", "Viola", "Cello"],
+    "tags": [
+      "Classical",
+      "Contemporary",
+      "Chamber Music"
+    ],
+    "instruments": [
+      "Violin I",
+      "Violin II",
+      "Viola",
+      "Cello"
+    ],
     "fullDescription": "전통적인 현악 4중주 형식에 현대적인 화성과 리듬을 접목한 작품입니다. 3악장으로 구성되어 있으며, 각 악장은 서로 다른 음악적 아이디어를 탐구합니다. 1악장은 긴장감 있는 대위법, 2악장은 서정적인 멜로디, 3악장은 리듬적 에너지를 중심으로 전개됩니다."
   },
   {
@@ -40,8 +55,15 @@
     "title": "Generative Music System",
     "description": "실시간 생성 음악 시스템",
     "date": "2023-02-10",
-    "tags": ["Generative", "Interactive", "Algorithmic"],
-    "instruments": ["Computer", "MIDI Controller"],
+    "tags": [
+      "Generative",
+      "Interactive",
+      "Algorithmic"
+    ],
+    "instruments": [
+      "Computer",
+      "MIDI Controller"
+    ],
     "fullDescription": "알고리즘과 확률론을 기반으로 실시간으로 음악을 생성하는 인터랙티브 시스템입니다. 매 연주마다 다른 결과를 만들어냅니다. 마르코프 체인, 셀룰러 오토마타 등의 알고리즘을 사용하여 예측 불가능하면서도 음악적으로 일관성 있는 결과를 생성합니다."
   },
   {
@@ -49,8 +71,14 @@
     "title": "Piano Etudes",
     "description": "현대 피아노를 위한 연습곡",
     "date": "2022-12-01",
-    "tags": ["Classical", "Piano", "Contemporary"],
-    "instruments": ["Piano"],
+    "tags": [
+      "Classical",
+      "Piano",
+      "Contemporary"
+    ],
+    "instruments": [
+      "Piano"
+    ],
     "fullDescription": "기술적 도전과 음악적 표현을 결합한 6개의 피아노 연습곡 모음입니다. 각 곡은 특정 기법에 초점을 맞춥니다. 아르페지오, 옥타브, 폴리리듬, 페달링 등 다양한 피아노 테크닉을 현대적인 음악 언어로 표현했습니다."
   }
 ]
