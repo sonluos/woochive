@@ -61,17 +61,23 @@ function AdminEditMusic() {
     try {
       const updated = musicWorks.filter(w => w.id !== id);
       
+      // 즉시 UI 업데이트
+      setMusicWorks(updated);
+      
       // GitHub에 저장
       const success = await saveMusicToGitHub(updated);
       
       if (success) {
         alert('삭제되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-        
-        // 삭제 후 최신 데이터 다시 로드
-        await loadMusic();
+      } else {
+        // 실패시 원래 상태로 복구
+        setMusicWorks(musicWorks);
+        alert('GitHub 저장에 실패했습니다.');
       }
     } catch (error) {
       console.error('Delete failed:', error);
+      // 실패시 원래 상태로 복구
+      setMusicWorks(musicWorks);
       alert('삭제 중 오류가 발생했습니다.');
     } finally {
       setIsSaving(false);
@@ -98,20 +104,22 @@ function AdminEditMusic() {
         );
       }
 
+      // 즉시 UI 업데이트
+      setMusicWorks(updated);
+      setEditingWork(null);
+      setIsCreating(false);
+
       // GitHub에 저장
       const success = await saveMusicToGitHub(updated);
       
       if (success) {
-        setEditingWork(null);
-        setIsCreating(false);
         alert('저장되었습니다! 변경사항이 GitHub에 저장되었습니다.');
-        
-        // 저장 후 최신 데이터 다시 로드
-        await loadMusic();
+      } else {
+        alert('GitHub 저장에 실패했습니다. 페이지를 새로고침해주세요.');
       }
     } catch (error) {
       console.error('Save failed:', error);
-      alert('저장 중 오류가 발생했습니다.');
+      alert('저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.');
     } finally {
       setIsSaving(false);
     }
