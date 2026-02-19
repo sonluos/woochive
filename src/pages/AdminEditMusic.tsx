@@ -17,19 +17,14 @@ function AdminEditMusic() {
 
   const loadMusic = async () => {
     try {
-      // GitHub API를 통해 직접 최신 데이터 로드 (캐시 없음)
+      // GitHub raw URL에서 데이터 로드 (캐시 무효화)
       const owner = 'sonluos';
       const repo = 'woochive';
       const branch = 'main';
-      const path = 'public/data/music.json';
+      const cacheBuster = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/data/music.json?cb=${cacheBuster}`;
       
-      // GitHub API 사용 (raw URL 대신)
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-      
-      const response = await fetch(apiUrl, {
-        headers: {
-          'Accept': 'application/vnd.github.v3.raw',
-        },
+      const response = await fetch(url, {
         cache: 'no-store'
       });
       
