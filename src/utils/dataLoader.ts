@@ -7,6 +7,9 @@ export class DataLoadError extends Error {
   }
 }
 
+// 환경 감지
+const isProduction = typeof window !== 'undefined' && window.location.hostname !== 'localhost';
+
 // localStorage 키
 const STORAGE_KEYS = {
   projects: 'portfolio_projects',
@@ -32,7 +35,6 @@ async function fetchFromStatic<T>(path: string): Promise<T> {
     
     const data = await response.json();
     
-    // Validate that data is not null or undefined
     if (data === null || data === undefined) {
       throw new DataLoadError(`No data found in ${path}`);
     }
@@ -50,9 +52,15 @@ async function fetchFromStatic<T>(path: string): Promise<T> {
   }
 }
 
-// localStorage에서 데이터 로드 (없으면 정적 파일에서 로드)
+// localStorage에서 데이터 로드 (로컬 개발 전용)
 async function loadData<T>(storageKey: string, staticPath: string): Promise<T> {
-  // localStorage 확인
+  // 배포 환경에서는 항상 정적 파일 사용
+  if (isProduction) {
+    console.log(`[dataLoader] 📁 Loading ${staticPath} from static files (production)`);
+    return await fetchFromStatic<T>(staticPath);
+  }
+  
+  // 로컬 개발: localStorage 확인
   const stored = localStorage.getItem(storageKey);
   console.log(`[dataLoader] Checking ${storageKey}:`, stored ? 'FOUND in localStorage' : 'NOT FOUND');
   
@@ -63,7 +71,6 @@ async function loadData<T>(storageKey: string, staticPath: string): Promise<T> {
       return parsed;
     } catch (e) {
       console.error(`[dataLoader] ❌ Failed to parse ${storageKey}:`, e);
-      // 파싱 실패 시 localStorage 삭제하고 정적 파일에서 로드
       localStorage.removeItem(storageKey);
     }
   }
