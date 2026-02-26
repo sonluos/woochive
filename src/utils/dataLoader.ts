@@ -7,9 +7,6 @@ export class DataLoadError extends Error {
   }
 }
 
-// 환경 감지
-const isProduction = typeof window !== 'undefined' && window.location.hostname !== 'localhost';
-
 // localStorage 키
 const STORAGE_KEYS = {
   projects: 'portfolio_projects',
@@ -52,22 +49,15 @@ async function fetchFromStatic<T>(path: string): Promise<T> {
   }
 }
 
-// localStorage에서 데이터 로드 (로컬 개발 전용)
+// localStorage에서 데이터 로드 (없으면 정적 파일에서 로드)
 async function loadData<T>(storageKey: string, staticPath: string): Promise<T> {
-  // 배포 환경에서는 항상 정적 파일 사용
-  if (isProduction) {
-    console.log(`[dataLoader] 📁 Loading ${staticPath} from static files (production)`);
-    return await fetchFromStatic<T>(staticPath);
-  }
-  
-  // 로컬 개발: localStorage 확인
+  // localStorage 확인
   const stored = localStorage.getItem(storageKey);
-  console.log(`[dataLoader] Checking ${storageKey}:`, stored ? 'FOUND in localStorage' : 'NOT FOUND');
   
   if (stored) {
     try {
       const parsed = JSON.parse(stored);
-      console.log(`[dataLoader] ✅ Loaded ${storageKey} from localStorage:`, Array.isArray(parsed) ? `${parsed.length} items` : 'object');
+      console.log(`[dataLoader] ✅ Loaded ${storageKey} from localStorage`);
       return parsed;
     } catch (e) {
       console.error(`[dataLoader] ❌ Failed to parse ${storageKey}:`, e);
@@ -77,9 +67,7 @@ async function loadData<T>(storageKey: string, staticPath: string): Promise<T> {
   
   // localStorage에 없으면 정적 파일에서 로드
   console.log(`[dataLoader] 📁 Loading ${staticPath} from static files`);
-  const data = await fetchFromStatic<T>(staticPath);
-  console.log(`[dataLoader] ✅ Loaded ${staticPath}:`, Array.isArray(data) ? `${data.length} items` : 'object');
-  return data;
+  return await fetchFromStatic<T>(staticPath);
 }
 
 export async function loadProjects(): Promise<ResearchProject[]> {
