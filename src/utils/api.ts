@@ -13,7 +13,18 @@ const STORAGE_KEYS = {
 
 // 인증 토큰 가져오기
 function getAuthToken(): string {
-  return sessionStorage.getItem('isAuthenticated') === 'true' ? 'admin-token' : '';
+  // sessionStorage에서 인증 상태 확인
+  const isAuth = sessionStorage.getItem('isAuthenticated') === 'true';
+  if (!isAuth) return '';
+  
+  // 프로덕션에서는 환경 변수의 ADMIN_PASSWORD 사용
+  // 로컬에서는 'admin-token' 사용
+  if (isProduction) {
+    // 프로덕션: 실제 비밀번호를 토큰으로 사용
+    // Vercel 환경 변수 ADMIN_PASSWORD와 매칭되어야 함
+    return 'sonluoscrool7';
+  }
+  return 'admin-token';
 }
 
 // API 요청 헬퍼
