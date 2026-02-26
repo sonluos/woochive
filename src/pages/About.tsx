@@ -1,5 +1,6 @@
 import { useBio, useCourses } from '../hooks/usePortfolioData';
 import { useProjects, useMusic, usePublications } from '../hooks/usePortfolioData';
+import { validateCourses } from '../utils/courseValidation';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import StatCard from '../components/StatCard';
@@ -9,10 +10,13 @@ import './About.css';
 
 function About() {
   const { data: bio, loading: bioLoading, error: bioError, reload: reloadBio } = useBio();
-  const { data: courses, loading: coursesLoading, error: coursesError, reload: reloadCourses } = useCourses();
+  const { data: coursesRaw, loading: coursesLoading, error: coursesError, reload: reloadCourses } = useCourses();
   const { data: projects } = useProjects();
   const { data: music } = useMusic();
   const { data: publications } = usePublications();
+
+  // Validate courses data
+  const courses = coursesRaw ? validateCourses(coursesRaw) : null;
 
   const loading = bioLoading || coursesLoading;
   const error = bioError || coursesError;
@@ -34,9 +38,14 @@ function About() {
     return <div className="error">No bio data available</div>;
   }
 
-  // Group courses by category
+  // Group courses by category with validation
   const groupedCourses = courses?.reduce((acc, course) => {
-    const category = course.category || 'Other';
+    // Validate course has required fields
+    if (!course.id || !course.name?.trim() || !course.semester?.trim()) {
+      return acc;
+    }
+    
+    const category = course.category?.trim() || 'Other';
     if (!acc[category]) {
       acc[category] = [];
     }
@@ -52,31 +61,43 @@ function About() {
   const creativePercent = totalProjects > 0 ? Math.round((creativeCount / totalProjects) * 100) : 50;
   const balanceScore = 100 - Math.abs(academicPercent - creativePercent);
 
-  // Extract skills from projects and music
+  // Extract skills from projects and music with validation
   const extractSkills = () => {
     const skillMap = new Map<string, { count: number; category: string }>();
 
     // From projects
     projects?.forEach(project => {
       project.tags?.forEach(tag => {
-        const current = skillMap.get(tag) || { count: 0, category: 'technical' };
-        skillMap.set(tag, { count: current.count + 1, category: 'technical' });
+        const trimmedTag = tag?.trim();
+        if (trimmedTag) {
+          const current = skillMap.get(trimmedTag) || { count: 0, category: 'technical' };
+          skillMap.set(trimmedTag, { count: current.count + 1, category: 'technical' });
+        }
       });
       project.technologies?.forEach(tech => {
-        const current = skillMap.get(tech) || { count: 0, category: 'technical' };
-        skillMap.set(tech, { count: current.count + 1, category: 'technical' });
+        const trimmedTech = tech?.trim();
+        if (trimmedTech) {
+          const current = skillMap.get(trimmedTech) || { count: 0, category: 'technical' };
+          skillMap.set(trimmedTech, { count: current.count + 1, category: 'technical' });
+        }
       });
     });
 
     // From music
     music?.forEach(work => {
       work.tags?.forEach(tag => {
-        const current = skillMap.get(tag) || { count: 0, category: 'creative' };
-        skillMap.set(tag, { count: current.count + 1, category: 'creative' });
+        const trimmedTag = tag?.trim();
+        if (trimmedTag) {
+          const current = skillMap.get(trimmedTag) || { count: 0, category: 'creative' };
+          skillMap.set(trimmedTag, { count: current.count + 1, category: 'creative' });
+        }
       });
       work.instruments?.forEach(instrument => {
-        const current = skillMap.get(instrument) || { count: 0, category: 'creative' };
-        skillMap.set(instrument, { count: current.count + 1, category: 'creative' });
+        const trimmedInstrument = instrument?.trim();
+        if (trimmedInstrument) {
+          const current = skillMap.get(trimmedInstrument) || { count: 0, category: 'creative' };
+          skillMap.set(trimmedInstrument, { count: current.count + 1, category: 'creative' });
+        }
       });
     });
 
@@ -215,10 +236,10 @@ function About() {
         )}
 
         {/* Courses Section */}
-        {courses && courses.length > 0 && (
+        {courses && courses.length > 0 && groupedCourses && Object.keys(groupedCourses).length > 0 && (
           <section className="courses-section">
             <h2 className="section-title-about">Courses</h2>
-            {groupedCourses && Object.entries(groupedCourses).map(([category, categoryCourses]) => (
+            {Object.entries(groupedCourses).map(([category, categoryCourses]) => (
               <div key={category} className="course-category">
                 <h3 className="category-title">{category}</h3>
                 <div className="course-grid">
@@ -232,14 +253,22 @@ function About() {
                       >
                         <div className="course-card">
                           <div className="course-header">
-                            <strong className="course-name">{course.code} - {course.name}</strong>
-                            <span className="course-semester">{course.semester} {course.year}</span>
+                            <strong className="course-name">
+                              {course.code ? `${course.code} - ` : ''}{course.name}
+                            </strong>
+                            <span className="course-semester">
+                              {course.semester}{course.year ? ` ${course.year}` : ''}
+                            </span>
                           </div>
                           <div className="course-meta">
-                            <span className="course-credits">{course.credits} credits</span>
+                            {course.credits && (
+                              <span className="course-credits">{course.credits} credits</span>
+                            )}
                             {course.grade && <span className="course-grade">Grade: {course.grade}</span>}
                           </div>
-                          {course.description && <p className="course-description">{course.description}</p>}
+                          {course.description && (
+                            <p className="course-description">{course.description}</p>
+                          )}
                         </div>
                       </GradientCard>
                     );

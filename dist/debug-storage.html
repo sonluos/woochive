@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>localStorage Debug</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
+        pre { background: #2d2d2d; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        .success { color: #4ec9b0; }
+        .error { color: #f48771; }
+        .warning { color: #dcdcaa; }
+    </style>
+</head>
+<body>
+    <h1>🔍 localStorage Debug Tool</h1>
+    <button onclick="checkAll()">전체 확인</button>
+    <button onclick="clearAll()">전체 삭제</button>
+    <div id="output"></div>
+
+    <script>
+        function checkAll() {
+            const output = document.getElementById('output');
+            let html = '<h2>localStorage 상태:</h2>';
+            
+            const keys = [
+                'portfolio_projects',
+                'portfolio_music', 
+                'portfolio_publications',
+                'portfolio_bio',
+                'portfolio_courses'
+            ];
+            
+            keys.forEach(key => {
+                const data = localStorage.getItem(key);
+                if (data) {
+                    try {
+                        const parsed = JSON.parse(data);
+                        const count = Array.isArray(parsed) ? parsed.length : 'object';
+                        html += `<pre class="success">✅ ${key}: ${count} items\n${JSON.stringify(parsed, null, 2).substring(0, 500)}...</pre>`;
+                    } catch (e) {
+                        html += `<pre class="error">❌ ${key}: Parse error</pre>`;
+                    }
+                } else {
+                    html += `<pre class="warning">⚠️ ${key}: Not found</pre>`;
+                }
+            });
+            
+            output.innerHTML = html;
+        }
+        
+        function clearAll() {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                localStorage.clear();
+                alert('삭제 완료!');
+                checkAll();
+            }
+        }
+        
+        checkAll();
+    </script>
+</body>
+</html>

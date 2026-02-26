@@ -22,13 +22,17 @@ describe('Data Loader', () => {
 
       const result = await loadProjects();
       expect(result).toEqual(mockProjects);
-      expect(global.fetch).toHaveBeenCalledWith('/data/projects.json');
+      expect(global.fetch).toHaveBeenCalledWith(
+        expect.stringMatching(/^\/data\/projects\.json\?t=\d+$/),
+        expect.objectContaining({ cache: 'no-store' })
+      );
     });
 
     it('should throw DataLoadError on 404', async () => {
       (global.fetch as any).mockResolvedValueOnce({
         ok: false,
-        status: 404
+        status: 404,
+        statusText: 'Not Found'
       });
 
       await expect(loadProjects()).rejects.toThrow(DataLoadError);

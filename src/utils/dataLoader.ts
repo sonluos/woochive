@@ -7,6 +7,15 @@ export class DataLoadError extends Error {
   }
 }
 
+// localStorage 키
+const STORAGE_KEYS = {
+  projects: 'portfolio_projects',
+  music: 'portfolio_music',
+  publications: 'portfolio_publications',
+  bio: 'portfolio_bio',
+  courses: 'portfolio_courses'
+};
+
 // 정적 파일에서 데이터 로드
 async function fetchFromStatic<T>(path: string): Promise<T> {
   try {
@@ -16,37 +25,72 @@ async function fetchFromStatic<T>(path: string): Promise<T> {
     
     if (!response.ok) {
       throw new DataLoadError(
-        `Failed to load data from ${path}`,
+        `Failed to load data from ${path}: ${response.statusText}`,
         response.status
       );
     }
     
-    return await response.json();
+    const data = await response.json();
+    
+    // Validate that data is not null or undefined
+    if (data === null || data === undefined) {
+      throw new DataLoadError(`No data found in ${path}`);
+    }
+    
+    return data;
   } catch (error) {
     console.error('Failed to load from static:', path, error);
     if (error instanceof DataLoadError) {
       throw error;
     }
+    if (error instanceof SyntaxError) {
+      throw new DataLoadError(`Invalid JSON in ${path}`);
+    }
     throw new DataLoadError(`Network error while loading ${path}`);
   }
 }
 
+// localStorage에서 데이터 로드 (없으면 정적 파일에서 로드)
+async function loadData<T>(storageKey: string, staticPath: string): Promise<T> {
+  // localStorage 확인
+  const stored = localStorage.getItem(storageKey);
+  console.log(`[dataLoader] Checking ${storageKey}:`, stored ? 'FOUND in localStorage' : 'NOT FOUND');
+  
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      console.log(`[dataLoader] ✅ Loaded ${storageKey} from localStorage:`, Array.isArray(parsed) ? `${parsed.length} items` : 'object');
+      return parsed;
+    } catch (e) {
+      console.error(`[dataLoader] ❌ Failed to parse ${storageKey}:`, e);
+      // 파싱 실패 시 localStorage 삭제하고 정적 파일에서 로드
+      localStorage.removeItem(storageKey);
+    }
+  }
+  
+  // localStorage에 없으면 정적 파일에서 로드
+  console.log(`[dataLoader] 📁 Loading ${staticPath} from static files`);
+  const data = await fetchFromStatic<T>(staticPath);
+  console.log(`[dataLoader] ✅ Loaded ${staticPath}:`, Array.isArray(data) ? `${data.length} items` : 'object');
+  return data;
+}
+
 export async function loadProjects(): Promise<ResearchProject[]> {
-  return await fetchFromStatic<ResearchProject[]>('projects.json');
+  return await loadData<ResearchProject[]>(STORAGE_KEYS.projects, 'projects.json');
 }
 
 export async function loadMusic(): Promise<MusicWork[]> {
-  return await fetchFromStatic<MusicWork[]>('music.json');
+  return await loadData<MusicWork[]>(STORAGE_KEYS.music, 'music.json');
 }
 
 export async function loadPublications(): Promise<Publication[]> {
-  return await fetchFromStatic<Publication[]>('publications.json');
+  return await loadData<Publication[]>(STORAGE_KEYS.publications, 'publications.json');
 }
 
 export async function loadBio(): Promise<Bio> {
-  return await fetchFromStatic<Bio>('bio.json');
+  return await loadData<Bio>(STORAGE_KEYS.bio, 'bio.json');
 }
 
 export async function loadCourses(): Promise<Course[]> {
-  return await fetchFromStatic<Course[]>('courses.json');
+  return await loadData<Course[]>(STORAGE_KEYS.courses, 'courses.json');
 }
