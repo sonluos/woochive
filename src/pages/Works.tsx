@@ -18,6 +18,10 @@ export default function Works() {
               key={work.id}
               className={`works__piece works__piece--${work.size || 'md'}`}
             >
+              <div className="works__piece-top">
+                <span className="works__piece-category">{work.category}</span>
+                <span className="works__piece-year">{work.year}</span>
+              </div>
               <h3 className="works__piece-title">{work.title}</h3>
               <p className="works__piece-desc">{work.description}</p>
               <div className="works__piece-tags">
