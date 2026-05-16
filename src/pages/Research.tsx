@@ -1,8 +1,23 @@
+import { useState, useMemo } from 'react';
 import { researchData } from '../data/research';
 import { ResearchCard } from '../components/ResearchCard';
 import './Research.css';
 
 export default function Research() {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  // Collect all unique tags from projects
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    researchData.projects.forEach((p) => p.tags.forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet);
+  }, []);
+
+  // Filter projects by active tag
+  const filteredProjects = activeTag
+    ? researchData.projects.filter((p) => p.tags.includes(activeTag))
+    : researchData.projects;
+
   return (
     <main className="research">
       <section className="research__header container">
@@ -16,8 +31,20 @@ export default function Research() {
       <section className="research__body container">
         <h2 className="research__subsection-heading">Projects</h2>
         <div className="research__list">
-          {researchData.projects.map((project) => (
+          {filteredProjects.map((project) => (
             <ResearchCard key={project.id} item={project} />
+          ))}
+        </div>
+
+        <div className="research__tag-filter">
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              className={`research__filter-btn ${activeTag === tag ? 'research__filter-btn--active' : ''}`}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+            >
+              {tag}
+            </button>
           ))}
         </div>
 
