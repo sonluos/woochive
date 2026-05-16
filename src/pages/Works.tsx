@@ -13,11 +13,10 @@ export default function Works() {
 
       <section className="works__body container">
         <div className="works__mosaic">
-          {worksData.map((work) => (
+          {worksData.map((work, index) => (
             <article
               key={work.id}
-              className="works__piece"
-              style={{ gridArea: work.id }}
+              className={`works__piece works__piece--${index}`}
             >
               <div className="works__piece-top">
                 <span className="works__piece-category">{work.category}</span>
