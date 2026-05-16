@@ -45,11 +45,11 @@
 }
 
 /* Tangram piece positions — 15 pieces in 4x7 grid */
-.works__piece--0  { grid-column: span 2; grid-row: span 2; }  /* Billie — big */
-.works__piece--1  { grid-column: span 2; grid-row: span 2; }  /* CARNIVAL — big */
-.works__piece--2  { grid-column: span 2; grid-row: span 2; }  /* Chillin It — big */
-.works__piece--3  { grid-column: span 1; grid-row: span 1; }  /* Sprechstimme — min */
-.works__piece--4  { grid-column: span 1; grid-row: span 1; }  /* TrumBap — min */
+.works__piece--0  { grid-column: span 2; grid-row: span 3; }  /* Billie — PRODUCTION biggest */
+.works__piece--1  { grid-column: span 2; grid-row: span 3; }  /* CARNIVAL — PRODUCTION biggest */
+.works__piece--2  { grid-column: span 2; grid-row: span 3; }  /* Chillin It — PRODUCTION biggest */
+.works__piece--3  { grid-column: span 2; grid-row: span 3; }  /* Sprechstimme — PRODUCTION biggest */
+.works__piece--4  { grid-column: span 2; grid-row: span 3; }  /* TrumBap — PRODUCTION biggest */
 .works__piece--5  { grid-column: span 1; grid-row: span 1; }  /* Best Parts — min */
 .works__piece--6  { grid-column: span 1; grid-row: span 1; }  /* Public Enemy — min */
 .works__piece--7  { grid-column: span 2; grid-row: span 1; }  /* Who Knows — wide */
