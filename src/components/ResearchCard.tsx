@@ -27,7 +27,10 @@ function ResearchProjectCard({ project }: ResearchProjectCardProps) {
     <article className="research-card">
       <div className="research-card__header">
         <h3 className="research-card__title">{project.title}</h3>
-        {project.status && <StatusBadge status={project.status} />}
+        <div className="research-card__meta">
+          <span className="research-card__year">{project.year}</span>
+          {project.status && <StatusBadge status={project.status} />}
+        </div>
       </div>
 
       <p className="research-card__description">{project.description}</p>

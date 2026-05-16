@@ -58,6 +58,7 @@ export interface ResearchProject {
   title: string;
   description: string;
   tags: string[];
+  year: number;
   status?: StatusBadgeValue;
   links?: {
     github?: string;
