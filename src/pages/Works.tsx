@@ -16,7 +16,8 @@ export default function Works() {
           {worksData.map((work) => (
             <article
               key={work.id}
-              className={`works__piece works__piece--${work.size || 'md'}`}
+              className="works__piece"
+              style={{ gridArea: work.id }}
             >
               <div className="works__piece-top">
                 <span className="works__piece-category">{work.category}</span>

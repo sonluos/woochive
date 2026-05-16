@@ -34,28 +34,29 @@
   margin: 0 auto;
 }
 
-/* Tangram-style mosaic grid */
+/* Tangram-style mosaic grid — forms a square */
 .works__mosaic {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 10rem;
-  gap: var(--sp-4);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: var(--sp-3);
+  aspect-ratio: 6 / 5;
+  max-width: 52rem;
+  margin: 0 auto;
+  grid-template-areas:
+    "billie-i-willish      billie-i-willish      carnival-lets-go      carnival-lets-go      sprechstimme          trumbap"
+    "billie-i-willish      billie-i-willish      carnival-lets-go      carnival-lets-go      chillin-it            chillin-it"
+    "guitar-best-parts     guitar-public-enemy   guitar-who-knows      guitar-who-knows      chillin-it            chillin-it"
+    "drum-meaning          chromakopia-tour       chromakopia-tour       chromakopia-tour       music-of-the-spheres  music-of-the-spheres"
+    "diffusion-presentation diffusion-presentation young-gugak           crimson-art           mugyeonggye           music-of-the-spheres";
 }
 
-/* Size variants — tangram feel */
-.works__piece--lg {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.works__piece--md {
-  grid-column: span 2;
-  grid-row: span 1;
-}
-
+/* Size variants — no longer needed */
+.works__piece--lg,
+.works__piece--md,
 .works__piece--sm {
-  grid-column: span 1;
-  grid-row: span 1;
+  grid-column: unset;
+  grid-row: unset;
 }
 
 /* Piece card */
@@ -99,14 +100,11 @@
 
 .works__piece-title {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   color: var(--ink);
-  margin-bottom: var(--sp-2);
-}
-
-.works__piece--lg .works__piece-title {
-  font-size: var(--text-lg);
+  margin-bottom: var(--sp-1);
+  line-height: var(--leading-tight);
 }
 
 .works__piece-desc {
@@ -157,18 +155,17 @@
 /* Responsive — stack on mobile */
 @media (max-width: 768px) {
   .works__mosaic {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-  }
-
-  .works__piece--lg,
-  .works__piece--md,
-  .works__piece--sm {
-    grid-column: span 1;
-    grid-row: span 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    aspect-ratio: unset;
   }
 
   .works__piece {
     padding: var(--sp-4);
+  }
+
+  .works__header {
+    padding-top: var(--sp-16);
   }
 }
