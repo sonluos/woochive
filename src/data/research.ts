@@ -3,22 +3,22 @@ import type { ResearchData } from '../types/archive';
 export const researchData: ResearchData = {
   publications: [
     {
-      id: 'academic-festival',
-      venue: 'Academic Festival of the Division of Applied Mathematical Sciences',
-      type: 'Poster Presentation',
-      status: 'Presented / In Preparation',
+      id: 'kwms-2026',
+      venue: 'KWMS 2026',
+      type: 'Poster',
+      status: 'In Preparation',
     },
     {
       id: 'ipiu-2026',
       venue: 'IPIU 2026',
-      type: 'Poster Presentation',
-      status: 'Presented / In Preparation',
+      type: 'Poster',
+      status: 'Presented',
     },
     {
-      id: 'kwms-2026',
-      venue: 'KWMS 2026',
-      type: 'Poster Presentation',
-      status: 'Presented / In Preparation',
+      id: 'academic-festival',
+      venue: 'Academic Festival of the Division of Applied Mathematical Sciences',
+      type: 'Oral',
+      status: 'Presented',
     },
   ],
   projects: [

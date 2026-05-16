@@ -6,7 +6,7 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status }: StatusBadgeProps) {
-  const className = status === 'In Progress'
+  const className = (status === 'In Progress' || status === 'In Preparation')
     ? 'status-badge status-badge--in-progress'
     : 'status-badge';
 

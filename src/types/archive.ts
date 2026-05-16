@@ -34,6 +34,8 @@ export interface IntroData {
 
 export type StatusBadgeValue =
   | 'In Progress'
+  | 'In Preparation'
+  | 'Presented'
   | 'LaTeX Note'
   | 'Code'
   | 'Presentation'
@@ -43,7 +45,7 @@ export type StatusBadgeValue =
 export interface PublicationEntry {
   id: string;
   venue: string;
-  type: 'Poster Presentation' | 'Paper' | 'Talk';
+  type: 'Poster' | 'Oral' | 'Paper' | 'Talk';
   status: StatusBadgeValue;
   /** undefined fields render as Placeholder */
   title?: string;

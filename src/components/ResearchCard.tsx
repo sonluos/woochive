@@ -107,15 +107,15 @@ function PublicationCard({ entry }: PublicationCardProps) {
           )}
         </div>
 
-        {/* Poster PDF */}
+        {/* PDF */}
         <div className="research-card__field">
-          <span className="research-card__field-label">Poster PDF</span>
+          <span className="research-card__field-label">PDF</span>
           {entry.posterPdf !== undefined ? (
             <a href={entry.posterPdf} target="_blank" rel="noopener noreferrer">
               View PDF
             </a>
           ) : (
-            <Placeholder label="Poster PDF" kind="pdf" />
+            <Placeholder label="PDF" kind="pdf" />
           )}
         </div>
       </div>
