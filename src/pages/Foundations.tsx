@@ -1,31 +1,17 @@
 import { foundationsData, CourseEntry } from '../data/foundations';
 import './Foundations.css';
 
-function CourseTable({ courses }: { courses: CourseEntry[] }) {
+function CourseCard({ course }: { course: CourseEntry }) {
   return (
-    <div className="foundations__table-wrap">
-      <table className="foundations__table">
-        <thead>
-          <tr>
-            <th>학기</th>
-            <th>과목명</th>
-            <th>이수구분</th>
-            <th>학점</th>
-            <th>등급</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses.map((c, i) => (
-            <tr key={i}>
-              <td className="foundations__cell--semester">{c.semester}</td>
-              <td className="foundations__cell--name">{c.name}</td>
-              <td className="foundations__cell--category">{c.category}</td>
-              <td className="foundations__cell--credits">{c.credits}</td>
-              <td className={`foundations__cell--grade ${c.grade === 'A+' ? 'foundations__grade--top' : ''}`}>{c.grade}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="course-card">
+      <div className="course-card__header">
+        <span className="course-card__name">{course.name}</span>
+        <span className="course-card__grade">{course.grade}</span>
+      </div>
+      <div className="course-card__meta">
+        <span className="course-card__semester">{course.semester}</span>
+        <span className="course-card__credits">{course.credits}학점</span>
+      </div>
     </div>
   );
 }
@@ -41,11 +27,19 @@ export default function Foundations() {
       </section>
 
       <section className="foundations__body container">
-        <h2 className="foundations__section-heading">Major</h2>
-        <CourseTable courses={foundationsData.major} />
+        <h2 className="foundations__section-heading foundations__section-heading--major">Major</h2>
+        <div className="foundations__grid">
+          {foundationsData.major.map((c, i) => (
+            <CourseCard key={i} course={c} />
+          ))}
+        </div>
 
-        <h2 className="foundations__section-heading">Elective</h2>
-        <CourseTable courses={foundationsData.elective} />
+        <h2 className="foundations__section-heading foundations__section-heading--elective">Elective</h2>
+        <div className="foundations__grid">
+          {foundationsData.elective.map((c, i) => (
+            <CourseCard key={i} course={c} />
+          ))}
+        </div>
       </section>
     </main>
   );

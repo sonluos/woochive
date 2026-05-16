@@ -34,7 +34,6 @@ export const foundationsData: FoundationsCoursesData = {
     { semester: '2023-2', code: 'GSLA01200', name: '한국전통예술의이해와감상', category: '교양', credits: 3, grade: 'A+' },
     { semester: '2025-1', code: 'SPGS30401', name: '음악의표현과감상', category: '교양', credits: 2, grade: 'A+' },
     { semester: '2025-1', code: 'SPGS33700', name: '클래식인문학과교향곡', category: '교양', credits: 3, grade: 'A+' },
-    { semester: '2025-2', code: 'SPGS28400', name: '정보적사고', category: '교양', credits: 1, grade: 'P' },
     { semester: '2025-2', code: 'SPGS32600', name: '음악이론과악기의응용', category: '교양', credits: 2, grade: 'A+' },
   ],
 };
