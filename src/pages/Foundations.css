@@ -62,6 +62,21 @@
   gap: var(--sp-4);
 }
 
+/* Semester group */
+.foundations__semester-group {
+  margin-bottom: var(--sp-6);
+}
+
+.foundations__semester-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-muted);
+  margin-bottom: var(--sp-3);
+  letter-spacing: 0.04em;
+}
+
 /* Course card */
 .course-card {
   background: var(--paper-2);
@@ -98,6 +113,22 @@
   font-weight: var(--weight-semibold);
   color: #5B6770;
   white-space: nowrap;
+}
+
+.course-card__badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: #EA426A;
+  background: rgba(234, 66, 106, 0.08);
+  border: 1px solid rgba(234, 66, 106, 0.2);
+  border-radius: var(--r-sm);
+  padding: 1px var(--sp-2);
+  white-space: nowrap;
+}
+
+.course-card--in-progress {
+  border-color: rgba(234, 66, 106, 0.2);
 }
 
 .course-card__meta {
