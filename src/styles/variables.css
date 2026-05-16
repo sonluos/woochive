@@ -9,12 +9,12 @@
   --paper-2:    #f3f2ef;
   --paper-3:    #eceae5;
 
-  --accent:     #D57FF4;   /* vibrant purple — creative energy */
-  --accent-dim: #e0a4f7;
-  --accent-bg:  rgba(213, 127, 244, 0.08);
+  --accent:     #FF4F79;   /* hot pink — primary accent for all content elements */
+  --accent-dim: #ff7a9a;
+  --accent-bg:  rgba(255, 79, 121, 0.08);
   --accent-2:   #717E87;  /* steel blue-gray — academic calm */
   --accent-2-bg: rgba(113, 126, 135, 0.08);
-  --accent-hot: #FF4F79;  /* hot pink — hover & interaction points */
+  --accent-hot: #FF4F79;  /* same as accent — unified */
   --accent-hot-dim: #ff7a9a;
   --accent-hot-bg: rgba(255, 79, 121, 0.08);
 
@@ -82,7 +82,7 @@
 
   /* legacy compat */
   --color-purple: var(--accent);
-  --color-purple-dark: #b85ee0;
+  --color-purple-dark: #e63d65;
   --bg-primary: var(--paper);
   --bg-secondary: var(--paper-2);
   --bg-tertiary: var(--paper-3);
@@ -109,7 +109,7 @@
   --shadow-card-hover: var(--shadow-lg);
   --transition-base: var(--ease);
   --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
-  --gradient-purple: linear-gradient(135deg, var(--accent) 0%, #b85ee0 100%);
+  --gradient-purple: linear-gradient(135deg, var(--accent) 0%, #e63d65 100%);
   --header-height: var(--nav-h);
 }
 
@@ -124,9 +124,9 @@
     --paper-2:    #1e1d1a;
     --paper-3:    #272520;
 
-    --accent:     #e0a4f7;
-    --accent-dim: #D57FF4;
-    --accent-bg:  rgba(224, 164, 247, 0.10);
+    --accent:     #FF6B8F;
+    --accent-dim: #ff8faa;
+    --accent-bg:  rgba(255, 107, 143, 0.10);
     --accent-2:   #9aa5ad;
     --accent-2-bg: rgba(154, 165, 173, 0.10);
     --accent-hot: #FF6B8F;

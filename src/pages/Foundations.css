@@ -85,7 +85,7 @@
 .foundation-card__status--studying {
   color: var(--accent);
   background: var(--accent-bg);
-  border: 1px solid rgba(213, 127, 244, 0.2);
+  border: 1px solid rgba(255, 79, 121, 0.2);
 }
 
 .foundation-card__status--planned {
