@@ -133,6 +133,24 @@
   padding: 2px var(--sp-2);
 }
 
+.works__piece-pdf {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-muted);
+  padding-bottom: 1px;
+  margin-left: auto;
+  white-space: nowrap;
+  transition: color var(--ease), border-color var(--ease);
+}
+
+.works__piece-pdf:hover {
+  color: #EA426A;
+  border-color: #EA426A;
+}
+
 /* Responsive — stack on mobile */
 @media (max-width: 768px) {
   .works__mosaic {

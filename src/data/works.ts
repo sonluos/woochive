@@ -6,6 +6,7 @@ export interface WorkEntry {
   tags: string[];
   year: number;
   size?: 'sm' | 'md' | 'lg';
+  pdfUrl?: string;
 }
 
 export const worksData: WorkEntry[] = [
@@ -36,6 +37,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Comedy', 'Production', 'Beat Making'],
     year: 2023,
     size: 'lg',
+    pdfUrl: '/works/%EA%B3%A0%EC%A0%80%EC%8A%A4%EC%B1%8C%EB%A6%B0%EC%A7%80_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf',
   },
   {
     id: 'sprechstimme',
@@ -101,6 +103,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Hip-hop', 'Live', 'Report'],
     year: 2025,
     size: 'lg',
+    pdfUrl: '/works/CHROMAKOPIA%20TOUR%20X%20CIRCUS%20MAXIMUS_%EB%A0%88%ED%8F%AC%ED%8A%B8.pdf',
   },
   {
     id: 'music-of-the-spheres',
@@ -110,6 +113,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Pop', 'Live', 'Report'],
     year: 2025,
     size: 'md',
+    pdfUrl: '/works/Music%20of%20the%20Spheres_%EB%A0%88%ED%8F%AC%ED%8A%B8.pdf',
   },
   {
     id: 'young-gugak',
@@ -119,6 +123,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Korean Music', 'Live', 'Report'],
     year: 2023,
     size: 'sm',
+    pdfUrl: '/works/%EC%A0%8A%EC%9D%80%20%EA%B5%AD%EC%95%85_%EB%A0%88%ED%8F%AC%ED%8A%B8.pdf',
   },
   {
     id: 'crimson-art',
@@ -128,6 +133,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Classic', 'Live', 'Report'],
     year: 2025,
     size: 'sm',
+    pdfUrl: '/works/%ED%81%AC%EB%A6%BC%EC%8A%A8%20%EC%98%88%EC%88%A0%20%EA%B3%B5%EC%97%B0_%EB%A0%88%ED%8F%AC%ED%8A%B8.pdf',
   },
   // Other
   {
