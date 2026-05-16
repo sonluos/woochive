@@ -1,46 +1,40 @@
-import type { FoundationsData } from '../types/archive';
+export interface CourseEntry {
+  semester: string;
+  code: string;
+  name: string;
+  category: string;
+  credits: number;
+  grade: string;
+}
 
-export const foundationsData: FoundationsData = [
-  {
-    id: 'mathematics',
-    title: 'Mathematics',
-    items: [
-      { label: 'Real Analysis', status: 'In Progress' },
-      { label: 'Topology I', status: 'In Progress' },
-      { label: 'Algebra I' },
-      { label: 'Numerical Analysis' },
-      { label: 'Linear Algebra' },
-      { label: 'Differential Equations' },
-    ],
-  },
-  {
-    id: 'cs-ai',
-    title: 'Computer Science & AI',
-    items: [
-      { label: 'Data Science', status: 'Code' },
-      { label: 'Artificial Intelligence', status: 'In Progress' },
-      { label: 'Neural Network from Scratch', status: 'Code' },
-      { label: 'MATLAB / Python Notes', status: 'Code' },
-    ],
-  },
-  {
-    id: 'paper-reading',
-    title: 'Paper Reading',
-    items: [
-      { label: 'Anisotropic Diffusion in ITK', status: 'Paper Reading' },
-      { label: 'MIR papers', status: 'Paper Reading' },
-      { label: 'TDA papers', status: 'Paper Reading' },
-      { label: 'Music and Audio Computing papers', status: 'Paper Reading' },
-    ],
-  },
-  {
-    id: 'latex-notes',
-    title: 'LaTeX Notes',
-    items: [
-      { label: 'Overleaf notes', status: 'LaTeX Note' },
-      { label: 'Research summaries', status: 'LaTeX Note' },
-      { label: 'Mathematical derivations', status: 'LaTeX Note' },
-      { label: 'Presentation notes', status: 'Presentation' },
-    ],
-  },
-];
+export interface FoundationsCoursesData {
+  major: CourseEntry[];
+  elective: CourseEntry[];
+}
+
+export const foundationsData: FoundationsCoursesData = {
+  major: [
+    { semester: '2023-1', code: 'DCSC16101', name: '미적분학및연습Ⅰ', category: '교양', credits: 3, grade: 'A+' },
+    { semester: '2023-1', code: 'DCSC16500', name: '전산수학(영강)', category: '학문의기초', credits: 3, grade: 'A+' },
+    { semester: '2023-2', code: 'DCCS10503', name: '전산프로그래밍언어및실습', category: '교양', credits: 3, grade: 'A+' },
+    { semester: '2023-2', code: 'DCSC16201', name: '미적분학및연습Ⅱ', category: '교양', credits: 3, grade: 'A' },
+    { semester: '2023-2', code: 'DCSC16600', name: '응용수리과학의이해', category: '학문의기초', credits: 3, grade: 'A' },
+    { semester: '2025-1', code: 'DCSC20500', name: '미분방정식및연습', category: '전공선택', credits: 3, grade: 'A+' },
+    { semester: '2025-1', code: 'DCSC21700', name: '해석학및연습Ⅰ', category: '전공선택', credits: 3, grade: 'A' },
+    { semester: '2025-1', code: 'DCSC21900', name: '선형대수학및연습Ⅰ', category: '전공선택', credits: 3, grade: 'A' },
+    { semester: '2025-1', code: 'DCSC22300', name: '인공지능기초(영강)', category: '전공선택', credits: 3, grade: 'A+' },
+    { semester: '2025-여름', code: '', name: '확률과 통계', category: '일반선택', credits: 3, grade: 'S' },
+    { semester: '2025-2', code: 'DCSC30700', name: '수리통계학및연습Ⅰ(영강)', category: '전공선택', credits: 3, grade: 'A+' },
+    { semester: '2025-2', code: 'DCSC32300', name: '딥러닝개론및연습(영강)', category: '전공선택', credits: 3, grade: 'A+' },
+    { semester: '2025-2', code: 'DCSC21800', name: '해석학및연습Ⅱ(영강)', category: '전공필수', credits: 3, grade: 'A+' },
+    { semester: '2025-2', code: 'DCSC22000', name: '선형대수학및연습Ⅱ', category: '전공필수', credits: 3, grade: 'A+' },
+    { semester: '2025-2', code: 'DCSC22200', name: '편미분방정식및연습', category: '전공필수', credits: 3, grade: 'A+' },
+  ],
+  elective: [
+    { semester: '2023-2', code: 'GSLA01200', name: '한국전통예술의이해와감상', category: '교양', credits: 3, grade: 'A+' },
+    { semester: '2025-1', code: 'SPGS30401', name: '음악의표현과감상', category: '교양', credits: 2, grade: 'A+' },
+    { semester: '2025-1', code: 'SPGS33700', name: '클래식인문학과교향곡', category: '교양', credits: 3, grade: 'A+' },
+    { semester: '2025-2', code: 'SPGS28400', name: '정보적사고', category: '교양', credits: 1, grade: 'P' },
+    { semester: '2025-2', code: 'SPGS32600', name: '음악이론과악기의응용', category: '교양', credits: 2, grade: 'A+' },
+  ],
+};
