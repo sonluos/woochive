@@ -38,29 +38,28 @@
 .works__mosaic {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(10rem, auto);
+  grid-template-rows: repeat(7, 9rem);
   gap: var(--sp-4);
   max-width: 52rem;
   margin: 0 auto;
-  aspect-ratio: 1;
 }
 
-/* Tangram piece positions — 15 pieces in 4-col grid */
-.works__piece--0  { grid-column: span 2; }  /* Billie */
-.works__piece--1  { grid-column: span 2; }  /* CARNIVAL */
-.works__piece--2  { grid-column: span 2; grid-row: span 2; }  /* Chillin It */
-.works__piece--3  { grid-column: span 1; }  /* Sprechstimme */
-.works__piece--4  { grid-column: span 1; }  /* TrumBap */
-.works__piece--5  { grid-column: span 1; }  /* Best Parts */
-.works__piece--6  { grid-column: span 1; }  /* Public Enemy */
-.works__piece--7  { grid-column: span 2; }  /* Who Knows */
-.works__piece--8  { grid-column: span 1; }  /* 너의 의미 */
-.works__piece--9  { grid-column: span 3; }  /* CHROMAKOPIA */
-.works__piece--10 { grid-column: span 2; }  /* Music of Spheres */
-.works__piece--11 { grid-column: span 1; }  /* 젊은 국악 */
-.works__piece--12 { grid-column: span 1; }  /* 크림슨 */
-.works__piece--13 { grid-column: span 2; }  /* Diffusion */
-.works__piece--14 { grid-column: span 1; }  /* 무경계 */
+/* Tangram piece positions — 15 pieces in 4x7 grid */
+.works__piece--0  { grid-column: span 2; grid-row: span 2; }  /* Billie — big */
+.works__piece--1  { grid-column: span 2; grid-row: span 2; }  /* CARNIVAL — big */
+.works__piece--2  { grid-column: span 2; grid-row: span 2; }  /* Chillin It — big */
+.works__piece--3  { grid-column: span 1; grid-row: span 1; }  /* Sprechstimme — min */
+.works__piece--4  { grid-column: span 1; grid-row: span 1; }  /* TrumBap — min */
+.works__piece--5  { grid-column: span 1; grid-row: span 1; }  /* Best Parts — min */
+.works__piece--6  { grid-column: span 1; grid-row: span 1; }  /* Public Enemy — min */
+.works__piece--7  { grid-column: span 2; grid-row: span 1; }  /* Who Knows — wide */
+.works__piece--8  { grid-column: span 1; grid-row: span 1; }  /* 너의 의미 — min */
+.works__piece--9  { grid-column: span 3; grid-row: span 1; }  /* CHROMAKOPIA — wide */
+.works__piece--10 { grid-column: span 2; grid-row: span 2; }  /* Music of Spheres — big */
+.works__piece--11 { grid-column: span 1; grid-row: span 1; }  /* 젊은 국악 — min */
+.works__piece--12 { grid-column: span 1; grid-row: span 1; }  /* 크림슨 — min */
+.works__piece--13 { grid-column: span 2; grid-row: span 1; }  /* Diffusion — wide */
+.works__piece--14 { grid-column: span 1; grid-row: span 1; }  /* 무경계 — min */
 
 /* Piece card */
 .works__piece {
