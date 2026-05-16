@@ -33,7 +33,14 @@ function ResearchProjectCard({ project }: ResearchProjectCardProps) {
         </div>
       </div>
 
-      <p className="research-card__description">{project.description}</p>
+      <p className="research-card__description">
+        {project.description.split('\n').map((line, i) => (
+          <span key={i}>
+            {line}
+            {i < project.description.split('\n').length - 1 && <br />}
+          </span>
+        ))}
+      </p>
 
       <div className="research-card__footer">
         {project.tags.length > 0 && <TagList tags={project.tags} />}

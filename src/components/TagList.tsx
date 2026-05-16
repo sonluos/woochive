@@ -4,9 +4,7 @@ const MUSIC_TAGS = new Set([
   'MIR',
   'Music Recommendation',
   'Music Structure',
-  'DSP',
   'Audio Analysis',
-  'S-Curt',
 ]);
 
 interface TagListProps {
