@@ -5,9 +5,9 @@ import type { TextHighlight } from '../types/archive';
 import './Home.css';
 
 const subtitleHighlights: TextHighlight[] = [
-  { phrase: 'music data research', color: 'gradient' },
-  { phrase: 'mathematical foundations', color: 'gray' },
-  { phrase: 'creative works', color: 'purple' },
+  { phrase: 'Music Data Research', color: 'gradient' },
+  { phrase: 'Mathematical Foundations', color: 'gray' },
+  { phrase: 'Creative Works', color: 'purple' },
 ];
 
 export default function Home() {

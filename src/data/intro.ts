@@ -3,7 +3,7 @@ import type { IntroData } from '../types/archive';
 export const introData: IntroData = {
   title: 'Woochive',
   subtitle:
-    'A personal archive for music data research, mathematical foundations, and creative works.',
+    'A personal archive for Music Data Research, Mathematical Foundations, and Creative Works.',
   bio: [
     {
       text: 'I study Applied Mathematics.',
