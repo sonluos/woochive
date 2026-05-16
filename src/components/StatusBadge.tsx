@@ -6,8 +6,12 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status }: StatusBadgeProps) {
+  const className = status === 'In Progress'
+    ? 'status-badge status-badge--in-progress'
+    : 'status-badge';
+
   return (
-    <span className="status-badge">
+    <span className={className}>
       {status}
     </span>
   );
