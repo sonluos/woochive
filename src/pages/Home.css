@@ -1,8 +1,5 @@
 .intro {
-  padding-bottom: var(--sp-4);
-  min-height: calc(100vh - var(--nav-h));
-  display: flex;
-  flex-direction: column;
+  padding-bottom: var(--sp-24);
 }
 
 .intro__hero {
@@ -73,7 +70,7 @@
 
 /* Info section */
 .intro__info {
-  margin-top: auto;
+  margin-top: var(--sp-8);
   max-width: 38.75rem;
   margin-left: auto;
   margin-right: auto;
@@ -82,23 +79,23 @@
 
 /* InfoCard */
 .info-card {
-  background: var(--paper-2);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: var(--sp-5);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   max-width: 38.75rem;
   margin: 0 auto;
 }
 
 .info-card__affiliation {
   font-size: var(--text-base);
-  color: var(--ink-soft);
+  color: var(--ink);
   margin-bottom: var(--sp-2);
 }
 
 .info-card__email {
   font-size: var(--text-sm);
-  color: var(--ink-muted);
+  color: var(--ink);
   margin-bottom: var(--sp-3);
 }
 

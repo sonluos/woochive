@@ -19,11 +19,11 @@ export const introData: IntroData = {
       ],
     },
     {
-      text: 'I listen to live music, create music, and archive the sounds of my world.',
+      text: 'I enjoy listening to Live Music, playing Instruments, and creating My Own Music.',
       highlights: [
-        { phrase: 'live music', color: 'purple' },
-        { phrase: 'music', color: 'purple' },
-        { phrase: 'sounds', color: 'purple' },
+        { phrase: 'Live Music', color: 'purple' },
+        { phrase: 'Instruments', color: 'purple' },
+        { phrase: 'My Own Music', color: 'purple' },
       ],
     },
   ],
