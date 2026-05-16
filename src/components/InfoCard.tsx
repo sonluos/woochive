@@ -6,7 +6,7 @@ export default function InfoCard({ affiliation, email, links }: InfoCardProps) {
   return (
     <div className="info-card">
       <p className="info-card__affiliation">{affiliation}</p>
-      <p className="info-card__email">{email}</p>
+      {email && <p className="info-card__email">{email}</p>}
       <div className="info-card__links">
         {links.map((link) => (
           <a
