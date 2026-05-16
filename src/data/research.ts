@@ -11,37 +11,77 @@ export const researchData: ResearchData = {
   ],
   projects: [
     {
-      id: 'mir-with-tda',
-      title: 'MIR with TDA',
+      id: 'scurt-mir-with-tda',
+      title: 'S-Curt: MIR with TDA',
       description:
-        'Exploring how Topological Data Analysis can be applied to music data and how it compares with traditional DSP-based music feature analysis.',
-      tags: ['TDA', 'Music Structure', 'Topology', 'MIR'],
-      year: 2026,
+        '음악 데이터를 DSP와 TDA 관점에서 비교 분석하는 프로젝트. 음악의 시간적·구조적 특징을 위상수학적으로 해석하는 방향을 탐색했다.',
+      tags: ['MIR', 'TDA', 'Music Structure'],
+      year: '3-1',
       status: 'In Progress',
     },
     {
-      id: 'bone-suppression-anisotropic-diffusion',
-      title: 'Bone Suppression & Anisotropic Diffusion',
+      id: 'kwms-bone-suppression',
+      title: 'KWMS 2026: Bone Suppression',
       description:
-        'Anisotropic diffusion, EED/CED, and non-deep-learning image processing approaches for structure-preserving medical image preprocessing.',
-      tags: ['Image Processing', 'Diffusion', 'EED', 'CED', 'CXR'],
-      year: 2025,
+        '흉부 X-ray 영상에서 뼈 구조를 억제하는 의료영상처리 프로젝트. 이미지 생성 모델이 아닌 anisotropic diffusion 기반 영상처리 개념을 활용했다.',
+      tags: ['Medical Imaging', 'Bone Suppression', 'Anisotropic Diffusion'],
+      year: '3-1',
     },
     {
-      id: 'mir-recommendation-system',
-      title: 'MIR Recommendation System',
+      id: 'real-analysis-diffusion',
+      title: '실해석학: Diffusion',
       description:
-        'Analyzing hip-hop album data using Apple Music / Spotify metadata and audio features to design a similarity-based recommendation system.',
-      tags: ['MIR', 'Recommendation System', 'Clustering', 'MATLAB'],
-      year: 2025,
+        '이미지 생성 모델인 Diffusion을 학생들에게 쉽게 설명하기 위한 교육형 프로젝트. 노이즈 추가와 복원 과정을 직관적으로 이해시키는 데 초점을 두었다.',
+      tags: ['Diffusion Models', 'AI Education', 'Mathematical Visualization'],
+      year: '3-1',
     },
     {
-      id: 'diffusion-education-program',
-      title: 'Diffusion Education Program',
+      id: 'ipiu-diffusion-models',
+      title: 'IPIU 2026: Diffusion Models',
       description:
-        'Explaining AI and diffusion models through functional thinking, visualization, and simple mathematical intuition.',
-      tags: ['AI Education', 'Diffusion', 'Visualization'],
-      year: 2024,
+        '이미지 생성 모델로서의 Diffusion Model을 다룬 프로젝트. Forward process와 denoising process를 중심으로 생성 과정을 이해했다.',
+      tags: ['Diffusion Models', 'Image Generation', 'Deep Learning'],
+      year: '2-W',
+    },
+    {
+      id: 'scurt-mir-with-dsp',
+      title: 'S-Curt: MIR with DSP',
+      description:
+        '기존 MIR 연구에 오디오 신호 분석을 결합한 프로젝트. Preview audio에서 리듬, 템포, 에너지 등 음악적 특징을 추출했다.',
+      tags: ['MIR', 'DSP', 'Audio Analysis'],
+      year: '2-2',
+    },
+    {
+      id: 'identifying-human-emotion',
+      title: 'Identifying A Human Emotion',
+      description:
+        '딥러닝 모델을 활용해 인간의 감정 상태를 분류한 프로젝트. 입력 데이터로부터 감정 특징을 학습하고 분류 성능을 확인했다.',
+      tags: ['Deep Learning', 'Emotion Recognition', 'Classification'],
+      year: '2-2',
+    },
+    {
+      id: 'scurt-mir',
+      title: 'S-Curt: MIR',
+      description:
+        '힙합 음악 데이터를 중심으로 MIR 연구의 기본 구조를 잡은 프로젝트. 메타데이터 기반 분석과 음악 추천 시스템으로의 확장 가능성을 탐색했다.',
+      tags: ['MIR', 'Music Recommendation', 'Metadata'],
+      year: '2-1',
+    },
+    {
+      id: 'sejong-inbody-data',
+      title: '세종시 인바디 데이터 분석',
+      description:
+        '세종시 인바디 데이터를 활용해 신체 지표의 패턴을 분석한 프로젝트. 인공지능 기초 수준에서 예측 및 분류 가능성을 탐색했다.',
+      tags: ['Artificial Intelligence', 'Data Analysis', 'Health Data'],
+      year: '2-1',
+    },
+    {
+      id: 'wildfire-helicopter-path',
+      title: '산불 진화 헬기 경로 최적화',
+      description:
+        '산불 진화 상황에서 헬기의 이동 경로를 수학적으로 모델링한 프로젝트. 최단 경로와 법선 방향 접근을 시도했지만, 최종 문제는 완전히 해결하지 못했다.',
+      tags: ['Computational Mathematics', 'Optimization', 'Path Planning'],
+      year: '1-1',
     },
   ],
 };

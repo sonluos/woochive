@@ -58,7 +58,7 @@ export interface ResearchProject {
   title: string;
   description: string;
   tags: string[];
-  year: number;
+  year: string;
   status?: StatusBadgeValue;
   pdfUrl?: string;
   links?: {
