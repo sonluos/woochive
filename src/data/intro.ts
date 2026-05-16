@@ -28,8 +28,8 @@ export const introData: IntroData = {
     },
   ],
   infoCard: {
-    affiliation: '손우진 | sonluos@gmail.com',
-    email: '',
+    affiliation: 'Undergraduate Researcher at Korea University, Sejong',
+    email: '손우진 | sonluos1013@gmail.com',
     links: [
       { label: 'GitHub', href: 'https://github.com/sonluos' },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/woojin-son-541705267' },
