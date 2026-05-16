@@ -69,10 +69,9 @@ function PublicationCard({ entry }: PublicationCardProps) {
   return (
     <article className="research-card">
       <div className="research-card__header">
-        <div className="research-card__meta">
-          <span className="research-card__venue">{entry.venue}</span>
-          <span className="research-card__type">{entry.type}</span>
-        </div>
+        <span className="research-card__venue-type">
+          {entry.venue} | {entry.type.toUpperCase()}
+        </span>
         <StatusBadge status={entry.status} />
       </div>
 
@@ -108,16 +107,19 @@ function PublicationCard({ entry }: PublicationCardProps) {
         </div>
 
         {/* PDF */}
-        <div className="research-card__field">
-          <span className="research-card__field-label">PDF</span>
-          {entry.posterPdf !== undefined ? (
-            <a href={entry.posterPdf} target="_blank" rel="noopener noreferrer">
-              View PDF ↗
+        {entry.posterPdf !== undefined && (
+          <div className="research-card__footer">
+            <span />
+            <a
+              className="research-card__pdf-link"
+              href={entry.posterPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              PDF ↗
             </a>
-          ) : (
-            <Placeholder label="PDF" kind="pdf" />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </article>
   );

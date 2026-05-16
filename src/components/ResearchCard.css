@@ -53,6 +53,13 @@
   color: var(--ink-muted);
 }
 
+.research-card__venue-type {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: #5B6770;
+}
+
 /* ── Description (projects) ── */
 .research-card__description {
   font-family: var(--font-sans);
