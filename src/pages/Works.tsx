@@ -1,5 +1,4 @@
 import { worksData } from '../data/works';
-import { WorkCard } from '../components/WorkCard';
 import './Works.css';
 
 export default function Works() {
@@ -13,9 +12,20 @@ export default function Works() {
       </section>
 
       <section className="works__body container">
-        <div className="works__grid">
-          {worksData.map((card) => (
-            <WorkCard key={card.id} card={card} />
+        <div className="works__mosaic">
+          {worksData.map((work) => (
+            <article
+              key={work.id}
+              className={`works__piece works__piece--${work.size || 'md'}`}
+            >
+              <h3 className="works__piece-title">{work.title}</h3>
+              <p className="works__piece-desc">{work.description}</p>
+              <div className="works__piece-tags">
+                {work.tags.map((tag) => (
+                  <span key={tag} className="works__piece-tag">{tag}</span>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
       </section>
