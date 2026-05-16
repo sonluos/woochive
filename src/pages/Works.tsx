@@ -8,7 +8,7 @@ export default function Works() {
       <section className="works__header container">
         <h1 className="works__title">Works</h1>
         <p className="works__desc">
-          Creative works, music, writings, concert records, and MuFasho Mag.
+          Music, writing, concerts, and creative projects outside of research.
         </p>
       </section>
 
