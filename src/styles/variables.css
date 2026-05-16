@@ -1,20 +1,22 @@
 :root {
   /* ── Palette ── */
   --ink:        #1a1a1a;
-  --ink-soft:   #4a4a4a;
-  --ink-muted:  #8a8a8a;
+  --ink-soft:   #5a6570;
+  --ink-muted:  #717E87;
   --ink-faint:  #c4c4c4;
 
   --paper:      #fafaf8;
   --paper-2:    #f3f2ef;
   --paper-3:    #eceae5;
 
-  --accent:     #7c6fcd;   /* muted violet — math + music */
-  --accent-dim: #a99de0;
-  --accent-bg:  rgba(124, 111, 205, 0.07);
+  --accent:     #D57FF4;   /* vibrant purple — creative energy */
+  --accent-dim: #e0a4f7;
+  --accent-bg:  rgba(213, 127, 244, 0.08);
+  --accent-2:   #717E87;  /* steel blue-gray — academic calm */
+  --accent-2-bg: rgba(113, 126, 135, 0.08);
 
-  --border:     #e2e0da;
-  --border-soft:#eeede9;
+  --border:     #dfe3e6;
+  --border-soft:#ebeef0;
 
   /* ── Typography ── */
   --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -74,7 +76,7 @@
 
   /* legacy compat */
   --color-purple: var(--accent);
-  --color-purple-dark: #6558b8;
+  --color-purple-dark: #b85ee0;
   --bg-primary: var(--paper);
   --bg-secondary: var(--paper-2);
   --bg-tertiary: var(--paper-3);
@@ -101,7 +103,7 @@
   --shadow-card-hover: var(--shadow-lg);
   --transition-base: var(--ease);
   --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
-  --gradient-purple: linear-gradient(135deg, var(--accent) 0%, #6558b8 100%);
+  --gradient-purple: linear-gradient(135deg, var(--accent) 0%, #b85ee0 100%);
   --header-height: var(--nav-h);
 }
 
@@ -116,9 +118,11 @@
     --paper-2:    #1e1d1a;
     --paper-3:    #272520;
 
-    --accent:     #9d92e0;
-    --accent-dim: #7c6fcd;
-    --accent-bg:  rgba(157, 146, 224, 0.08);
+    --accent:     #e0a4f7;
+    --accent-dim: #D57FF4;
+    --accent-bg:  rgba(224, 164, 247, 0.10);
+    --accent-2:   #9aa5ad;
+    --accent-2-bg: rgba(154, 165, 173, 0.10);
 
     --border:     #2e2c28;
     --border-soft:#252320;

@@ -36,7 +36,7 @@ function contrastRatio(fg: string, bg: string): number {
 // Light mode color tokens from src/styles/variables.css
 const lightTokens = {
   '--ink': '#1a1a1a',
-  '--ink-soft': '#4a4a4a',
+  '--ink-soft': '#5a6570',
   '--paper': '#fafaf8',
   '--paper-2': '#f3f2ef',
   '--paper-3': '#eceae5',

@@ -45,7 +45,7 @@
 
 /* Foundation card */
 .foundation-card {
-  padding: var(--sp-6) 0;
+  padding: var(--sp-8) var(--sp-6);
   border-bottom: 1px solid var(--border-soft);
 }
 .foundation-card:last-child { border-bottom: none; }
@@ -85,7 +85,7 @@
 .foundation-card__status--studying {
   color: var(--accent);
   background: var(--accent-bg);
-  border: 1px solid rgba(124, 111, 205, 0.2);
+  border: 1px solid rgba(213, 127, 244, 0.2);
 }
 
 .foundation-card__status--planned {
