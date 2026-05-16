@@ -35,7 +35,19 @@ function ResearchProjectCard({ project }: ResearchProjectCardProps) {
 
       <p className="research-card__description">{project.description}</p>
 
-      {project.tags.length > 0 && <TagList tags={project.tags} />}
+      <div className="research-card__footer">
+        {project.tags.length > 0 && <TagList tags={project.tags} />}
+        {project.pdfUrl && (
+          <a
+            className="research-card__pdf-link"
+            href={project.pdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            PDF ↗
+          </a>
+        )}
+      </div>
     </article>
   );
 }

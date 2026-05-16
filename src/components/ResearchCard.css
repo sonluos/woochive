@@ -78,3 +78,29 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
+/* ── Card footer (tags + PDF link) ── */
+.research-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: auto;
+}
+
+.research-card__pdf-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-muted);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color var(--ease), border-color var(--ease);
+}
+
+.research-card__pdf-link:hover {
+  color: #EA426A;
+  border-color: #EA426A;
+}

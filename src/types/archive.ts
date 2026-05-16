@@ -60,6 +60,7 @@ export interface ResearchProject {
   tags: string[];
   year: number;
   status?: StatusBadgeValue;
+  pdfUrl?: string;
   links?: {
     github?: string;
     paper?: string;
