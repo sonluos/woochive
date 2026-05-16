@@ -46,7 +46,7 @@
   font-weight: var(--weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-hot);
 }
 
 .work-card__year {
@@ -69,7 +69,7 @@
   text-decoration: none;
   transition: color var(--ease);
 }
-.work-card__title a:hover { color: var(--accent); }
+.work-card__title a:hover { color: var(--accent-hot); }
 
 .work-card__desc {
   font-size: var(--text-base);

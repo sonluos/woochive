@@ -14,6 +14,12 @@
   --accent-bg:  rgba(213, 127, 244, 0.08);
   --accent-2:   #717E87;  /* steel blue-gray — academic calm */
   --accent-2-bg: rgba(113, 126, 135, 0.08);
+  --accent-hot: #FF4F79;  /* hot pink — hover & interaction points */
+  --accent-hot-dim: #ff7a9a;
+  --accent-hot-bg: rgba(255, 79, 121, 0.08);
+
+  /* Gradient for brand text */
+  --gradient-brand: linear-gradient(135deg, #717E87 0%, #D57FF4 100%);
 
   --border:     #dfe3e6;
   --border-soft:#ebeef0;
@@ -123,6 +129,11 @@
     --accent-bg:  rgba(224, 164, 247, 0.10);
     --accent-2:   #9aa5ad;
     --accent-2-bg: rgba(154, 165, 173, 0.10);
+    --accent-hot: #FF6B8F;
+    --accent-hot-dim: #ff8faa;
+    --accent-hot-bg: rgba(255, 107, 143, 0.10);
+
+    --gradient-brand: linear-gradient(135deg, #9aa5ad 0%, #e0a4f7 100%);
 
     --border:     #2e2c28;
     --border-soft:#252320;

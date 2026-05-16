@@ -13,7 +13,10 @@
 .footer__name {
   font-family: var(--font-serif);
   font-size: var(--text-base);
-  color: var(--ink-muted);
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .footer__tagline {

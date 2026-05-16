@@ -13,7 +13,7 @@
   font-weight: var(--weight-medium);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-hot);
   margin-bottom: var(--sp-4);
 }
 
@@ -21,7 +21,10 @@
   font-family: var(--font-serif);
   font-size: clamp(2.8rem, 6vw, var(--text-4xl));
   font-weight: var(--weight-normal);
-  color: var(--ink);
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: var(--sp-5);
   letter-spacing: -0.01em;
 }
@@ -48,7 +51,7 @@
   letter-spacing: 0.02em;
   transition: color var(--ease);
 }
-.intro__nav-link:hover { color: var(--accent); }
+.intro__nav-link:hover { color: var(--accent-hot); }
 
 /* About */
 .intro__about {
@@ -110,7 +113,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-hot);
   flex-shrink: 0;
   opacity: 0.6;
 }
@@ -133,7 +136,7 @@
   text-decoration: none;
   transition: color var(--ease);
 }
-.intro__contact-link:hover { color: var(--accent-dim); }
+.intro__contact-link:hover { color: var(--accent-hot); }
 
 .intro__contact-note {
   font-size: var(--text-sm);
