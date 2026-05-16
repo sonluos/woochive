@@ -48,8 +48,8 @@ export default function Research() {
       <section className="research__header container">
         <h1 className="research__title" style={{ color: titleColor }}>Research</h1>
         <p className="research__desc">
-          Connecting mathematics, signal processing, and music through
-          research projects and academic presentations.
+          Mathematics, signal processing, and music — explored through
+          projects and presentations.
         </p>
       </section>
 
