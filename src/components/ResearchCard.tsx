@@ -118,16 +118,6 @@ function PublicationCard({ entry }: PublicationCardProps) {
             <Placeholder label="Poster PDF" kind="pdf" />
           )}
         </div>
-
-        {/* Related Project */}
-        <div className="research-card__field">
-          <span className="research-card__field-label">Project</span>
-          {entry.relatedProject !== undefined ? (
-            <span>{entry.relatedProject}</span>
-          ) : (
-            <Placeholder label="Related Project" kind="link" />
-          )}
-        </div>
       </div>
     </article>
   );

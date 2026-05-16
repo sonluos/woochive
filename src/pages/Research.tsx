@@ -5,6 +5,15 @@ import './Research.css';
 
 const MUSIC_FILTER_TAGS = new Set(['MIR', 'Music Recommendation', 'Music Structure', 'Audio Analysis']);
 
+// gray #5B6770, purple #C077DB — interpolate based on music tag ratio
+function interpolateColor(ratio: number): string {
+  // ratio = music tags / total tags (0 = all gray, 1 = all purple)
+  const r = Math.round(0x5B + (0xC0 - 0x5B) * ratio);
+  const g = Math.round(0x67 + (0x77 - 0x67) * ratio);
+  const b = Math.round(0x70 + (0xDB - 0x70) * ratio);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 export default function Research() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -15,6 +24,20 @@ export default function Research() {
     return Array.from(tagSet);
   }, []);
 
+  // Calculate music tag ratio for title color
+  const titleColor = useMemo(() => {
+    let musicCount = 0;
+    let totalCount = 0;
+    researchData.projects.forEach((p) => {
+      p.tags.forEach((t) => {
+        totalCount++;
+        if (MUSIC_FILTER_TAGS.has(t)) musicCount++;
+      });
+    });
+    const ratio = totalCount > 0 ? musicCount / totalCount : 0;
+    return interpolateColor(ratio);
+  }, []);
+
   // Filter projects by active tag
   const filteredProjects = activeTag
     ? researchData.projects.filter((p) => p.tags.includes(activeTag))
@@ -23,7 +46,7 @@ export default function Research() {
   return (
     <main className="research">
       <section className="research__header container">
-        <h1 className="research__title">Research</h1>
+        <h1 className="research__title" style={{ color: titleColor }}>Research</h1>
         <p className="research__desc">
           Connecting mathematics, signal processing, and music through
           research projects and academic presentations.
