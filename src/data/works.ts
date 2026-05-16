@@ -7,10 +7,11 @@ export interface WorkEntry {
   year: number;
   size?: 'sm' | 'md' | 'lg';
   pdfUrl?: string;
+  mediaUrl?: string;
 }
 
 export const worksData: WorkEntry[] = [
-  // Beat Making
+  // Production
   {
     id: 'billie-i-willish',
     title: 'Billie I Willish',
@@ -19,6 +20,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Pop', 'Production', 'Mix-up'],
     year: 2026,
     size: 'md',
+    mediaUrl: 'https://drive.google.com/file/d/18VEi0uo3UauhF_nlYSsWYIurwjpk9naa/view',
   },
   {
     id: 'carnival-lets-go',
@@ -28,6 +30,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Hip-hop', 'Production', 'Mix-up'],
     year: 2026,
     size: 'md',
+    mediaUrl: 'https://drive.google.com/file/d/1CmdKZ-tE1KinG4Zwhs9-ELDBy9g84FCw/view',
   },
   {
     id: 'chillin-it',
@@ -38,6 +41,7 @@ export const worksData: WorkEntry[] = [
     year: 2023,
     size: 'lg',
     pdfUrl: '/works/%EA%B3%A0%EC%A0%80%EC%8A%A4%EC%B1%8C%EB%A6%B0%EC%A7%80_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf',
+    mediaUrl: 'https://drive.google.com/file/d/17I1aOE0KY_vkRt40HmTnEtHrz7LUITcm/view',
   },
   {
     id: 'sprechstimme',
@@ -47,6 +51,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Classic', 'Production', 'Beat Making'],
     year: 2026,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1ZivUkDxidrRN-gS8DpGO8vHAm9ndMv61/view',
   },
   {
     id: 'trumbap',
@@ -56,8 +61,9 @@ export const worksData: WorkEntry[] = [
     tags: ['Boom-bap', 'Production', 'Beat Making'],
     year: 2024,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1nAl7BB6DEer8EO99AHbJqN-BZrQeYP15/view',
   },
-  // Guitar/Drum Cover
+  // Cover
   {
     id: 'guitar-best-parts',
     title: 'Best Parts',
@@ -66,6 +72,7 @@ export const worksData: WorkEntry[] = [
     tags: ['R&B', 'Cover', 'Guitar'],
     year: 2026,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1XGtrsR5bcC20rx1JAGbHN3gncy0KI_IO/view',
   },
   {
     id: 'guitar-public-enemy',
@@ -75,6 +82,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Rage', 'Cover', 'Electric Guitar'],
     year: 2026,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1538jLbO2flx9zSjd5KGHh9MD5QQS8DhX/view',
   },
   {
     id: 'guitar-who-knows',
@@ -84,6 +92,7 @@ export const worksData: WorkEntry[] = [
     tags: ['R&B', 'Cover', 'Guitar'],
     year: 2026,
     size: 'md',
+    mediaUrl: 'https://drive.google.com/file/d/1L3oJtxvA7dazDfr8VAgB35as44L-mvBy/view',
   },
   {
     id: 'drum-meaning',
@@ -93,6 +102,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Pop', 'Cover', 'Drum'],
     year: 2026,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1aGCK7iPQm8gAlaezC3EnAl0zLVAWPT2k/view',
   },
   // Report
   {
@@ -144,6 +154,7 @@ export const worksData: WorkEntry[] = [
     tags: ['Visualization', 'Diffusion', 'AI'],
     year: 2026,
     size: 'md',
+    mediaUrl: 'https://drive.google.com/file/d/1danuyhZbH5T8xDAi87-Teqx_bnkPeyxh/view',
   },
   {
     id: 'mugyeonggye',
@@ -153,5 +164,6 @@ export const worksData: WorkEntry[] = [
     tags: ['Contest', 'Concerts', 'Shortform'],
     year: 2025,
     size: 'sm',
+    mediaUrl: 'https://drive.google.com/file/d/1-Dv0HVa8tCd5tZfvJXGJVomSR5aHEQBt/view',
   },
 ];

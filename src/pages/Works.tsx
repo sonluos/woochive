@@ -28,6 +28,16 @@ export default function Works() {
                 {work.tags.map((tag) => (
                   <span key={tag} className="works__piece-tag">{tag}</span>
                 ))}
+                {work.mediaUrl && (
+                  <a
+                    className="works__piece-pdf"
+                    href={work.mediaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ▶ ↗
+                  </a>
+                )}
                 {work.pdfUrl && (
                   <a
                     className="works__piece-pdf"
