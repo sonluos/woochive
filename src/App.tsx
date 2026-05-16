@@ -4,11 +4,9 @@ import ErrorBoundary from './components/ErrorBoundary';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Music from './pages/Music';
-import Publications from './pages/Publications';
-import DetailPage from './pages/DetailPage';
+import Research from './pages/Research';
+import Foundations from './pages/Foundations';
+import Works from './pages/Works';
 import NotFound from './pages/NotFound';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
@@ -28,14 +26,10 @@ function App() {
             <main className="main-content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/projects/:id" element={<DetailPage type="project" />} />
-                <Route path="/music" element={<Music />} />
-                <Route path="/music/:id" element={<DetailPage type="music" />} />
-                <Route path="/publications" element={<Publications />} />
-                <Route path="/publications/:id" element={<DetailPage type="publication" />} />
-                
+                <Route path="/research" element={<Research />} />
+                <Route path="/foundations" element={<Foundations />} />
+                <Route path="/works" element={<Works />} />
+
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminDashboard />} />
@@ -43,7 +37,7 @@ function App() {
                 <Route path="/admin/edit/projects" element={<AdminEditProjects />} />
                 <Route path="/admin/edit/music" element={<AdminEditMusic />} />
                 <Route path="/admin/edit/publications" element={<AdminEditPublications />} />
-                
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

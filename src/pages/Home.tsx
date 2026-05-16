@@ -1,162 +1,82 @@
 import { Link } from 'react-router-dom';
-import { useProjects, useMusic, usePublications } from '../hooks/usePortfolioData';
-import { PortfolioItem, Publication } from '../types/portfolio';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorMessage from '../components/ErrorMessage';
-import HeroSection from '../components/HeroSection';
-import StatCard from '../components/StatCard';
-import GradientCard from '../components/GradientCard';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import './Home.css';
 
-function Home() {
-  const { data: projects, loading: projectsLoading, error: projectsError, reload: reloadProjects } = useProjects();
-  const { data: music, loading: musicLoading, error: musicError, reload: reloadMusic } = useMusic();
-  const { data: publications, loading: publicationsLoading, error: publicationsError, reload: reloadPublications } = usePublications();
+const INTERESTS = [
+  'Music Information Retrieval',
+  'Topological Data Analysis',
+  'Recommendation Systems',
+  'Music & Audio Computing',
+  'Mathematical Foundations of ML',
+];
 
-  // Intersection observers for scroll animations (must be before any conditional returns)
-  const [statsRef, statsVisible] = useIntersectionObserver({ threshold: 0.2 });
-  const [featuredRef, featuredVisible] = useIntersectionObserver({ threshold: 0.1 });
-
-  const loading = projectsLoading || musicLoading || publicationsLoading;
-  const error = projectsError || musicError || publicationsError;
-  
-  const handleRetry = () => {
-    reloadProjects();
-    reloadMusic();
-    reloadPublications();
-  };
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return <ErrorMessage message={error.message} onRetry={handleRetry} />;
-  }
-
-  // Get latest items (sorted by date, max 6 total)
-  const getLatestItems = () => {
-    const allItems: (PortfolioItem | Publication)[] = [
-      ...(projects || []),
-      ...(music || []),
-      ...(publications || [])
-    ];
-    
-    return allItems
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6);
-  };
-
-  const getItemLink = (item: PortfolioItem | Publication) => {
-    if (projects?.some(p => p.id === item.id)) return `/projects/${item.id}`;
-    if (music?.some(m => m.id === item.id)) return `/music/${item.id}`;
-    return `/publications/${item.id}`;
-  };
-
-  const latestItems = getLatestItems();
-  const featuredItems = latestItems.slice(0, 3);
-
+export default function Home() {
   return (
-    <div className="home">
-      <HeroSection
-        title="Woo Jin Son"
-        subtitle="MIR researcher / Interdisciplinary Creator"
-        gradient={true}
-        height="full"
-      >
-        <div className="hero-links">
-          <Link to="/about" className="hero-link">About</Link>
-          <Link to="/projects" className="hero-link">Projects</Link>
-          <Link to="/music" className="hero-link">Music</Link>
-          <Link to="/publications" className="hero-link">Publications</Link>
-        </div>
-      </HeroSection>
+    <main className="intro">
+      <section className="intro__hero container">
+        <div className="intro__eyebrow fade-up">Personal Archive</div>
+        <h1 className="intro__title fade-up" style={{ animationDelay: '60ms' }}>
+          Woochive
+        </h1>
+        <p className="intro__tagline fade-up" style={{ animationDelay: '120ms' }}>
+          Undergraduate mathematics student working at the intersection of
+          mathematical structure, data analysis, and music.
+        </p>
 
-      <section className="stats-section" ref={statsRef}>
-        <div className="container">
-          <div className="stats-grid">
-            <StatCard
-              title="Research Projects"
-              value={projects?.length || 0}
-              subtitle="AI & Music Technology"
-              icon="💻"
-              gradient="purple"
-            />
-            <StatCard
-              title="Music Works"
-              value={music?.length || 0}
-              subtitle="Compositions & Performances"
-              icon="🎵"
-              gradient="blue"
-            />
-            <StatCard
-              title="Publications"
-              value={publications?.length || 0}
-              subtitle="Academic Papers"
-              icon="📚"
-              gradient="orange"
-            />
-          </div>
+        <div className="intro__nav-links fade-up" style={{ animationDelay: '180ms' }}>
+          <Link to="/research" className="intro__nav-link">Research →</Link>
+          <Link to="/foundations" className="intro__nav-link">Foundations →</Link>
+          <Link to="/works" className="intro__nav-link">Works →</Link>
         </div>
       </section>
 
-      <section className="featured-section" ref={featuredRef}>
-        <div className="container">
-          <h2 className="section-title">Featured Work</h2>
-          {featuredItems && featuredItems.length > 0 ? (
-            <>
-              <div className="featured-grid">
-                {featuredItems.map((item, index) => {
-                  const gradients: Array<'purple' | 'blue' | 'orange'> = ['purple', 'blue', 'orange'];
-                  return (
-                    <div 
-                      key={item.id}
-                      className="featured-item"
-                    >
-                      <GradientCard
-                        gradient={gradients[index % 3]}
-                        hover={true}
-                        onClick={() => window.location.href = getItemLink(item)}
-                      >
-                        <div className="featured-card">
-                          {item.thumbnail && (
-                            <img 
-                              src={item.thumbnail} 
-                              alt={item.title}
-                              loading="lazy"
-                              className="featured-thumbnail"
-                            />
-                          )}
-                          <div className="featured-content">
-                            <h3>{item.title}</h3>
-                            <p>
-                              {'description' in item ? item.description : item.abstract}
-                            </p>
-                            {item.tags && (
-                              <div className="tags">
-                                {item.tags.slice(0, 3).map((tag) => (
-                                  <span key={tag} className="tag">{tag}</span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </GradientCard>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="view-all-container">
-                <Link to="/projects" className="view-all-button">View All Projects →</Link>
-              </div>
-            </>
-          ) : (
-            <p className="no-items">No featured items available</p>
-          )}
+      <section className="intro__about container fade-up" style={{ animationDelay: '240ms' }}>
+        <div className="intro__about-text">
+          <p>
+            This is a personal archive documenting research projects, mathematical
+            foundations, and creative works. The name <em>Woochive</em> combines
+            a personal identifier with "archive" — a place to collect, connect,
+            and share ideas across disciplines.
+          </p>
+          <p>
+            My work centers on applying rigorous mathematical tools — topology,
+            linear algebra, probability — to problems in music and audio. I'm
+            particularly drawn to how structure in data can reveal structure in
+            sound, and vice versa.
+          </p>
         </div>
       </section>
-    </div>
+
+      <section className="intro__interests container fade-up" style={{ animationDelay: '300ms' }}>
+        <h2 className="intro__section-label">Research Interests</h2>
+        <ul className="intro__interest-list">
+          {INTERESTS.map(interest => (
+            <li key={interest} className="intro__interest-item">
+              <span className="intro__interest-dot" aria-hidden="true" />
+              {interest}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="intro__contact container fade-up" style={{ animationDelay: '360ms' }}>
+        <h2 className="intro__section-label">Contact</h2>
+        <div className="intro__contact-row">
+          <a href="mailto:contact@woochive.me" className="intro__contact-link">
+            contact@woochive.me
+          </a>
+          <a
+            href="https://github.com/woochive"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="intro__contact-link"
+          >
+            GitHub
+          </a>
+        </div>
+        <p className="intro__contact-note">
+          Open to research collaborations, lab inquiries, and academic discussions.
+        </p>
+      </section>
+    </main>
   );
 }
-
-export default Home;

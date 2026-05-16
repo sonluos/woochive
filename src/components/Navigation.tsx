@@ -1,76 +1,72 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation() {
+const NAV_ITEMS = [
+  { label: 'Intro',       path: '/' },
+  { label: 'Research',    path: '/research' },
+  { label: 'Foundations', path: '/foundations' },
+  { label: 'Works',       path: '/works' },
+];
+
+export default function Navigation() {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/music', label: 'Music' },
-    { path: '/publications', label: 'Publications' },
-  ];
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
-  const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/';
-    }
-    return location.pathname.startsWith(path);
-  };
+  const isActive = (path: string) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
-    <nav className={`navigation ${scrolled ? 'scrolled' : ''}`}>
-      <div className="nav-container">
-        <Link to="/" className="nav-logo">
-          Woochive
-        </Link>
-        
-        <button
-          className={`mobile-menu-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
+    <header className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
+      <div className="nav__inner">
+        <Link to="/" className="nav__logo">Woochive</Link>
 
-        <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-          {navItems.map((item) => (
-            <li key={item.path}>
-              <Link
-                to={item.path}
-                className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
+        <nav className="nav__links" aria-label="Main navigation">
+          {NAV_ITEMS.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`nav__link${isActive(item.path) ? ' nav__link--active' : ''}`}
+            >
+              {item.label}
+            </Link>
           ))}
-        </ul>
+        </nav>
+
+        <button
+          className={`nav__burger${menuOpen ? ' nav__burger--open' : ''}`}
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          <span /><span /><span />
+        </button>
       </div>
-      
-      {isMobileMenuOpen && (
-        <div 
-          className="mobile-overlay" 
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
+
+      {menuOpen && (
+        <nav className="nav__mobile" aria-label="Mobile navigation">
+          {NAV_ITEMS.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`nav__mobile-link${isActive(item.path) ? ' nav__mobile-link--active' : ''}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
       )}
-    </nav>
+    </header>
   );
 }
-
-export default Navigation;
