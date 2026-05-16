@@ -53,7 +53,7 @@
 
 /* Bio block */
 .intro__bio {
-  margin-top: var(--sp-8);
+  margin-top: calc(var(--sp-8) + 50px);
   max-width: 52rem;
   margin-left: auto;
   margin-right: auto;
@@ -68,6 +68,7 @@
   color: var(--ink);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--sp-2);
+  text-align: left;
 }
 
 .intro__bio-line:last-child {
@@ -125,8 +126,8 @@
 }
 
 .info-card__link:hover {
-  border-color: var(--ink);
-  opacity: 0.7;
+  border-color: #EA426A;
+  color: #EA426A;
 }
 
 /* Responsive: mobile adjustments */
