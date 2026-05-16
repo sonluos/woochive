@@ -53,7 +53,7 @@
 
 /* Bio block */
 .intro__bio {
-  margin-top: calc(var(--sp-8) + 50px);
+  margin-top: calc(var(--sp-8) + 10px);
   max-width: 52rem;
   margin-left: auto;
   margin-right: auto;
@@ -61,7 +61,7 @@
 
 .intro__bio-line {
   font-family: var(--font-sans);
-  font-size: var(--text-md);
+  font-size: 1.5rem;
   color: var(--ink);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--sp-2);
