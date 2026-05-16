@@ -7,12 +7,29 @@ export interface ContactLink {
   href?: string;
 }
 
+export type HighlightColor = 'gray' | 'purple' | 'gradient';
+
+export interface TextHighlight {
+  phrase: string;
+  color: HighlightColor;
+}
+
+export interface BioLine {
+  text: string;
+  highlights: TextHighlight[];
+}
+
+export interface InfoCardData {
+  affiliation: string;
+  email: string;
+  links: Array<{ label: string; href: string }>;
+}
+
 export interface IntroData {
   title: string;
   subtitle: string;
-  bio: string;
-  keywords: string[];
-  contact: ContactLink[];
+  bio: BioLine[];
+  infoCard: InfoCardData;
 }
 
 export type StatusBadgeValue =
