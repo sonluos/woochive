@@ -1,10 +1,13 @@
 .intro {
-  padding-bottom: var(--sp-24);
+  padding-bottom: var(--sp-4);
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
 }
 
 .intro__hero {
   padding-top: var(--sp-24);
-  padding-bottom: var(--sp-16);
+  padding-bottom: var(--sp-10);
   text-align: center;
 }
 
@@ -70,10 +73,11 @@
 
 /* Info section */
 .intro__info {
-  margin-top: var(--sp-8);
+  margin-top: auto;
   max-width: 38.75rem;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: var(--sp-4);
 }
 
 /* InfoCard */

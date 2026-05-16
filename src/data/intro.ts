@@ -19,7 +19,7 @@ export const introData: IntroData = {
       ],
     },
     {
-      text: 'I listen to live music, make music, and archive the sounds that shape my world.',
+      text: 'I listen to live music, create music, and archive the sounds of my world.',
       highlights: [
         { phrase: 'live music', color: 'purple' },
         { phrase: 'music', color: 'purple' },
