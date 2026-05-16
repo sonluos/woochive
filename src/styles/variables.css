@@ -68,9 +68,9 @@
   --ease: 240ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ── Layout ── */
-  --nav-h: 64px;
-  --max-w: 760px;
-  --max-w-wide: 1000px;
+  --nav-h: 4rem;
+  --max-w: 47.5rem;
+  --max-w-wide: 62.5rem;
 
   /* legacy compat */
   --color-purple: var(--accent);

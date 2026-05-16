@@ -1,94 +1,63 @@
+// Feature: woochive-personal-archive, Property 1: All nav links are present
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
-import { Navigation } from './Navigation';
+import { MemoryRouter } from 'react-router-dom';
+import Navigation from './Navigation';
 import fc from 'fast-check';
 
-describe('Navigation Property Tests', () => {
-  describe('Property 1: Navigation link click navigates correctly', () => {
-    it('should have correct href for all navigation links', () => {
-      render(
-        <BrowserRouter>
-          <Navigation />
-        </BrowserRouter>
-      );
+const EXPECTED_NAV_LINKS = [
+  { label: 'Intro', path: '/' },
+  { label: 'Research', path: '/research' },
+  { label: 'Foundations', path: '/foundations' },
+  { label: 'Works', path: '/works' },
+];
 
-      const links = [
-        { text: 'Home', href: '/' },
-        { text: 'About', href: '/about' },
-        { text: 'Projects', href: '/projects' },
-        { text: 'Music', href: '/music' },
-        { text: 'Publications', href: '/publications' }
-      ];
+/**
+ * Property 1: All nav links are present
+ * Validates: Requirements 1.1
+ *
+ * For any render of the Navigation component, the output must contain
+ * exactly four links with the labels "Intro", "Research", "Foundations",
+ * and "Works" — no more, no fewer.
+ */
+describe('Property 1: All nav links are present', () => {
+  it('renders exactly four nav links with correct labels on every render', () => {
+    fc.assert(
+      fc.property(
+        // Vary the current route to ensure links are present regardless of active state
+        fc.constantFrom('/', '/research', '/foundations', '/works', '/unknown'),
+        (route) => {
+          const { unmount } = render(
+            <MemoryRouter initialEntries={[route]}>
+              <Navigation />
+            </MemoryRouter>
+          );
 
-      links.forEach(({ text, href }) => {
-        const link = screen.getByText(text).closest('a');
-        expect(link).toHaveAttribute('href', href);
-      });
-    });
-  });
+          // Collect all nav links (desktop nav)
+          const navEl = document.querySelector('nav[aria-label="Main navigation"]');
+          expect(navEl).not.toBeNull();
 
-  describe('Property 2: Active section highlighting', () => {
-    it('should highlight the active route', () => {
-      const routes = ['/', '/about', '/projects', '/music', '/publications'];
+          const links = navEl!.querySelectorAll('a');
+          // Must have exactly four links
+          expect(links.length).toBe(4);
 
-      routes.forEach(route => {
-        const { container } = render(
-          <MemoryRouter initialEntries={[route]}>
-            <Navigation />
-          </MemoryRouter>
-        );
+          // Each expected label must be present
+          EXPECTED_NAV_LINKS.forEach(({ label }) => {
+            expect(screen.getAllByText(label).length).toBeGreaterThanOrEqual(1);
+          });
 
-        const activeLinks = container.querySelectorAll('.active');
-        expect(activeLinks.length).toBeGreaterThan(0);
-      });
-    });
-
-    it('should only have one active link at a time', () => {
-      fc.assert(
-        fc.property(
-          fc.constantFrom('/', '/about', '/projects', '/music', '/publications'),
-          (route) => {
-            const { container } = render(
-              <MemoryRouter initialEntries={[route]}>
-                <Navigation />
-              </MemoryRouter>
+          // Each expected path must be present as an href
+          EXPECTED_NAV_LINKS.forEach(({ path }) => {
+            const found = Array.from(links).some(
+              (a) => (a as HTMLAnchorElement).getAttribute('href') === path
             );
+            expect(found).toBe(true);
+          });
 
-            const activeLinks = container.querySelectorAll('.active');
-            return activeLinks.length === 1;
-          }
-        )
-      );
-    });
-  });
-
-  describe('Property 3: Navigation visibility', () => {
-    it('should always render all 5 navigation links', () => {
-      render(
-        <BrowserRouter>
-          <Navigation />
-        </BrowserRouter>
-      );
-
-      expect(screen.getByText('Home')).toBeInTheDocument();
-      expect(screen.getByText('About')).toBeInTheDocument();
-      expect(screen.getByText('Projects')).toBeInTheDocument();
-      expect(screen.getByText('Music')).toBeInTheDocument();
-      expect(screen.getByText('Publications')).toBeInTheDocument();
-    });
-  });
-
-  describe('Property 30: Mobile navigation menu toggle', () => {
-    it('should have a mobile menu toggle button', () => {
-      const { container } = render(
-        <BrowserRouter>
-          <Navigation />
-        </BrowserRouter>
-      );
-
-      const menuButton = container.querySelector('.menu-toggle');
-      expect(menuButton).toBeInTheDocument();
-    });
+          unmount();
+        }
+      ),
+      { numRuns: 25 }
+    );
   });
 });

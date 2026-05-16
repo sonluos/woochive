@@ -6,10 +6,8 @@
 
 .footer__inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: var(--sp-4);
-  flex-wrap: wrap;
 }
 
 .footer__name {
@@ -18,11 +16,18 @@
   color: var(--ink-muted);
 }
 
-.footer__copy {
+.footer__tagline {
   font-size: var(--text-sm);
   color: var(--ink-faint);
+  margin: 0;
+}
+
+.footer__contact {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
 }
 
 @media (max-width: 480px) {
-  .footer__inner { flex-direction: column; align-items: flex-start; }
+  .footer__inner { align-items: flex-start; }
 }

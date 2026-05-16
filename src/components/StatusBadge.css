@@ -1,0 +1,12 @@
+.status-badge {
+  display: inline-block;
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  line-height: var(--leading-normal);
+}

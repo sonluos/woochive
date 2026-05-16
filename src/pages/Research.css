@@ -19,20 +19,53 @@
 .page-desc {
   font-size: var(--text-base);
   color: var(--ink-soft);
-  max-width: 540px;
+  max-width: 33.75rem;
   line-height: var(--leading-relaxed);
 }
 
-/* Research layout */
+/* Research layout — visually prominent per requirements 3.1 */
+.research {
+  background: var(--paper-2);
+}
+
 .research__header {
-  padding-top: var(--sp-16);
+  padding-top: var(--sp-20);
   padding-bottom: var(--sp-10);
   border-bottom: 1px solid var(--border-soft);
 }
 
+.research__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, var(--text-3xl));
+  font-weight: var(--weight-normal);
+  color: var(--ink);
+  margin-bottom: var(--sp-4);
+}
+
+.research__desc {
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+  max-width: 33.75rem;
+  line-height: var(--leading-relaxed);
+}
+
 .research__body {
-  padding-top: var(--sp-10);
+  padding-top: var(--sp-20);
   padding-bottom: var(--sp-24);
+}
+
+.research__subsection-heading {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-normal);
+  color: var(--ink);
+  margin-top: var(--sp-12);
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border-soft);
+}
+.research__subsection-heading:first-child {
+  margin-top: 0;
 }
 
 .research__empty {
@@ -45,6 +78,20 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+/* Projects grid — single column by default (mobile-first) */
+.research__list--grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+}
+
+/* Two columns at 768px and above */
+@media (min-width: 768px) {
+  .research__list--grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Research card */
@@ -105,7 +152,7 @@
   font-size: var(--text-base);
   color: var(--ink-soft);
   line-height: var(--leading-relaxed);
-  max-width: 620px;
+  max-width: 38.75rem;
   margin-bottom: var(--sp-4);
 }
 

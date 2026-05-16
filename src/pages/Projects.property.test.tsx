@@ -40,7 +40,7 @@ describe('Projects Page Property Tests', () => {
 
       await waitFor(() => {
         const cards = screen.getAllByRole('link').filter(link =>
-          link.className.includes('project-card')
+          link.className.includes('portfolio-card-link')
         );
         expect(cards).toHaveLength(5);
       });
@@ -109,7 +109,7 @@ describe('Projects Page Property Tests', () => {
 
       await waitFor(() => {
         const cards = screen.getAllByRole('link').filter(link =>
-          link.className.includes('project-card')
+          link.className.includes('portfolio-card-link')
         );
         
         // Should be sorted: Project 2 (June), Project 3 (March), Project 1 (Jan)
@@ -165,7 +165,7 @@ describe('Projects Page Property Tests', () => {
       );
 
       await waitFor(() => {
-        const grid = container.querySelector('.project-grid');
+        const grid = container.querySelector('.portfolio-grid');
         expect(grid).toBeInTheDocument();
       });
     });
@@ -200,8 +200,8 @@ describe('Projects Page Property Tests', () => {
       await waitFor(() => {
         expect(screen.getByText('Test Project')).toBeInTheDocument();
         expect(screen.getByText('Test Description')).toBeInTheDocument();
-        expect(screen.getByText('AI')).toBeInTheDocument();
-        expect(screen.getByText('Python')).toBeInTheDocument();
+        expect(screen.getAllByText('AI').length).toBeGreaterThan(0);
+        expect(screen.getAllByText('Python').length).toBeGreaterThan(0);
       });
     });
   });

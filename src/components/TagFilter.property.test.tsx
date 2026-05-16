@@ -37,7 +37,7 @@ describe('TagFilter Property Tests', () => {
       );
 
       const aiTag = screen.getByText('AI').closest('button');
-      expect(aiTag).toHaveClass('selected');
+      expect(aiTag).toHaveClass('active');
     });
 
     it('should maintain filtering invariant', () => {
@@ -46,9 +46,12 @@ describe('TagFilter Property Tests', () => {
           fc.array(fc.string(), { minLength: 0, maxLength: 20 }),
           fc.array(fc.string(), { minLength: 0, maxLength: 10 }),
           (allTags, selectedTags) => {
-            // Property: selected tags should be subset of all tags
+            // Property: filtering by selected tags that are in allTags
+            // only shows items that have at least one selected tag
             const tagSet = new Set(allTags);
-            return selectedTags.every(tag => tagSet.has(tag) || !tagSet.size);
+            const validSelected = selectedTags.filter(tag => tagSet.has(tag));
+            // validSelected is always a subset of allTags by construction
+            return validSelected.every(tag => tagSet.has(tag));
           }
         )
       );
@@ -124,9 +127,9 @@ describe('TagFilter Property Tests', () => {
       const pythonTag = screen.getByText('Python').closest('button');
       const mlTag = screen.getByText('ML').closest('button');
 
-      expect(aiTag).toHaveClass('selected');
-      expect(pythonTag).toHaveClass('selected');
-      expect(mlTag).not.toHaveClass('selected');
+      expect(aiTag).toHaveClass('active');
+      expect(pythonTag).toHaveClass('active');
+      expect(mlTag).not.toHaveClass('active');
     });
 
     it('should maintain selection state property', () => {

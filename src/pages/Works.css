@@ -9,6 +9,20 @@
   padding-bottom: var(--sp-24);
 }
 
+/* Card grid — single column by default (mobile-first) */
+.works__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+}
+
+/* Two columns at 768px and above */
+@media (min-width: 768px) {
+  .works__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .works__list {
   display: flex;
   flex-direction: column;
@@ -61,7 +75,7 @@
   font-size: var(--text-base);
   color: var(--ink-soft);
   line-height: var(--leading-relaxed);
-  max-width: 600px;
+  max-width: 37.5rem;
   margin-bottom: var(--sp-4);
 }
 

@@ -7,9 +7,20 @@
 .foundations__body {
   padding-top: var(--sp-10);
   padding-bottom: var(--sp-24);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-12);
+}
+
+/* Card grid — single column by default (mobile-first) */
+.foundations__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+}
+
+/* Two columns at 768px and above */
+@media (min-width: 768px) {
+  .foundations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .foundations__section {}
@@ -87,7 +98,7 @@
   font-size: var(--text-sm);
   color: var(--ink-soft);
   line-height: var(--leading-relaxed);
-  max-width: 580px;
+  max-width: 36.25rem;
   margin-bottom: var(--sp-3);
 }
 

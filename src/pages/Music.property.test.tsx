@@ -39,7 +39,7 @@ describe('Music Page Property Tests', () => {
 
       await waitFor(() => {
         const cards = screen.getAllByRole('link').filter(link =>
-          link.className.includes('music-card')
+          link.className.includes('portfolio-card-link')
         );
         expect(cards).toHaveLength(6);
       });
@@ -105,7 +105,7 @@ describe('Music Page Property Tests', () => {
 
       await waitFor(() => {
         const cards = screen.getAllByRole('link').filter(link =>
-          link.className.includes('music-card')
+          link.className.includes('portfolio-card-link')
         );
         
         // Should be sorted: New, Mid, Old
@@ -160,7 +160,7 @@ describe('Music Page Property Tests', () => {
       );
 
       await waitFor(() => {
-        const grid = container.querySelector('.music-grid');
+        const grid = container.querySelector('.portfolio-grid');
         expect(grid).toBeInTheDocument();
       });
     });

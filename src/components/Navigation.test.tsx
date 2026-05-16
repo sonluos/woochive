@@ -12,14 +12,13 @@ describe('Navigation Component', () => {
     );
   };
 
-  it('should render all 5 navigation links', () => {
+  it('should render all 4 navigation links', () => {
     renderNavigation();
     
-    expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('About')).toBeInTheDocument();
-    expect(screen.getByText('Projects')).toBeInTheDocument();
-    expect(screen.getByText('Music')).toBeInTheDocument();
-    expect(screen.getByText('Publications')).toBeInTheDocument();
+    expect(screen.getByText('Intro')).toBeInTheDocument();
+    expect(screen.getByText('Research')).toBeInTheDocument();
+    expect(screen.getByText('Foundations')).toBeInTheDocument();
+    expect(screen.getByText('Works')).toBeInTheDocument();
   });
 
   it('should render logo', () => {
@@ -31,23 +30,22 @@ describe('Navigation Component', () => {
   it('should have correct href attributes', () => {
     renderNavigation();
     
-    const homeLink = screen.getByText('Home').closest('a');
-    const aboutLink = screen.getByText('About').closest('a');
-    const projectsLink = screen.getByText('Projects').closest('a');
-    const musicLink = screen.getByText('Music').closest('a');
-    const publicationsLink = screen.getByText('Publications').closest('a');
+    const introLink = screen.getByText('Intro').closest('a');
+    const researchLink = screen.getByText('Research').closest('a');
+    const foundationsLink = screen.getByText('Foundations').closest('a');
+    const worksLink = screen.getByText('Works').closest('a');
     
-    expect(homeLink).toHaveAttribute('href', '/');
-    expect(aboutLink).toHaveAttribute('href', '/about');
-    expect(projectsLink).toHaveAttribute('href', '/projects');
-    expect(musicLink).toHaveAttribute('href', '/music');
-    expect(publicationsLink).toHaveAttribute('href', '/publications');
+    expect(introLink).toHaveAttribute('href', '/');
+    expect(researchLink).toHaveAttribute('href', '/research');
+    expect(foundationsLink).toHaveAttribute('href', '/foundations');
+    expect(worksLink).toHaveAttribute('href', '/works');
   });
 
   it('should render mobile menu toggle button', () => {
     renderNavigation();
     
-    const toggleButton = screen.getByLabelText('Toggle menu');
+    // The burger button has aria-label "Open menu" or "Close menu"
+    const toggleButton = screen.getByRole('button');
     expect(toggleButton).toBeInTheDocument();
   });
 });

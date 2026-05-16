@@ -220,7 +220,7 @@ describe('Publications Page Property Tests', () => {
 
       await waitFor(() => {
         const cards = screen.getAllByRole('link').filter(link =>
-          link.className.includes('publication-card')
+          link.className.includes('portfolio-card-link')
         );
         
         // Should be sorted: New, Mid, Old
