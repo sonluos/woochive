@@ -9,18 +9,18 @@
   --paper-2:    #f3f2ef;
   --paper-3:    #eceae5;
 
-  --accent:     #FF4F79;   /* hot pink — primary accent for all content elements */
-  --accent-dim: #ff7a9a;
-  --accent-bg:  rgba(255, 79, 121, 0.08);
-  --accent-2:   #717E87;  /* steel blue-gray — academic calm */
-  --accent-2-bg: rgba(113, 126, 135, 0.08);
-  --accent-hot: #FF4F79;  /* same as accent — unified */
-  --accent-hot-dim: #ff7a9a;
-  --accent-hot-bg: rgba(255, 79, 121, 0.08);
+  --accent:     #EA426A;   /* red — primary accent */
+  --accent-dim: #f06b8a;
+  --accent-bg:  rgba(234, 66, 106, 0.08);
+  --accent-2:   #5B6770;  /* steel blue-gray — academic calm */
+  --accent-2-bg: rgba(91, 103, 112, 0.08);
+  --accent-hot: #EA426A;  /* same as accent — unified */
+  --accent-hot-dim: #f06b8a;
+  --accent-hot-bg: rgba(234, 66, 106, 0.08);
 
   /* Gradient for brand text */
-  --gradient-brand: linear-gradient(135deg, #717E87 0%, #D57FF4 100%);
-  --gradient-title: linear-gradient(90deg, #717E87 0%, #D57FF4 100%);
+  --gradient-brand: linear-gradient(135deg, #5B6770 0%, #C077DB 100%);
+  --gradient-title: linear-gradient(90deg, #5B6770 0%, #C077DB 100%);
 
   --border:     #dfe3e6;
   --border-soft:#ebeef0;
