@@ -113,6 +113,24 @@
   border-color: #9B74B0;
 }
 
+.research__filter-btn--music {
+  color: #C077DB;
+  background: rgba(192, 119, 219, 0.08);
+  border-color: rgba(192, 119, 219, 0.2);
+}
+
+.research__filter-btn--music:hover {
+  background: rgba(192, 119, 219, 0.15);
+  color: #C077DB;
+  border-color: rgba(192, 119, 219, 0.4);
+}
+
+.research__filter-btn--music.research__filter-btn--active {
+  background: rgba(192, 119, 219, 0.20);
+  color: #C077DB;
+  border-color: #C077DB;
+}
+
 .research__list {
   display: flex;
   flex-direction: column;

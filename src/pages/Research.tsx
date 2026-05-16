@@ -3,6 +3,8 @@ import { researchData } from '../data/research';
 import { ResearchCard } from '../components/ResearchCard';
 import './Research.css';
 
+const MUSIC_FILTER_TAGS = new Set(['MIR', 'Music Recommendation', 'Music Structure', 'Audio Analysis']);
+
 export default function Research() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -30,21 +32,22 @@ export default function Research() {
 
       <section className="research__body container">
         <h2 className="research__subsection-heading">Projects</h2>
-        <div className="research__list">
-          {filteredProjects.map((project) => (
-            <ResearchCard key={project.id} item={project} />
-          ))}
-        </div>
 
         <div className="research__tag-filter">
           {allTags.map((tag) => (
             <button
               key={tag}
-              className={`research__filter-btn ${activeTag === tag ? 'research__filter-btn--active' : ''}`}
+              className={`research__filter-btn ${MUSIC_FILTER_TAGS.has(tag) ? 'research__filter-btn--music' : ''} ${activeTag === tag ? 'research__filter-btn--active' : ''}`}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
             >
               {tag}
             </button>
+          ))}
+        </div>
+
+        <div className="research__list">
+          {filteredProjects.map((project) => (
+            <ResearchCard key={project.id} item={project} />
           ))}
         </div>
 

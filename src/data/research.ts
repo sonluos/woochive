@@ -8,6 +8,18 @@ export const researchData: ResearchData = {
       type: 'Poster Presentation',
       status: 'Presented / In Preparation',
     },
+    {
+      id: 'academic-festival',
+      venue: 'Academic Festival of the Division of Applied Mathematical Sciences',
+      type: 'Poster Presentation',
+      status: 'Presented / In Preparation',
+    },
+    {
+      id: 'kwms-2026',
+      venue: 'KWMS 2026',
+      type: 'Poster Presentation',
+      status: 'Presented / In Preparation',
+    },
   ],
   projects: [
     {
