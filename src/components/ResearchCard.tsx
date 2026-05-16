@@ -81,7 +81,7 @@ function PublicationCard({ entry }: PublicationCardProps) {
         <div className="research-card__field">
           <span className="research-card__field-label">Title</span>
           {entry.title !== undefined ? (
-            <span>{entry.title}</span>
+            <span className="research-card__field-value research-card__field-value--title">{entry.title}</span>
           ) : (
             <Placeholder label="Title" />
           )}
@@ -91,7 +91,7 @@ function PublicationCard({ entry }: PublicationCardProps) {
         <div className="research-card__field">
           <span className="research-card__field-label">Authors</span>
           {entry.authors !== undefined ? (
-            <span>{entry.authors.join(', ')}</span>
+            <span className="research-card__field-value research-card__field-value--authors">{entry.authors.join(', ')}</span>
           ) : (
             <Placeholder label="Authors" />
           )}
@@ -101,7 +101,7 @@ function PublicationCard({ entry }: PublicationCardProps) {
         <div className="research-card__field">
           <span className="research-card__field-label">Abstract</span>
           {entry.abstract !== undefined ? (
-            <span>{entry.abstract}</span>
+            <span className="research-card__field-value research-card__field-value--abstract">{entry.abstract}</span>
           ) : (
             <Placeholder label="Abstract" />
           )}
@@ -112,7 +112,7 @@ function PublicationCard({ entry }: PublicationCardProps) {
           <span className="research-card__field-label">PDF</span>
           {entry.posterPdf !== undefined ? (
             <a href={entry.posterPdf} target="_blank" rel="noopener noreferrer">
-              View PDF
+              View PDF ↗
             </a>
           ) : (
             <Placeholder label="PDF" kind="pdf" />
