@@ -1,11 +1,11 @@
 .foundations__header {
-  padding-top: var(--sp-16);
-  padding-bottom: var(--sp-10);
-  border-bottom: 1px solid var(--border-soft);
+  padding-top: var(--sp-20);
+  padding-bottom: var(--sp-12);
+  text-align: center;
 }
 
 .foundations__body {
-  padding-top: var(--sp-10);
+  padding-top: var(--sp-12);
   padding-bottom: var(--sp-24);
 }
 
@@ -13,7 +13,7 @@
 .foundations__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--sp-6);
+  gap: var(--sp-8);
 }
 
 /* Two columns at 768px and above */
@@ -40,15 +40,21 @@
 .foundations__list {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--sp-6);
 }
 
 /* Foundation card */
 .foundation-card {
-  padding: var(--sp-8) var(--sp-6);
-  border-bottom: 1px solid var(--border-soft);
+  padding: var(--sp-8);
+  background: var(--paper-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: box-shadow var(--ease), border-color var(--ease);
 }
-.foundation-card:last-child { border-bottom: none; }
+.foundation-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
 
 .foundation-card__top {
   display: flex;
