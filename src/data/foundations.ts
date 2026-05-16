@@ -30,8 +30,8 @@ export const foundationsData: FoundationsCoursesData = {
     { semester: '2-1', name: '해석학및연습Ⅰ', credits: 3, grade: 'A' },
     { semester: '2-1', name: '선형대수학및연습Ⅰ', credits: 3, grade: 'A' },
     { semester: '2-1', name: '인공지능기초(영강)', credits: 3, grade: 'A+' },
-    // 2-여름
-    { semester: '2-여름', name: '확률과 통계', credits: 3, grade: 'S' },
+    // 2-S
+    { semester: '2-S', name: '확률과 통계', credits: 3, grade: 'S' },
     // 1-2
     { semester: '1-2', name: '전산프로그래밍언어및실습', credits: 3, grade: 'A+' },
     { semester: '1-2', name: '미적분학및연습Ⅱ', credits: 3, grade: 'A' },

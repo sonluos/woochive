@@ -55,7 +55,7 @@ export default function Foundations() {
       <section className="foundations__header container">
         <h1 className="foundations__title">Foundations</h1>
         <p className="foundations__desc">
-          The mathematical and computational coursework behind the research.
+          Courses in applied mathematics, computing, and music that support my research.
         </p>
       </section>
 
