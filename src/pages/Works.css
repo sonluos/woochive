@@ -26,6 +26,11 @@
   line-height: var(--leading-relaxed);
 }
 
+.works__desc strong {
+  color: #C077DB;
+  font-weight: var(--weight-semibold);
+}
+
 .works__body {
   padding-top: var(--sp-8);
   padding-bottom: var(--sp-24);

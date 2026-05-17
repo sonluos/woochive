@@ -54,6 +54,11 @@
   line-height: var(--leading-relaxed);
 }
 
+.research__desc strong {
+  color: #9B74B0;
+  font-weight: var(--weight-semibold);
+}
+
 .research__body {
   padding-top: var(--sp-20);
   padding-bottom: var(--sp-24);

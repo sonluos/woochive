@@ -1,5 +1,14 @@
+import { useMemo } from 'react';
 import { foundationsData, CourseEntry } from '../data/foundations';
 import './Foundations.css';
+
+// Major = gray (#5B6770), Elective = purple (#C077DB) — interpolate by ratio
+function interpolateColor(ratio: number): string {
+  const r = Math.round(0x5B + (0xC0 - 0x5B) * ratio);
+  const g = Math.round(0x67 + (0x77 - 0x67) * ratio);
+  const b = Math.round(0x70 + (0xDB - 0x70) * ratio);
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 function CourseCard({ course }: { course: CourseEntry }) {
   return (
@@ -21,7 +30,6 @@ function CourseCard({ course }: { course: CourseEntry }) {
 }
 
 function CourseSection({ courses }: { courses: CourseEntry[] }) {
-  // Group by semester
   const semesters: { label: string; items: CourseEntry[] }[] = [];
   let currentSemester = '';
 
@@ -50,12 +58,21 @@ function CourseSection({ courses }: { courses: CourseEntry[] }) {
 }
 
 export default function Foundations() {
+  // Title color based on Elective:Major ratio
+  const titleColor = useMemo(() => {
+    const major = foundationsData.major.length;
+    const elective = foundationsData.elective.length;
+    const total = major + elective;
+    const ratio = total > 0 ? elective / total : 0;
+    return interpolateColor(ratio);
+  }, []);
+
   return (
     <main className="foundations">
       <section className="foundations__header container">
-        <h1 className="foundations__title">Foundations</h1>
+        <h1 className="foundations__title" style={{ color: titleColor }}>Foundations</h1>
         <p className="foundations__desc">
-          Courses in <strong>Applied Mathematics</strong>, <strong>Computing</strong>, and <strong>Music</strong> that support my research.
+          Courses in <strong>Applied Mathematics</strong>, <strong>Computing</strong>, and <strong>Music</strong>.
         </p>
       </section>
 

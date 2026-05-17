@@ -124,8 +124,8 @@
 }
 
 .research-card__field a:hover {
-  color: #EA426A;
-  border-color: #EA426A;
+  color: #9B74B0;
+  border-color: #9B74B0;
 }
 
 /* ── Card footer (tags + PDF link) ── */
@@ -150,6 +150,6 @@
 }
 
 .research-card__pdf-link:hover {
-  color: #EA426A;
-  border-color: #EA426A;
+  color: #9B74B0;
+  border-color: #9B74B0;
 }
