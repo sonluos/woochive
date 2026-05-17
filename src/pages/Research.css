@@ -165,8 +165,8 @@
   transition: box-shadow var(--ease), border-color var(--ease);
 }
 .research-card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
+  border-color: #9B74B0;
+  box-shadow: 0 4px 12px rgba(155, 116, 176, 0.12);
 }
 
 .research-card__meta {
