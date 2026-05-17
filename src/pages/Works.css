@@ -1,5 +1,5 @@
 .works {
-  background: var(--paper-2);
+  background: var(--paper);
   min-height: calc(100vh - var(--nav-h));
 }
 
@@ -55,11 +55,11 @@
 .works__piece--7  { grid-column: span 2; grid-row: span 1; }  /* Who Knows — wide */
 .works__piece--8  { grid-column: span 1; grid-row: span 1; }  /* 너의 의미 — min */
 .works__piece--9  { grid-column: span 3; grid-row: span 1; }  /* CHROMAKOPIA — wide */
-.works__piece--10 { grid-column: span 2; grid-row: span 2; }  /* Music of Spheres — big */
+.works__piece--10 { grid-column: span 2; grid-row: span 1; }  /* Music of Spheres — wide */
 .works__piece--11 { grid-column: span 1; grid-row: span 1; }  /* 젊은 국악 — min */
 .works__piece--12 { grid-column: span 1; grid-row: span 1; }  /* 크림슨 — min */
 .works__piece--13 { grid-column: span 2; grid-row: span 1; }  /* Diffusion — wide */
-.works__piece--14 { grid-column: span 1; grid-row: span 1; }  /* 무경계 — min */
+.works__piece--14 { grid-column: span 2; grid-row: span 1; }  /* 무경계 — wide */
 
 /* Piece card */
 .works__piece {
