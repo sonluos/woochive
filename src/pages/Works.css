@@ -139,13 +139,13 @@
 
 .works__piece-pdf {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: 0.6rem;
   font-weight: var(--weight-medium);
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--ink-muted);
   padding-bottom: 1px;
-  margin-left: auto;
+  margin-left: var(--sp-2);
   white-space: nowrap;
   transition: color var(--ease), border-color var(--ease);
 }
