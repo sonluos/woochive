@@ -24,35 +24,37 @@ export default function Works() {
               </div>
               <h3 className="works__piece-title">{work.title}</h3>
               <p className="works__piece-desc">{work.description}</p>
-              <div className="works__piece-tags">
-                {work.tags.map((tag) => (
-                  <span key={tag} className="works__piece-tag">{tag}</span>
-                ))}
-              </div>
-              {(work.mediaUrl || work.pdfUrl) && (
-                <div className="works__piece-footer">
-                  {work.mediaUrl && (
-                    <a
-                      className="works__piece-pdf"
-                      href={work.mediaUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      ▶ ↗
-                    </a>
-                  )}
-                  {work.pdfUrl && (
-                    <a
-                      className="works__piece-pdf"
-                      href={work.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      PDF ↗
-                    </a>
-                  )}
+              <div className="works__piece-bottom">
+                <div className="works__piece-tags">
+                  {work.tags.map((tag) => (
+                    <span key={tag} className="works__piece-tag">{tag}</span>
+                  ))}
                 </div>
-              )}
+                {(work.mediaUrl || work.pdfUrl) && (
+                  <div className="works__piece-footer">
+                    {work.mediaUrl && (
+                      <a
+                        className="works__piece-pdf"
+                        href={work.mediaUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        ▶ ↗
+                      </a>
+                    )}
+                    {work.pdfUrl && (
+                      <a
+                        className="works__piece-pdf"
+                        href={work.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        PDF ↗
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             </article>
           ))}
         </div>
