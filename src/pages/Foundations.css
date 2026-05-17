@@ -27,8 +27,15 @@
 }
 
 .foundations__desc strong {
-  color: #5B6770;
   font-weight: var(--weight-semibold);
+}
+
+.foundations__desc-purple {
+  color: #C077DB;
+}
+
+.foundations__desc-gray {
+  color: #5B6770;
 }
 
 .foundations__body {

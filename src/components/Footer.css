@@ -29,19 +29,24 @@
 
 .footer__contact {
   display: flex;
-  gap: var(--sp-4);
+  align-items: center;
+  gap: var(--sp-3);
   flex-wrap: wrap;
+  font-size: var(--text-sm);
 }
 
-.footer__email {
-  font-size: var(--text-sm);
+.footer__link {
   color: var(--ink-soft);
   text-decoration: none;
   transition: color var(--ease);
 }
 
-.footer__email:hover {
+.footer__link:hover {
   color: #EA426A;
+}
+
+.footer__sep {
+  color: var(--ink-faint);
 }
 
 @media (max-width: 480px) {

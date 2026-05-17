@@ -6,11 +6,27 @@ export default function Footer() {
       <div className="footer__inner container--wide">
         <span className="footer__name">Woochive</span>
         <p className="footer__tagline">
-          Music, mathematics, research, and creative records.
+          Music, Mathematics, Research, and Creative Works.
         </p>
         <div className="footer__contact">
-          <a href="mailto:sonluos1013@gmail.com" className="footer__email">
-            sonluos1013@gmail.com
+          <a href="mailto:sonluos1013@gmail.com" className="footer__link">sonluos1013@gmail.com</a>
+          <span className="footer__sep">|</span>
+          <a
+            href="https://github.com/sonluos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer__link"
+          >
+            GitHub
+          </a>
+          <span className="footer__sep">|</span>
+          <a
+            href="https://www.linkedin.com/in/woojin-son-541705267"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer__link"
+          >
+            LinkedIn
           </a>
         </div>
       </div>

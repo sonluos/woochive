@@ -72,7 +72,7 @@ export default function Foundations() {
       <section className="foundations__header container">
         <h1 className="foundations__title" style={{ color: titleColor }}>Foundations</h1>
         <p className="foundations__desc">
-          Courses in <strong>Applied Mathematics</strong>, <strong>Computing</strong>, and <strong>Music</strong>.
+          Courses in <strong className="foundations__desc-gray">Applied Mathematics</strong>, <strong className="foundations__desc-gray">Computing</strong>, and <strong className="foundations__desc-purple">Music</strong>.
         </p>
       </section>
 

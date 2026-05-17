@@ -55,8 +55,15 @@
 }
 
 .research__desc strong {
-  color: #9B74B0;
   font-weight: var(--weight-semibold);
+}
+
+.research__desc-purple {
+  color: #C077DB;
+}
+
+.research__desc-gray {
+  color: #5B6770;
 }
 
 .research__body {
@@ -90,7 +97,7 @@
   flex-wrap: wrap;
   gap: var(--sp-2);
   margin-top: var(--sp-8);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-10);
 }
 
 .research__filter-btn {
