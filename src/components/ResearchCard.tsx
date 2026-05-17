@@ -51,7 +51,7 @@ function ResearchProjectCard({ project }: ResearchProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            PDF ↗
+            📄
           </a>
         )}
       </div>
@@ -116,7 +116,7 @@ function PublicationCard({ entry }: PublicationCardProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              PDF ↗
+              📄
             </a>
           </div>
         )}

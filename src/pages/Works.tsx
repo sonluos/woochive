@@ -49,7 +49,7 @@ export default function Works() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        PDF ↗
+                        📄
                       </a>
                     )}
                   </div>
