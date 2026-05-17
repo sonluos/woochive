@@ -87,8 +87,8 @@
 }
 
 .course-card:hover {
-  border-color: #9B74B0;
-  box-shadow: 0 2px 8px rgba(155, 116, 176, 0.10);
+  border-color: #5B6770;
+  box-shadow: 0 2px 8px rgba(91, 103, 112, 0.10);
 }
 
 .course-card__header {

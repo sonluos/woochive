@@ -48,7 +48,7 @@ export default function Research() {
       <section className="research__header container">
         <h1 className="research__title" style={{ color: titleColor }}>Research</h1>
         <p className="research__desc">
-          MIR, DSP, TDA, and image processing — explored through mathematics.
+          <strong>MIR</strong>, <strong>DSP</strong>, <strong>TDA</strong>, and <strong>Image Processing</strong> — explored through <strong>Mathematics</strong>.
         </p>
       </section>
 

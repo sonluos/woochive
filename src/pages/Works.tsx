@@ -7,7 +7,7 @@ export default function Works() {
       <section className="works__header container">
         <h1 className="works__title">Works</h1>
         <p className="works__desc">
-          Beat making, covers, live reports, and creative experiments.
+          <strong>Production</strong>, <strong>Cover</strong>, <strong>Report</strong>, and <strong>Creative Experiment</strong>.
         </p>
       </section>
 
