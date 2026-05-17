@@ -68,20 +68,41 @@
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 1px;
-  background: var(--accent-hot);
+  background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--ease);
 }
 
-.nav__link:hover { color: var(--accent-hot); }
-.nav__link:hover::after { transform: scaleX(1); }
+.nav__link:hover::after,
+.nav__link--active::after { transform: scaleX(1); }
 
-.nav__link--active {
-  color: var(--accent-hot);
+/* Per-page hover colors matching each page's title */
+.nav__link[href="/"]:hover,
+.nav__link[href="/"].nav__link--active {
+  background: linear-gradient(90deg, #5B6770 0%, #C077DB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.nav__link--active::after {
-  transform: scaleX(1);
+.nav__link[href="/"]:hover::after,
+.nav__link[href="/"].nav__link--active::after {
+  background: linear-gradient(90deg, #5B6770 0%, #C077DB 100%);
+}
+
+.nav__link[href="/research"]:hover,
+.nav__link[href="/research"].nav__link--active {
+  color: #9B74B0;
+}
+
+.nav__link[href="/foundations"]:hover,
+.nav__link[href="/foundations"].nav__link--active {
+  color: #5B6770;
+}
+
+.nav__link[href="/works"]:hover,
+.nav__link[href="/works"].nav__link--active {
+  color: #C077DB;
 }
 
 /* Burger */
@@ -127,8 +148,20 @@
   transition: color var(--ease);
 }
 .nav__mobile-link:last-child { border-bottom: none; }
-.nav__mobile-link:hover,
-.nav__mobile-link--active { color: var(--accent-hot); }
+
+.nav__mobile-link[href="/"]:hover,
+.nav__mobile-link[href="/"].nav__mobile-link--active {
+  background: linear-gradient(90deg, #5B6770 0%, #C077DB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav__mobile-link[href="/research"]:hover,
+.nav__mobile-link[href="/research"].nav__mobile-link--active { color: #9B74B0; }
+.nav__mobile-link[href="/foundations"]:hover,
+.nav__mobile-link[href="/foundations"].nav__mobile-link--active { color: #5B6770; }
+.nav__mobile-link[href="/works"]:hover,
+.nav__mobile-link[href="/works"].nav__mobile-link--active { color: #C077DB; }
 
 @media (max-width: 640px) {
   .nav__links { display: none; }
