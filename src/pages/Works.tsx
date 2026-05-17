@@ -7,7 +7,7 @@ export default function Works() {
       <section className="works__header container">
         <h1 className="works__title">Works</h1>
         <p className="works__desc">
-          Music, writing, concerts, and creative projects outside of research.
+          Beat making, covers, live reports, and creative experiments.
         </p>
       </section>
 
@@ -25,9 +25,6 @@ export default function Works() {
               <h3 className="works__piece-title">{work.title}</h3>
               <p className="works__piece-desc">{work.description}</p>
               <div className="works__piece-tags">
-                {work.tags.map((tag) => (
-                  <span key={tag} className="works__piece-tag">{tag}</span>
-                ))}
                 {work.mediaUrl && (
                   <a
                     className="works__piece-pdf"
@@ -48,6 +45,9 @@ export default function Works() {
                     PDF ↗
                   </a>
                 )}
+                {work.tags.map((tag) => (
+                  <span key={tag} className="works__piece-tag">{tag}</span>
+                ))}
               </div>
             </article>
           ))}

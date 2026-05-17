@@ -26,7 +26,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'young-gugak',
     title: '젊은 국악',
-    description: '젊은 국악 공연 경험을 기록한 라이브 리포트',
+    description: '공연 리포트',
     category: 'Report',
     tags: ['Korean Music', 'Live'],
     year: 2023,
@@ -36,7 +36,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'drum-meaning',
     title: '너의 의미',
-    description: 'IU의 「너의 의미」 드럼 커버',
+    description: 'by IU',
     category: 'Cover',
     tags: ['Pop', 'Drum'],
     year: 2026,
@@ -46,7 +46,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'carnival-lets-go',
     title: "CARNIVAL, Let's Go",
-    description: 'Kanye West의 「Carnival」과 Tyler, The Creator의 「Come On, Let\'s Go」를 섞은 비트',
+    description: 'Kanye West의 「Carnival」과 Tyler, The Creator의 「Come On, Let\'s Go」의 믹스 업',
     category: 'Production',
     tags: ['Hip-hop', 'Mix-up'],
     year: 2026,
@@ -56,7 +56,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'chromakopia-tour',
     title: 'CHROMAKOPIA TOUR X CIRCUS MAXIMUS',
-    description: 'Tyler, The Creator 공연 경험을 기록한 라이브 리포트',
+    description: 'by Tyler, The Creator & Travis Scott',
     category: 'Report',
     tags: ['Hip-hop', 'Live'],
     year: 2025,
@@ -66,7 +66,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'guitar-best-parts',
     title: 'Best Parts',
-    description: 'Daniel Caesar의 「Best Parts」 기타 커버',
+    description: 'by Daniel Caesar',
     category: 'Cover',
     tags: ['R&B', 'Guitar'],
     year: 2026,
@@ -76,7 +76,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'billie-i-willish',
     title: 'Billie I Willish',
-    description: 'Billie Eilish와 Beatles의 「I Will」을 섞은 비트',
+    description: 'Billie Eilish와 Beatles의 「I Will」을 섞은 믹스 업',
     category: 'Production',
     tags: ['Pop', 'Mix-up'],
     year: 2026,
@@ -86,7 +86,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'diffusion-presentation',
     title: 'Diffusion Models',
-    description: 'Diffusion 모델을 시각적으로 설명한 프레젠테이션',
+    description: 'Diffusion 모델의 시각화',
     category: 'Other',
     tags: ['Visualization', 'Diffusion', 'AI'],
     year: 2026,
@@ -96,7 +96,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'guitar-public-enemy',
     title: 'Public Enemy',
-    description: 'Sik-K & Lil Moshpit의 「Public Enemy」 기타 톤 커버',
+    description: 'by Sik-K & Lil Moshpit',
     category: 'Cover',
     tags: ['Rage', 'Electric Guitar'],
     year: 2026,
@@ -116,7 +116,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'music-of-the-spheres',
     title: 'Music of the Spheres',
-    description: 'Coldplay 월드투어 공연 경험을 기록한 라이브 리포트',
+    description: 'by Coldplay',
     category: 'Report',
     tags: ['Pop', 'Live'],
     year: 2025,
@@ -126,7 +126,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'guitar-who-knows',
     title: 'Who Knows?',
-    description: 'Daniel Caesar의 「Who Knows?」 기타 커버',
+    description: 'by Daniel Caesar',
     category: 'Cover',
     tags: ['R&B', 'Guitar'],
     year: 2026,
@@ -146,7 +146,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'mugyeonggye',
     title: '무경계',
-    description: '콘서트 경험을 바탕으로 제작한 인스타그램 숏폼 영상',
+    description: '인스타그램 숏폼 공모전',
     category: 'Other',
     tags: ['Contest', 'Concerts', 'Shortform'],
     year: 2025,
@@ -156,7 +156,7 @@ export const worksData: WorkEntry[] = [
   {
     id: 'crimson-art',
     title: '크림슨 예술 공연',
-    description: '크림슨 예술 공연 경험을 기록한 라이브 리포트',
+    description: '공연 리포트',
     category: 'Report',
     tags: ['Classic', 'Live'],
     year: 2025,

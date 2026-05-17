@@ -20,11 +20,10 @@
 
 .works__desc {
   font-size: var(--text-md);
-  color: var(--ink-soft);
+  color: var(--ink);
   max-width: 36rem;
   margin: 0 auto;
   line-height: var(--leading-relaxed);
-  font-style: italic;
 }
 
 .works__body {
@@ -133,6 +132,7 @@
   margin-top: auto;
   padding-top: var(--sp-2);
   align-items: center;
+  justify-content: flex-start;
 }
 
 .works__piece-tag {
@@ -153,7 +153,6 @@
   text-decoration: none;
   border-bottom: 1px solid var(--ink-muted);
   padding-bottom: 1px;
-  margin-left: var(--sp-2);
   white-space: nowrap;
   transition: color var(--ease), border-color var(--ease);
 }
