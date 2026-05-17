@@ -44,5 +44,11 @@ dist-ssr/
 # TypeScript
 *.tsbuildinfo
 
+# Large media files (served via external links)
+public/works/*.mov
+public/works/*.m4v
+public/works/*.aif
+public/works/*.mp3
+
 # Misc
 .kiro/
