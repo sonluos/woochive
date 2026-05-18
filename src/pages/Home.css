@@ -63,6 +63,26 @@
   margin-top: -45px;
 }
 
+.intro__bio-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-8);
+}
+
+.intro__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+}
+
+.intro__bio-text {
+  flex: 1;
+}
+
 .intro__bio-line {
   font-family: var(--font-sans);
   font-size: 1.3rem;

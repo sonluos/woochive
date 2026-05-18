@@ -21,11 +21,20 @@ export default function Home() {
       </section>
 
       <section className="intro__bio container">
-        {introData.bio.map((line, index) => (
-          <p key={index} className="intro__bio-line">
-            {renderHighlightedText(line.text, line.highlights)}
-          </p>
-        ))}
+        <div className="intro__bio-content">
+          <img
+            src="/profile.jpg"
+            alt="Woojin Son"
+            className="intro__photo"
+          />
+          <div className="intro__bio-text">
+            {introData.bio.map((line, index) => (
+              <p key={index} className="intro__bio-line">
+                {renderHighlightedText(line.text, line.highlights)}
+              </p>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="intro__info container">
