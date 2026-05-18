@@ -23,7 +23,7 @@ export default function Home() {
       <section className="intro__bio container">
         <div className="intro__bio-content">
           <img
-            src="/profile.jpg"
+            src="/profile.png"
             alt="Woojin Son"
             className="intro__photo"
           />
