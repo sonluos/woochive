@@ -71,10 +71,10 @@
 
 .intro__photo {
   width: 180px;
-  height: 180px;
+  height: 160px;
   border-radius: var(--r-lg);
   object-fit: cover;
-  object-position: center 25%;
+  object-position: center top;
   flex-shrink: 0;
   filter: saturate(0.85) contrast(0.95);
   box-shadow:
@@ -101,8 +101,8 @@
   }
 
   .intro__photo {
-    width: 160px;
-    height: 180px;
+    width: 140px;
+    height: 130px;
   }
 
   .intro__bio-line {
