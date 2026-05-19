@@ -120,11 +120,11 @@ export default function Foundations() {
         <h2 className="foundations__section-heading foundations__section-heading--major">Major</h2>
         <CourseSection courses={foundationsData.major} />
 
-        <h2 className="foundations__section-heading foundations__section-heading--mfk">MFK</h2>
-        <MFKSection entries={foundationsData.mfk} />
-
         <h2 className="foundations__section-heading foundations__section-heading--elective">Elective</h2>
         <CourseSection courses={foundationsData.elective} />
+
+        <h2 className="foundations__section-heading foundations__section-heading--mfk">MFK</h2>
+        <MFKSection entries={foundationsData.mfk} />
       </section>
     </main>
   );
