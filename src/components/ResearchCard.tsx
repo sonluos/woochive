@@ -90,7 +90,18 @@ function PublicationCard({ entry }: PublicationCardProps) {
         <div className="research-card__field">
           <span className="research-card__field-label">Authors</span>
           {entry.authors !== undefined ? (
-            <span className="research-card__field-value research-card__field-value--authors">{entry.authors.join(', ')}</span>
+            <span className="research-card__field-value research-card__field-value--authors">
+              {entry.authors.map((author, i) => (
+                <span key={i}>
+                  {author === 'Woojin Son' ? (
+                    <strong className="research-card__author-me">{author}</strong>
+                  ) : (
+                    author
+                  )}
+                  {i < entry.authors!.length - 1 && ', '}
+                </span>
+              ))}
+            </span>
           ) : (
             <Placeholder label="Authors" />
           )}

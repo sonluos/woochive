@@ -153,3 +153,8 @@
   color: #9B74B0;
   border-color: #9B74B0;
 }
+
+.research-card__author-me {
+  color: #5B6770;
+  font-weight: var(--weight-semibold);
+}
