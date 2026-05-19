@@ -22,7 +22,7 @@ function CourseCard({ course }: { course: CourseEntry }) {
         )}
       </div>
       <div className="course-card__meta">
-        <span className="course-card__credits">{course.credits}학점</span>
+        <span className="course-card__credits">{course.credits} credit</span>
       </div>
     </div>
   );
