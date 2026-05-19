@@ -6,8 +6,16 @@ export interface CourseEntry {
   inProgress?: boolean;
 }
 
+export interface MFKEntry {
+  semester: string;
+  title: string;
+  description: string;
+  inProgress?: boolean;
+}
+
 export interface FoundationsCoursesData {
   major: CourseEntry[];
+  mfk: MFKEntry[];
   elective: CourseEntry[];
 }
 
@@ -39,6 +47,14 @@ export const foundationsData: FoundationsCoursesData = {
     // 1-1
     { semester: '1-1', name: '미적분학및연습Ⅰ', credits: 3, grade: 'A+' },
     { semester: '1-1', name: '전산수학(영강)', credits: 3, grade: 'A+' },
+  ],
+  mfk: [
+    // 2-W
+    { semester: '2-W', title: 'Logic Pro 201', description: 'Logic Pro 정규' },
+    { semester: '2-W', title: 'String Crash Course', description: 'String 편곡법' },
+    // 2-S
+    { semester: '2-S', title: 'Logic Pro 101', description: 'Logic Pro 입문' },
+    { semester: '2-S', title: 'Harmony', description: '기초 화성학' },
   ],
   elective: [
     // 3-1

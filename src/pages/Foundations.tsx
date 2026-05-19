@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { foundationsData, CourseEntry } from '../data/foundations';
+import { foundationsData, CourseEntry, MFKEntry } from '../data/foundations';
 import './Foundations.css';
 
 // Major = gray (#5B6770), Elective = purple (#C077DB) — interpolate by ratio
@@ -22,8 +22,20 @@ function CourseCard({ course }: { course: CourseEntry }) {
         )}
       </div>
       <div className="course-card__meta">
-        <span className="course-card__semester">{course.semester}</span>
         <span className="course-card__credits">{course.credits}학점</span>
+      </div>
+    </div>
+  );
+}
+
+function MFKCard({ entry }: { entry: MFKEntry }) {
+  return (
+    <div className={`course-card course-card--mfk ${entry.inProgress ? 'course-card--in-progress' : ''}`}>
+      <div className="course-card__header">
+        <span className="course-card__name">{entry.title}</span>
+      </div>
+      <div className="course-card__meta">
+        <span className="course-card__desc">{entry.description}</span>
       </div>
     </div>
   );
@@ -57,6 +69,34 @@ function CourseSection({ courses }: { courses: CourseEntry[] }) {
   );
 }
 
+function MFKSection({ entries }: { entries: MFKEntry[] }) {
+  const semesters: { label: string; items: MFKEntry[] }[] = [];
+  let currentSemester = '';
+
+  entries.forEach((e) => {
+    if (e.semester !== currentSemester) {
+      currentSemester = e.semester;
+      semesters.push({ label: e.semester, items: [] });
+    }
+    semesters[semesters.length - 1].items.push(e);
+  });
+
+  return (
+    <>
+      {semesters.map((sem) => (
+        <div key={sem.label} className="foundations__semester-group">
+          <span className="foundations__semester-label">{sem.label}</span>
+          <div className="foundations__grid">
+            {sem.items.map((e, i) => (
+              <MFKCard key={i} entry={e} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function Foundations() {
   // Title color based on Elective:Major ratio
   const titleColor = useMemo(() => {
@@ -79,6 +119,9 @@ export default function Foundations() {
       <section className="foundations__body container">
         <h2 className="foundations__section-heading foundations__section-heading--major">Major</h2>
         <CourseSection courses={foundationsData.major} />
+
+        <h2 className="foundations__section-heading foundations__section-heading--mfk">MFK</h2>
+        <MFKSection entries={foundationsData.mfk} />
 
         <h2 className="foundations__section-heading foundations__section-heading--elective">Elective</h2>
         <CourseSection courses={foundationsData.elective} />

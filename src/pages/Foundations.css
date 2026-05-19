@@ -63,6 +63,10 @@
   color: #5B6770;
 }
 
+.foundations__section-heading--mfk {
+  color: #C077DB;
+}
+
 .foundations__section-heading--elective {
   color: #C077DB;
 }
@@ -155,9 +159,23 @@
   color: var(--ink-muted);
 }
 
+.course-card__desc {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}
+
 .course-card__credits {
   font-size: var(--text-xs);
   color: var(--ink-muted);
+}
+
+.course-card--mfk {
+  border-color: rgba(192, 119, 219, 0.25);
+}
+
+.course-card--mfk:hover {
+  border-color: #C077DB;
+  box-shadow: 0 2px 8px rgba(192, 119, 219, 0.12);
 }
 
 /* Responsive */
